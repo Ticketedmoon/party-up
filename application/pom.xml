@@ -3,26 +3,51 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
-        <groupId>com.mycompany.parent</groupId>
-        <artifactId>parent</artifactId>
+        <groupId>com.skybreak.parent</groupId>
+        <artifactId>project-scanner-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.mycompany.app</groupId>
-    <artifactId>project-scanner</artifactId>
-    <name>Project-Scanner Maven Web App</name>
+    <groupId>com.skybreak.application</groupId>
+    <artifactId>project-scanner-application</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <url>http://maven.apache.org</url>
 
     <dependencies>
 
+        <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
 
         <!-- logging , spring 5 no more bridge, thanks spring-jcl -->
         <dependency>
@@ -45,6 +70,18 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.2</version>
         </dependency>
 
     </dependencies>
@@ -74,11 +111,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.2.3</version>
                 <configuration>
-                    <warSourceExcludes>**/*.woff, **/*.woff2, **/*.ttf</warSourceExcludes>
                     <warSourceDirectory>${project.basedir}/src/main/webapp</warSourceDirectory>
-                    <webResources>
-                        <filtering>true</filtering>
-                    </webResources>
                     <nonFilteredFileExtensions>
                         <nonFilteredFileExtension>gif</nonFilteredFileExtension>
                         <nonFilteredFileExtension>ico</nonFilteredFileExtension>

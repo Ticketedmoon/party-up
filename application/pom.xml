@@ -1,0 +1,100 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <groupId>com.mycompany.parent</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.mycompany.app</groupId>
+    <artifactId>project-scanner</artifactId>
+    <name>Project-Scanner Maven Web App</name>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <url>http://maven.apache.org</url>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!-- logging , spring 5 no more bridge, thanks spring-jcl -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+
+        <!-- for web servlet -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Some containers like Tomcat don't have jstl library -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>Project Scanner</finalName>
+        <plugins>
+            <!-- http://www.eclipse.org/jetty/documentation/current/jetty-maven-plugin.html -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.4.12.v20180830</version>
+            </plugin>
+
+            <!-- Default is too old, update to latest to run the latest Spring 5 + jUnit 5 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.1</version>
+                <configuration>
+                    <useSystemClassLoader>false</useSystemClassLoader>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.3</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <warSourceExcludes>**/*.woff, **/*.woff2, **/*.ttf</warSourceExcludes>
+                    <warSourceDirectory>${project.basedir}/src/main/webapp</warSourceDirectory>
+                    <webResources>
+                        <filtering>true</filtering>
+                    </webResources>
+                    <nonFilteredFileExtensions>
+                        <nonFilteredFileExtension>gif</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>ico</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>jpg</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>png</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>pdf</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>otf</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>eot</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>svg</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>woff</nonFilteredFileExtension>
+                    </nonFilteredFileExtensions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

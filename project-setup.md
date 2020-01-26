@@ -1,3 +1,11 @@
+### Maven Web Application / Spring / Tomcat
+Setting up basic structure - **Guide:** https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
+
+Understanding the webapp directory - **Guide:** https://www.tutorialspoint.com/maven/maven_web_application.htm
+
+### React
+**Guide:** https://www.valentinog.com/blog/babel/
+
 Let’s install it by running:
 
 npm i webpack --save-dev

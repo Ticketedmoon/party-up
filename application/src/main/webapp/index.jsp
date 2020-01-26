@@ -13,7 +13,15 @@
                 Created by Shane Creedon.
                 Length: 1 page">
     </head>
+
     <body>
-        test123445XXXYYYY
+        <%-- React Hook-in for SPA --%>
+        <div id="root"></div>
     </body>
+
+    <%-- Production --%>
+    <%--<script src="react/dist/bundle.js"></script>--%>
+
+    <%-- Development --%>
+    <script src="http://localhost:3000/dist/bundle.js"></script>
 </html>

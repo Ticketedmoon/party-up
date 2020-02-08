@@ -1,15 +1,17 @@
-import { Provider } from 'react-redux';
-import { Route, Switch } from 'react-router' ;
+import {Provider} from 'react-redux';
+import {BrowserRouter as Router, Switch} from "react-router-dom";
 import * as React from "react";
-import store from "./redux/store";
+import store from "./store";
+import PrimaryButton from "./components/atoms/button/primary";
 
 const App = () => {
     return (
         <Provider store={store}>
-            <Switch>
-                <Route exact path="/" render={() => (<div> Match </div>)}/>
-                <Route render={() => (<div> Miss </div>)}/>
-            </Switch>
+            <Router>
+                <Switch>
+                    <PrimaryButton/>
+                </Switch>
+            </Router>
         </Provider>
     );
 };

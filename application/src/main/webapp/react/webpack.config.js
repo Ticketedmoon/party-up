@@ -1,8 +1,7 @@
 // NOTE: webpack watch options has a poll setting, do not include this if you are using webpack-dev-server
 // Polling dramatically influences the cpu usage.
-
 module.exports = {
-  entry: "./src/index.js",
+  entry: "./src/index.tsx",
   output: {
     filename: 'bundle.js'
   },
@@ -22,10 +21,23 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader"
-        }
+        use: "babel-loader"
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
       }
     ]
-  }
+  },
+  resolve: {
+    extensions: [ '.tsx', '.ts', '.js', '.css'],
+    modules: [
+      'node_modules'
+    ]
+  },
 };

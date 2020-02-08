@@ -1,7 +1,7 @@
 import * as React from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {IStore} from "../../../../store/login";
 import {sendMessage} from "../../../../store/login/types/action.function.types";
+import {IStore} from "../../../../store/login/types/store.interface.types";
 
 const PrimaryButton = (props: any) => {
 

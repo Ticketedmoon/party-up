@@ -11,10 +11,7 @@ import * as React from "react";
 import {ILoginActionInterface} from "./types/ILoginActionInterface";
 import {Reducer} from "redux";
 import {Login} from "./types/action.constants";
-
-export interface IStore {
-    value: number;
-}
+import {IStore} from "./types/store.interface.types";
 
 const initialState: IStore = {
     value: 5

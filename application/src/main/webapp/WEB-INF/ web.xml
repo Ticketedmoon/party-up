@@ -52,7 +52,7 @@
 
     <context-param>
         <param-name>initializeURL</param-name>
-        <param-value>http://localhost:8080/project_scanner/</param-value>
+        <param-value>http://localhost:8080</param-value>
     </context-param>
 
 </web-app>

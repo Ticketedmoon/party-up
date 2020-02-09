@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title> Project Scanner - A project analysis tool </title>
+        <title> Code Wars - An adversarial learning tool </title>
         <base href="./">
 
         <meta name="viewport" content="width=device-width, initial-scale=1">

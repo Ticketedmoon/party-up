@@ -2,7 +2,7 @@ import * as React from "react";
 import TextInputField from "../../../atoms/input/TextInputField";
 import {useState} from "react";
 import PrimaryButton from "../../../atoms/button/primary";
-import "./style/style"
+import "./style/style.css"
 
 const LoginForm = (props: any) => {
 
@@ -11,11 +11,9 @@ const LoginForm = (props: any) => {
 
     return (
         <div className={"login-form"}>
-            <TextInputField title={"Username: "} update={(value: string) => setUsername(value)}/>
-            <TextInputField title={"Password: "} update={(value: string) => setPassword(value)}/>
-            <PrimaryButton text={"Login"} click={() => {
-                console.log(username + " has successfully logged in.");
-            }}/>
+            <TextInputField title={"Email: "} type={"email"} update={(value: string) => setUsername(value)}/>
+            <TextInputField title={"Password: "} type={"password"} update={(value: string) => setPassword(value)}/>
+            <PrimaryButton text={"Login"} click={() => props.tryLogin(username, password)}/>
         </div>
     );
 };

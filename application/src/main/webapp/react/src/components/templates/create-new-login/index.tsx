@@ -6,8 +6,6 @@ import history from "../../../utils/history";
 const CreateNewLoginTemplate = (props: any) => {
 
     const verifyNewUser = (username: string, password: string) => {
-        // TODO: - Send to controller and verify with DB user exists
-        // TODO: - Look into spring security?
         console.log("User with name: " + username + " validating...");
         history.goBack();
     };

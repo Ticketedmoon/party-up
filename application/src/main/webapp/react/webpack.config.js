@@ -1,5 +1,7 @@
 // NOTE: webpack watch options has a poll setting, do not include this if you are using webpack-dev-server
 // Polling dramatically influences the cpu usage.
+const path = require('path');
+
 module.exports = {
   entry: "./src/index.tsx",
   output: {
@@ -31,7 +33,7 @@ module.exports = {
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
-      }
+      },
     ]
   },
   resolve: {

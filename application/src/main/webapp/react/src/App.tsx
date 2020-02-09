@@ -1,16 +1,21 @@
 import {Provider} from 'react-redux';
-import {BrowserRouter as Router, Switch} from "react-router-dom";
+import {Redirect, Route, Switch} from 'react-router-dom';
+import {Router} from "react-router";
 import * as React from "react";
 import store from "./store";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import LoginTemplate from "./components/templates/login";
+import history from './utils/history';
+import CreateNewLoginTemplate from "./components/templates/create-new-login";
 
 const App = () => {
     return (
         <Provider store={store}>
-            <Router>
+            <Router history={history}>
                 <Switch>
-                    <LoginTemplate/>
+                    <Redirect exact from="/" to="/login" />
+                    <Route exact path={"/login"} component={LoginTemplate}/>
+                    <Route exact path={"/login/create"} component={CreateNewLoginTemplate}/>
                 </Switch>
             </Router>
         </Provider>

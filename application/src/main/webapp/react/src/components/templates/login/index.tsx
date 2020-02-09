@@ -1,6 +1,8 @@
 import * as React from "react";
 import LoginForm from "../../molecules/form/LoginForm";
 import "./style/style.css";
+import PrimaryButton from "../../atoms/button/primary";
+import { redirectToRouteWithCurrent } from "../../../utils/history";
 
 const LoginTemplate = (props: any) => {
 
@@ -13,7 +15,8 @@ const LoginTemplate = (props: any) => {
     return (
         <div className={"login-template"}>
             <span className={"login-template-title"}> Code Wars </span>
-            <LoginForm tryLogin={(username: string, password: string) => tryLogin(username, password)}/>
+            <LoginForm text={"Login"} checkCredentials={(username: string, password: string) => tryLogin(username, password)}/>
+            <PrimaryButton text={"Create New Account"} click={() => redirectToRouteWithCurrent("/create")}/>
         </div>
     );
 };

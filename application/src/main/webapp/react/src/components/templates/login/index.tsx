@@ -2,14 +2,24 @@ import * as React from "react";
 import LoginForm from "../../molecules/form/LoginForm";
 import "./style/style.css";
 import PrimaryButton from "../../atoms/button/primary";
-import { redirectToRouteWithCurrent } from "../../../utils/history";
+import {currentRoute, redirectToRouteWithCurrent} from "../../../utils/history";
 
 const LoginTemplate = (props: any) => {
 
     const tryLogin = (username: string, password: string) => {
-        // TODO: - Send to controller and verify with DB user exists
-        // TODO: - Look into spring security?
-        console.log("User with name: " + username + " attempted login");
+        console.log("User with name: " + username + " attempting login...");
+        fetch(window.location.href, {
+            method: 'POST',
+            headers : {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({'username': username, 'password': password})
+        }).then(response => response.json()).then(data => {
+            console.log(data);
+        }).catch(err => {
+            console.log(err)
+        })
     };
 
     return (

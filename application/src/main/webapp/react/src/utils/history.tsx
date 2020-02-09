@@ -12,4 +12,8 @@ export const redirectToRouteWithRoot = (route: string) => {
     history.push(route);
 };
 
+export const currentRoute = () => {
+    return window.location.pathname;
+};
+
 export default history;

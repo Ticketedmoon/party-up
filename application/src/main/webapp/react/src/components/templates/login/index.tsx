@@ -8,13 +8,13 @@ const LoginTemplate = (props: any) => {
 
     const tryLogin = (username: string, password: string) => {
         console.log("User with name: " + username + " attempting login...");
-        fetch(window.location.origin + "/test", {
-            method: 'GET'
-/*            headers : {
+        fetch(window.location.href, {
+            method: 'POST',
+            headers : {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
-            },*/
-            //body: JSON.stringify({'username': username, 'password': password})
+            },
+            body: JSON.stringify({'username': username, 'password': password})
         }).then(response => response.json()).then(data => {
             console.log(data);
         }).catch(err => {

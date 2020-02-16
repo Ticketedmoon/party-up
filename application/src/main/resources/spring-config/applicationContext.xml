@@ -30,6 +30,7 @@
 
     <!-- Imports datasource configuration -->
     <import resource="spring-data.xml"/>
+    <import resource="spring-jpa.xml"/>
 
     <bean id="deployProperties"
           class="org.springframework.beans.factory.config.PropertiesFactoryBean"

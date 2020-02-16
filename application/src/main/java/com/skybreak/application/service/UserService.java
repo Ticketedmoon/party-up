@@ -26,9 +26,14 @@ public class UserService {
         logger.info(String.format("Attempting to verify user with username: {%s}", user.getUsername()));
         User existingUser = userRepository.findUserByUsername(user.getUsername());
         // User exists, now verify hashed password.
-        if (existingUser.getPassword().equals(passwordEncoder.encode(user.getPassword()))) {
-            logger.info(String.format("User with username: {%s} successfully authenticated", user.getUsername()));
-            return existingUser;
+        try {
+            if (existingUser.getPassword().equals(passwordEncoder.encode(user.getPassword()))) {
+                logger.info(String.format("User with username: {%s} successfully authenticated", user.getUsername()));
+                return existingUser;
+            }
+            logger.info(String.format("User found for username: {%s} but incorrect password entered", user.getUsername()));
+        } catch (NullPointerException e) {
+            logger.info(String.format("User not found for username: {%s}", user.getUsername()));
         }
         return null;
     }

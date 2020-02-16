@@ -1,9 +1,14 @@
 package com.skybreak.application.domain.entity;
 
 import com.skybreak.application.domain.enums.UserRole;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-// TODO: implement JPA
+@Entity
 public class User {
+
+    @Id
+    private String userID;
 
     private String username;
     private String password;

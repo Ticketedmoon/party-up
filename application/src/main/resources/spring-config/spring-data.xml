@@ -7,11 +7,20 @@
 
     <!-- Declare a datasource that has pooling capabilities-->
     <!-- Configuration for accessing JNDI Datasource -->
-    <beans profile="prod">
+    <beans profile="production">
         <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
             <property name="jndiName" value="java:comp/env/jdbc/springDataSource"/>
             <property name="lookupOnStartup" value="true"/>
             <property name="proxyInterface" value="javax.sql.DataSource"/>
+        </bean>
+    </beans>
+
+    <beans profile="unit-testing">
+        <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+            <property name="driverClassName" value="org.testcontainers.jdbc.ContainerDatabaseDriver"/>
+            <property name="url" value="jdbc:tc:mysql:5.6.40://hostname/legalshinedb" />
+            <property name="username" value="root" />
+            <property name="password" value="test" />
         </bean>
     </beans>
 

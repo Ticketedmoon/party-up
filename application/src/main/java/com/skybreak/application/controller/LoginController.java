@@ -29,13 +29,13 @@ public class LoginController {
         return new ModelAndView("index");
     }
 
-    @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "login", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody User login(@RequestBody String userDTO) throws IOException {
         final User user = objectMapper.readValue(userDTO, User.class);
         return userService.userAttemptLogin(user);
     }
 
-    @GetMapping(value = "/login/create", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "login/create", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody User createNewUser(@RequestParam String userDTO) throws IOException {
         try {
             final User user = objectMapper.readValue(userDTO, User.class);
@@ -43,6 +43,11 @@ public class LoginController {
         } catch (UsernameNotFoundException e) {
             return null;
         }
+    }
+
+    @GetMapping(value = "test", produces = MediaType.ALL_VALUE)
+    public void test() {
+        int x = 5;
     }
 
 }

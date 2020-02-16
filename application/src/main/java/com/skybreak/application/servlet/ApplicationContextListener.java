@@ -13,7 +13,7 @@ public class ApplicationContextListener implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent arg0) {
-        LOGGER.error("Servlet Context Destroyed");
+        LOGGER.info("Servlet Context Destroyed");
     }
 
     @Override
@@ -21,7 +21,7 @@ public class ApplicationContextListener implements ServletContextListener {
         ServletContext context = event.getServletContext();
         System.setProperty("initializeURL", context.getInitParameter("initializeURL"));
         System.setProperty("rootPath", context.getRealPath("/"));
-        LOGGER.error("Servlet Context Initialized");
+        LOGGER.info("Servlet Context Initialized");
     }
 
 }

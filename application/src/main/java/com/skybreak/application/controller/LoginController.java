@@ -45,9 +45,4 @@ public class LoginController {
         }
     }
 
-    @GetMapping(value = "test", produces = MediaType.ALL_VALUE)
-    public void test() {
-        int x = 5;
-    }
-
 }

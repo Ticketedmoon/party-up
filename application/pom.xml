@@ -4,13 +4,13 @@
 
     <parent>
         <groupId>com.skybreak.parent</groupId>
-        <artifactId>project-scanner-parent</artifactId>
+        <artifactId>code-wars-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.skybreak.application</groupId>
-    <artifactId>project-scanner-application</artifactId>
+    <artifactId>code-wars-application</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <url>http://maven.apache.org</url>

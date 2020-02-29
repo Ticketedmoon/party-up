@@ -14,15 +14,13 @@ import {Login} from "./types/action.constants";
 import {IStore} from "./types/store.interface.types";
 
 const initialState: IStore = {
-    value: 5
+    activeUser: ""
 };
 
 const rootReducer : Reducer<IStore> = (state = initialState, action: ILoginActionInterface) => {
     switch (action.type) {
-        case Login.SEND_MESSAGE:
-            return Object.assign({}, state, {value: action.payload});
-        case Login.DELETE_MESSAGE:
-            return Object.assign({}, state, {});
+        case Login.SET_USER:
+            return Object.assign({}, state, {activeUser: action.payload});
         default:
             return state;
     }

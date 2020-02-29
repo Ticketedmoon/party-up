@@ -1,16 +1,8 @@
-// src/store/chat/types.ts
-
 import {Login} from "./action.constants";
 
-interface ISendMessageAction {
-    type: typeof Login.SEND_MESSAGE
-    payload: number
+interface ISetUserAction {
+    type: typeof Login.SET_USER
+    payload: Object
 }
 
-interface IDeleteMessageAction {
-    type: typeof  Login.DELETE_MESSAGE
-    payload: {
-        timestamp: number
-    }
-}
-export type ILoginActionInterface = ISendMessageAction | IDeleteMessageAction;
+export type ILoginActionInterface = ISetUserAction;

@@ -1,8 +1,9 @@
 import * as React from "react";
 import LoginForm from "../../molecules/form/LoginForm";
 import "./style/style.css";
-import history from "../../../utils/history";
+import history, {redirectToRouteWithCurrent, redirectToRouteWithRoot} from "../../../utils/history";
 import { useToasts } from 'react-toast-notifications';
+import PrimaryButton from "../../atoms/button/primary";
 
 const CreateNewLoginTemplate = (props: any) => {
 
@@ -46,6 +47,7 @@ const CreateNewLoginTemplate = (props: any) => {
             <span className={"login-template-title"}> Create New Account </span>
             <LoginForm text={"Create New Account"}
                        checkCredentials={(username: string, password: string) => verifyNewUser(username, password)}/>
+            <PrimaryButton text={"Return to Login"} click={() => redirectToRouteWithRoot("/", {})}/>
         </div>
     );
 };

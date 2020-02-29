@@ -7,6 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import LoginTemplate from "./components/templates/login";
 import history from './utils/history';
 import CreateNewLoginTemplate from "./components/templates/create-new-login";
+import {ToastProvider} from "react-toast-notifications";
+import GameModes from "./components/templates/game-modes";
 
 const App = () => {
     return (
@@ -14,8 +16,11 @@ const App = () => {
             <Router history={history}>
                 <Switch>
                     <Redirect exact from="/" to="/login" />
-                    <Route exact path={"/login"} component={LoginTemplate}/>
-                    <Route exact path={"/login/create"} component={CreateNewLoginTemplate}/>
+                    <ToastProvider>
+                        <Route exact path={"/login"} component={LoginTemplate}/>
+                        <Route exact path={"/login/create"} component={CreateNewLoginTemplate}/>
+                        <Route exact path={"/game-modes"} component={GameModes}/>
+                    </ToastProvider>
                 </Switch>
             </Router>
         </Provider>

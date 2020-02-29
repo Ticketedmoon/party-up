@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,16 +31,22 @@ public class LoginController {
     @PostMapping(value = "login", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody User login(@RequestBody String userDTO) throws IOException {
         final User user = objectMapper.readValue(userDTO, User.class);
-        return userService.userAttemptLogin(user);
+        User existingUser = userService.userAttemptLogin(user);
+
+        if (existingUser != null) {
+            existingUser.setPassword(null);
+        }
+
+        return existingUser;
     }
 
-    @GetMapping(value = "login/create", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody User createNewUser(@RequestParam String userDTO) throws IOException {
+    @PostMapping(value = "login/create", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody boolean createNewUser(@RequestBody String userDTO) throws IOException {
         try {
             final User user = objectMapper.readValue(userDTO, User.class);
-            return userService.registerNewUser(user);
+            return userService.registerNewUser(user) != null;
         } catch (UsernameNotFoundException e) {
-            return null;
+            return false;
         }
     }
 

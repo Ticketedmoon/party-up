@@ -3,8 +3,13 @@ import PrimaryButton from "../../atoms/button/primary";
 import "./style/style.css"
 import {faChessKing, faUser} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {getActiveState, redirectToRouteWithRoot} from "../../../utils/history";
+import {RootStateOrAny, useSelector} from "react-redux";
 
-const GameModes = () => {
+const GameModes = (props: any) => {
+
+    const username = useSelector((state: RootStateOrAny) => state.activeUser.username);
+
     return (
         <div className={"game-modes wrapper"}>
 
@@ -18,7 +23,7 @@ const GameModes = () => {
                 </div>
                 <div className={"game-modes profile"}>
                     <FontAwesomeIcon icon={faUser} />
-                    <i className="fas fa-user"> UserIDX </i>
+                    <b> <p> { username } </p> </b>
                 </div>
             </div>
 
@@ -27,6 +32,10 @@ const GameModes = () => {
                 <PrimaryButton text={"Time Attack"} click={() => console.log("Time Attack Clicked")}/>
                 <PrimaryButton text={"War"} click={() => console.log("War Clicked")}/>
                 <PrimaryButton text={"Tag Team"} click={() => console.log("Tag Team Clicked")}/>
+            </div>
+
+            <div className={"login-return-button"}>
+                <PrimaryButton text={"Return to Login"} click={() => redirectToRouteWithRoot("/", {})}/>
             </div>
         </div>
     );

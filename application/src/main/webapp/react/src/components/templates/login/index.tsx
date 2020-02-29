@@ -2,9 +2,12 @@ import * as React from "react";
 import LoginForm from "../../molecules/form/LoginForm";
 import "./style/style.css";
 import PrimaryButton from "../../atoms/button/primary";
-import {currentRoute, redirectToRouteWithCurrent} from "../../../utils/history";
+import {redirectToRouteWithCurrent, redirectToRouteWithRoot} from "../../../utils/history";
+import {useToasts} from "react-toast-notifications";
 
 const LoginTemplate = (props: any) => {
+
+    const { addToast } = useToasts();
 
     const tryLogin = (username: string, password: string) => {
         console.log("User with name: " + username + " attempting login...");
@@ -16,9 +19,24 @@ const LoginTemplate = (props: any) => {
             },
             body: JSON.stringify({'username': username, 'password': password})
         }).then(response => response.json()).then(data => {
-            console.log(data);
-        }).catch(err => {
-            console.log(err)
+            if (data != null) {
+                addToast("User: {" + username + "}  Successfully logged in", {
+                    appearance: 'success',
+                    autoDismiss: true,
+                });
+                redirectToRouteWithRoot("/game-modes");
+            }
+            else {
+                addToast("User: {" + username + "}  failed to log in", {
+                    appearance: 'error',
+                    autoDismiss: true,
+                });
+            }
+        }).catch((err) => {
+            addToast("User: {" + username + "}  failed to log in", {
+                appearance: 'error',
+                autoDismiss: true,
+            });
         })
     };
 

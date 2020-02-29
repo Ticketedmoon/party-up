@@ -27,7 +27,7 @@ public class UserService {
         User existingUser = userRepository.findUserByUsername(user.getUsername());
         // User exists, now verify hashed password.
         try {
-            if (existingUser.getPassword().equals(passwordEncoder.encode(user.getPassword()))) {
+            if (passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
                 logger.info(String.format("User with username: {%s} successfully authenticated", user.getUsername()));
                 return existingUser;
             }
@@ -49,6 +49,7 @@ public class UserService {
         user.setUsername(newUser.getUsername());
         user.setPassword(passwordEncoder.encode(newUser.getPassword()));
         user.setRole(UserRole.STANDARD);
+        logger.info(String.format("Creating user for Code Wars application with credentials: %s", user));
         return userRepository.save(user);
     }
 
@@ -57,7 +58,7 @@ public class UserService {
         if (user != null) {
             logger.info(String.format("User with username: {%s} successfully authenticated", username));
         }
-        return user != null;
+        return user == null;
     }
 
 }

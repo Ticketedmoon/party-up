@@ -4,10 +4,13 @@ import "./style/style.css";
 import PrimaryButton from "../../atoms/button/primary";
 import {redirectToRouteWithCurrent, redirectToRouteWithRoot} from "../../../utils/history";
 import {useToasts} from "react-toast-notifications";
+import {useDispatch} from "react-redux";
+import {setUser} from "../../../store/login/types/action.function.types";
 
 const LoginTemplate = (props: any) => {
 
     const { addToast } = useToasts();
+    const dispatch = useDispatch();
 
     const tryLogin = (username: string, password: string) => {
         console.log("User with name: " + username + " attempting login...");
@@ -24,7 +27,9 @@ const LoginTemplate = (props: any) => {
                     appearance: 'success',
                     autoDismiss: true,
                 });
-                redirectToRouteWithRoot("/game-modes");
+
+                dispatch(setUser({username: data.username, role: data.role}));
+                redirectToRouteWithRoot("/game-modes", null);
             }
             else {
                 addToast("User: {" + username + "}  failed to log in", {
@@ -44,7 +49,7 @@ const LoginTemplate = (props: any) => {
         <div className={"login-template"}>
             <span className={"login-template-title"}> Code Wars </span>
             <LoginForm text={"Login"} checkCredentials={(username: string, password: string) => tryLogin(username, password)}/>
-            <PrimaryButton text={"Create New Account"} click={() => redirectToRouteWithCurrent("/create")}/>
+            <PrimaryButton text={"Create New Account"} click={() => redirectToRouteWithCurrent("/create", {})}/>
         </div>
     );
 };

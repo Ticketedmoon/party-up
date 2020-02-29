@@ -1,3 +1,3 @@
 export interface IStore {
-    value: number;
+    activeUser: Object;
 }

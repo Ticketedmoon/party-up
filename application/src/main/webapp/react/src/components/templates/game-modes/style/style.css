@@ -1,7 +1,27 @@
+.top-row {
+    display: grid;
+    flex-wrap: wrap;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 1em;
+    justify-items: center;
+    align-items: center;
+}
+
+.top-row * {
+    display: inline-block;
+    margin-right: 1em;
+}
+
 .button-form-container {
-    margin: 0 auto;
+    margin: auto;
     padding: 1em;
     border-radius: 5px;
-    width: 50%;
+    width: 30%;
     text-align: center;
+    background-color: #52e0e6;
+    border: 1px solid black;
+}
+
+.button-form-container * {
+    margin: 1em;
 }

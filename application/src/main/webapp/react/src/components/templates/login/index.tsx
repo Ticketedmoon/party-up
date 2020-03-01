@@ -28,7 +28,7 @@ const LoginTemplate = (props: any) => {
                     autoDismiss: true,
                 });
 
-                dispatch(setUser({username: data.username, role: data.role}));
+                dispatch(setUser({username: data.username, role: data.role, level: data.level}));
                 redirectToRouteWithRoot("/game-modes", null);
             }
             else {

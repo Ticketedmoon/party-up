@@ -14,7 +14,7 @@ import {Login} from "./types/action.constants";
 import {IStore} from "./types/store.interface.types";
 
 const initialState: IStore = {
-    activeUser: ""
+    activeUser: null
 };
 
 const rootReducer : Reducer<IStore> = (state = initialState, action: ILoginActionInterface) => {

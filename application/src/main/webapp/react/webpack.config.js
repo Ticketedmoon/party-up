@@ -1,20 +1,22 @@
-// NOTE: webpack watch options has a poll setting, do not include this if you are using webpack-dev-server
-// Polling dramatically influences the cpu usage.
-const path = require('path');
-
 module.exports = {
   entry: "./src/index.tsx",
   output: {
     filename: 'bundle.js'
   },
+  resolve: {
+    extensions: [ '.tsx', '.ts', '.js', '.css'],
+    modules: [
+      'node_modules'
+    ]
+  },
   devServer: {
-    public: 'http://localhost:3000/dist',
-    publicPath: 'http://localhost:3000/dist',
+    publicPath: 'https://localhost:3000/dist',
     host: "localhost",
     port: 3000,
     hot: true,
     watchContentBase: true,
     disableHostCheck: true,
+    inline: false
   },
   devtool: 'source-map',
   mode: "development",
@@ -35,11 +37,5 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
     ]
-  },
-  resolve: {
-    extensions: [ '.tsx', '.ts', '.js', '.css'],
-    modules: [
-      'node_modules'
-    ]
-  },
+  }
 };

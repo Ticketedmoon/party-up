@@ -29,7 +29,7 @@ public class User {
 
     @Column(columnDefinition = "int(20)",  nullable = false)
     @Transient
-    private Integer level;
+    private int level;
 
     public int getUserID() {
         return userID;

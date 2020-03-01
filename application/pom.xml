@@ -130,7 +130,7 @@
     </dependencies>
 
     <build>
-        <finalName>Project Scanner</finalName>
+        <finalName>Code Wars</finalName>
         <plugins>
             <!-- http://www.eclipse.org/jetty/documentation/current/jetty-maven-plugin.html -->
             <plugin>

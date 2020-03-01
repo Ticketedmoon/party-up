@@ -16,21 +16,8 @@
     display: inline-block;
 }
 
-.user-details > p, .profile > b {
+.user-details > b, .profile > b {
     padding: 0.5em;
-}
-
-.button-form-container {
-    margin: auto;
-    padding: 1em;
-    border-radius: 5px;
-    width: 30%;
-    text-align: center;
-    border: 1px solid black;
-}
-
-.button-form-container * {
-    margin: 1em;
 }
 
 .login-return-button {

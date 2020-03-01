@@ -24,3 +24,35 @@
     text-align: center;
     padding: 3em;
 }
+
+@-webkit-keyframes slideIn {
+    0% {
+        transform: translateX(0px);
+    }
+    100% {
+        transform: translateX(-32.5vw);
+    }
+}
+@-moz-keyframes slideIn {
+    0% {
+        transform: translateX(0px);
+    }
+    100% {
+        transform: translateX(-32.5vw);
+    }
+}
+@keyframes slideIn {
+    0% {
+        transform: translateX(0px);
+    }
+    100% {
+        transform: translateX(-32.5vw);
+    }
+}
+
+.button-list-animation {
+    position: relative;
+    -webkit-animation: slideIn 1s forwards;
+    -moz-animation: slideIn 1s forwards;
+    animation: slideIn 1s forwards;
+}

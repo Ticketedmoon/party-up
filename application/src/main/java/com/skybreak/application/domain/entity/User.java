@@ -8,13 +8,14 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class User {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private int userID;
+    private Integer userID;
 
     @Column(columnDefinition = "varchar(255)", nullable = false)
     private String username;
@@ -25,6 +26,10 @@ public class User {
     @Column(columnDefinition = "varchar(20)",  nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
+    @Column(columnDefinition = "int(20)",  nullable = false)
+    @Transient
+    private Integer level;
 
     public int getUserID() {
         return userID;
@@ -56,6 +61,14 @@ public class User {
 
     public void setRole(UserRole role) {
         this.role = role;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     @Override

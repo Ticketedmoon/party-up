@@ -1,15 +1,29 @@
 import * as React from "react";
+import {useState} from "react";
 import PrimaryButton from "../../atoms/button/primary";
 import "./style/style.css"
 import {faChessKing, faUser} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {getActiveState, redirectToRouteWithRoot} from "../../../utils/history";
+import {redirectToRouteWithRoot} from "../../../utils/history";
 import {RootStateOrAny, useSelector} from "react-redux";
 import ButtonForm from "../../molecules/form/ButtonForm";
 
 const GameModes = (props: any) => {
 
     const user = useSelector((state: RootStateOrAny) => state.activeUser);
+    const [hasPublicGamesOpened, setHasPublicGamesOpened] = useState(false);
+    const [animation, setAnimation] = useState(null);
+
+    const handleGameModeClick = (event: Event) => {
+        if (!hasPublicGamesOpened) {
+            // Animate the buttons
+            setAnimation("button-list-animation");
+            // Set condition to true
+            setHasPublicGamesOpened(true);
+        }
+
+        // Change active button colour and current display
+    };
 
     return (
         <div className={"game-modes wrapper"}>
@@ -29,11 +43,11 @@ const GameModes = (props: any) => {
             </div>
 
             <ButtonForm buttonListConfigurations={[
-                {text: "Battle", click: () => console.log("Battle Clicked")},
-                {text: "Time Attack", click: () => console.log("Time Attack Clicked"), enabled: false},
-                {text: "War", click: () => console.log("War Clicked"), enabled: false},
-                {text: "Tag Team", click: () => console.log("Tag Team Clicked"), enabled: false}
-            ]}/>
+                {text: "Battle", click: (event: Event) => handleGameModeClick(event)},
+                {text: "Time Attack", click: (event: Event) => handleGameModeClick(event), enabled: false},
+                {text: "War", click: (event: Event) => handleGameModeClick(event), enabled: false},
+                {text: "Tag Team", click: (event: Event) => handleGameModeClick(event), enabled: false}
+            ]} animation={animation}/>
 
             <div className={"login-return-button"}>
                 <PrimaryButton text={"Return to Login"} click={() => redirectToRouteWithRoot("/", {})}/>

@@ -14,8 +14,8 @@ const defaultProps: Object = {
 const PrimaryButton: React.FunctionComponent<PrimaryButtonProps> = (props:PrimaryButtonProps) => {
     return (
       <div>
-          <button type="button" className="btn btn-primary custom" onClick={() => {
-              props.click();
+          <button type="button" className="btn btn-primary custom" onClick={(event: React.MouseEvent<HTMLElement>) => {
+              props.click(event);
           }} disabled={!props.enabled}> {props.text} </button>
       </div>
     );

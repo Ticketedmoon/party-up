@@ -56,7 +56,7 @@ public class UserService {
     private boolean isUsernameValid(String username) {
         User user = userRepository.findUserByUsername(username);
         if (user != null) {
-            logger.info(String.format("User with username: {%s} successfully authenticated", username));
+            logger.info(String.format("User with username: {%s} found in DB", username));
         }
         return user == null;
     }

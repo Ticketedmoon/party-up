@@ -2,12 +2,12 @@ import PrimaryButton, {PrimaryButtonProps} from "../../../atoms/button/primary";
 import * as React from "react";
 import "./style/style.css";
 
-const ButtonForm = (props: {buttonListConfigurations: PrimaryButtonProps[]}) => {
+const ButtonForm = (props: {buttonListConfigurations: PrimaryButtonProps[], animation: string}) => {
   return (
-      <div className={"button-form-container"}>
+      <div className={`button-form-container ${props.animation}`}>
           {
               props.buttonListConfigurations.map((buttonConfig: PrimaryButtonProps, index: number) => {
-                  return (<PrimaryButton key={index} text={buttonConfig.text} click={() => buttonConfig.click()} enabled={buttonConfig.enabled}/>)
+                  return (<PrimaryButton key={index} text={buttonConfig.text} click={(event: Event) => buttonConfig.click(event)} enabled={buttonConfig.enabled}/>)
               })
           }
       </div>

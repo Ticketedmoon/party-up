@@ -15,7 +15,7 @@ const App = () => {
         <Provider store={store}>
             <Router history={history}>
                 <Switch>
-                    <Redirect exact from="/" to="/login" />
+                    <Redirect exact from="/" to="/game-modes" />
                     <ToastProvider>
                         <Route exact path={"/login"} component={LoginTemplate}/>
                         <Route exact path={"/login/create"} component={CreateNewLoginTemplate}/>

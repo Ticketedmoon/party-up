@@ -3,7 +3,7 @@ import LoginForm from "../../molecules/form/LoginForm";
 import "./style/style.css";
 import history, {redirectToRouteWithCurrent, redirectToRouteWithRoot} from "../../../utils/history";
 import { useToasts } from 'react-toast-notifications';
-import PrimaryButton from "../../atoms/button/primary";
+import BootstrapButton from "../../atoms/button/primary";
 
 const CreateNewLoginContainer = (props: any) => {
 
@@ -42,12 +42,13 @@ const CreateNewLoginContainer = (props: any) => {
     };
 
     return (
-
-        <div className={"login-template"}>
-            <span className={"login-template-title"}> Create New Account </span>
-            <LoginForm text={"Create New Account"}
-                       checkCredentials={(username: string, password: string) => verifyNewUser(username, password)}/>
-            <PrimaryButton text={"Return to Login"} click={() => redirectToRouteWithRoot("/", {})}/>
+        <div className={"login-template-wrapper"}>
+            <div className={"login-template"}>
+                <span className={"login-template-title"}> Create New Account </span>
+                <LoginForm text={"Create New Account"}
+                           checkCredentials={(username: string, password: string) => verifyNewUser(username, password)}/>
+                <BootstrapButton text={"Return to Login"} click={() => redirectToRouteWithRoot("/", {})}/>
+            </div>
         </div>
     );
 };

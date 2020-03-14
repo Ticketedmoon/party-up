@@ -1,4 +1,4 @@
-import PrimaryButton, {PrimaryButtonType} from "../../../atoms/button/primary";
+import BootstrapButton, {BootstrapButtonType} from "../../../atoms/button/primary";
 import * as React from "react";
 import "./style/style.css";
 
@@ -9,12 +9,12 @@ import "./style/style.css";
  * @param props
  * @constructor
  */
-const ButtonForm = (props: {buttonListConfigurations: PrimaryButtonType[], animation: string}) => {
+const ButtonForm = (props: {buttonListConfigurations: BootstrapButtonType[], animation: string}) => {
   return (
       <div className={`button-form-container ${props.animation}`}>
           {
-              props.buttonListConfigurations.map((buttonConfig: PrimaryButtonType, index: number) => {
-                  return (<PrimaryButton key={index} text={buttonConfig.text} click={(event: Event) => buttonConfig.click(event)} enabled={buttonConfig.enabled}/>)
+              props.buttonListConfigurations.map((buttonConfig: BootstrapButtonType, index: number) => {
+                  return (<BootstrapButton className={buttonConfig.className} key={index} text={buttonConfig.text} click={(event: Event) => buttonConfig.click(event)} enabled={buttonConfig.enabled}/>)
               })
           }
       </div>

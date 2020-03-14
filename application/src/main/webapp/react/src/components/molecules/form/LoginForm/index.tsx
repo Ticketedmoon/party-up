@@ -1,7 +1,7 @@
 import * as React from "react";
 import TextInputField from "../../../atoms/input/TextInputField";
 import {useState} from "react";
-import PrimaryButton from "../../../atoms/button/primary";
+import BootstrapButton from "../../../atoms/button/primary";
 import "./style/style.css"
 
 /**
@@ -27,7 +27,7 @@ const LoginForm = (props: any) => {
                             keypress={(e: React.KeyboardEvent) => keyPress(e)}/>
             <TextInputField title={"Password: "} type={"password"} update={(value: string) => setPassword(value)}
                             keypress={(e: React.KeyboardEvent) => keyPress(e)}/>
-            <PrimaryButton text={props.text} click={() => props.checkCredentials(username, password)}/>
+            <BootstrapButton text={props.text} click={() => props.checkCredentials(username, password)}/>
         </div>
     );
 };

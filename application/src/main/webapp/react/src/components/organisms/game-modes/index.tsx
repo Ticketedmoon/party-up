@@ -1,6 +1,6 @@
 import * as React from "react";
 import {useState} from "react";
-import PrimaryButton from "../../atoms/button/primary";
+import BootstrapButton from "../../atoms/button/primary";
 import "./style/style.css"
 import {faChessKing, faUser} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -46,12 +46,9 @@ const GameModesContainer = (props: any) => {
                 {text: "Battle", click: (event: Event) => handleGameModeClick(event)},
                 {text: "Time Attack", click: (event: Event) => handleGameModeClick(event), enabled: false},
                 {text: "War", click: (event: Event) => handleGameModeClick(event), enabled: false},
-                {text: "Tag Team", click: (event: Event) => handleGameModeClick(event), enabled: false}
+                {text: "Tag Team", click: (event: Event) => handleGameModeClick(event), enabled: false},
+                {text: "Logout", click: () => redirectToRouteWithRoot("/", {}), className: "logout-button-style"}
             ]} animation={animation}/>
-
-            <div className={"login-return-button"}>
-                <PrimaryButton text={"Return to Login"} click={() => redirectToRouteWithRoot("/", {})}/>
-            </div>
         </div>
     );
 };

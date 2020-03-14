@@ -8,14 +8,13 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Transient;
 
 @Entity
 public class User {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer userID;
+    private Long userID;
 
     @Column(columnDefinition = "varchar(255)", nullable = false)
     private String username;
@@ -28,16 +27,7 @@ public class User {
     private UserRole role;
 
     @Column(columnDefinition = "int(20)",  nullable = false)
-    @Transient
     private int level;
-
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
 
     public String getUsername() {
         return username;

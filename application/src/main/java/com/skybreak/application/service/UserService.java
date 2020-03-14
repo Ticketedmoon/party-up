@@ -16,11 +16,13 @@ public class UserService {
 
     private static Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-    @Autowired
     private PasswordEncoder passwordEncoder;
-
-    @Autowired
     private UserRepository userRepository;
+
+    public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository) {
+        this.passwordEncoder = passwordEncoder;
+        this.userRepository = userRepository;
+    }
 
     public User userAttemptLogin(User user) {
         logger.info(String.format("Attempting to verify user with username: {%s}", user.getUsername()));
@@ -49,6 +51,7 @@ public class UserService {
         user.setUsername(newUser.getUsername());
         user.setPassword(passwordEncoder.encode(newUser.getPassword()));
         user.setRole(UserRole.STANDARD);
+        user.setLevel(1);
         logger.info(String.format("Creating user for Code Wars application with credentials: %s", user));
         return userRepository.save(user);
     }

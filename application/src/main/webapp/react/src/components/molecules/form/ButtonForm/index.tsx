@@ -9,7 +9,7 @@ import "./style/style.css";
  * @param props
  * @constructor
  */
-const ButtonForm = (props: {buttonListConfigurations: BootstrapButtonType[], animation: string}) => {
+const ButtonForm = (props: ButtonFormType) => {
     return (
         <div className={`button-form-container ${props.animation}`}>
             {
@@ -28,5 +28,16 @@ const ButtonForm = (props: {buttonListConfigurations: BootstrapButtonType[], ani
         </div>
     )
 };
+
+export interface ButtonFormType {
+    buttonListConfigurations: BootstrapButtonType[],
+    animation?: String
+}
+
+const defaultProps: Object = {
+    animation: null
+};
+
+ButtonForm.defaultProps = defaultProps;
 
 export default ButtonForm;

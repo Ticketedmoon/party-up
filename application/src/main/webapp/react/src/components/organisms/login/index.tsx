@@ -7,7 +7,7 @@ import {useToasts} from "react-toast-notifications";
 import {useDispatch} from "react-redux";
 import {setUser} from "../../../store/Reducers/login/types/action.function.types";
 
-const LoginTemplate = (props: any) => {
+const LoginContainer = (props: any) => {
 
     const { addToast } = useToasts();
     const dispatch = useDispatch();
@@ -54,4 +54,4 @@ const LoginTemplate = (props: any) => {
     );
 };
 
-export default LoginTemplate;
+export default LoginContainer;

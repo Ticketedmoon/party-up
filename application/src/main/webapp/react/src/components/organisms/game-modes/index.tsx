@@ -8,7 +8,7 @@ import {redirectToRouteWithRoot} from "../../../utils/history";
 import {RootStateOrAny, useSelector} from "react-redux";
 import ButtonForm from "../../molecules/form/ButtonForm";
 
-const GameModes = (props: any) => {
+const GameModesContainer = (props: any) => {
 
     const user = useSelector((state: RootStateOrAny) => state.activeUser);
     const [hasPublicGamesOpened, setHasPublicGamesOpened] = useState(false);
@@ -56,4 +56,4 @@ const GameModes = (props: any) => {
     );
 };
 
-export default GameModes;
+export default GameModesContainer;

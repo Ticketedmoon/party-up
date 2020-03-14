@@ -5,7 +5,7 @@ import history, {redirectToRouteWithCurrent, redirectToRouteWithRoot} from "../.
 import { useToasts } from 'react-toast-notifications';
 import PrimaryButton from "../../atoms/button/primary";
 
-const CreateNewLoginTemplate = (props: any) => {
+const CreateNewLoginContainer = (props: any) => {
 
     const { addToast } = useToasts();
 
@@ -52,4 +52,4 @@ const CreateNewLoginTemplate = (props: any) => {
     );
 };
 
-export default CreateNewLoginTemplate;
+export default CreateNewLoginContainer;

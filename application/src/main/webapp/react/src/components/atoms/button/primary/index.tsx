@@ -1,15 +1,17 @@
 import * as React from "react";
 import "./style/style.css";
 
-export interface PrimaryButtonType {
+export interface BootstrapButtonType {
     className?: string,
     click: Function,
     enabled?: boolean,
     text: string,
+    bootstrapColor?: string
 }
 
 const defaultProps: Object = {
-    enabled: true
+    enabled: true,
+    bootstrapColor: "primary"
 };
 
 /**
@@ -18,19 +20,20 @@ const defaultProps: Object = {
  * - click: Function -- callback method when button clicked
  * - enabled: boolean -- Whether button enabled or disabled
  * - text: string -- Text of the button
+ * - bootstrap-color: string -- Examples: {primary, secondary, success, danger, warning, info, light, dark, link}
  * @param props
  * @constructor
  */
-const PrimaryButton: React.FunctionComponent<PrimaryButtonType> = (props:PrimaryButtonType) => {
+const BootstrapButton: React.FunctionComponent<BootstrapButtonType> = (props:BootstrapButtonType) => {
     return (
       <div className={props.className}>
-          <button type="button" className="btn btn-primary custom" onClick={(event: React.MouseEvent<HTMLElement>) => {
+          <button type="button" className={`btn btn-${props.bootstrapColor} custom`} onClick={(event: React.MouseEvent<HTMLElement>) => {
               props.click(event);
           }} disabled={!props.enabled}> {props.text} </button>
       </div>
     );
 };
 
-PrimaryButton.defaultProps = defaultProps;
+BootstrapButton.defaultProps = defaultProps;
 
-export default PrimaryButton;
+export default BootstrapButton;

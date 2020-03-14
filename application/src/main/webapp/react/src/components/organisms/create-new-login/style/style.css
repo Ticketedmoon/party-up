@@ -1,12 +1,3 @@
-.login-template {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding-bottom: 40vh;
-}
-
 .login-template-title {
     font-size: 5em;
     font-family: Calibri, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',

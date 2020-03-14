@@ -2,7 +2,7 @@ import {Provider} from 'react-redux';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import {Router} from "react-router";
 import * as React from "react";
-import store from "./store";
+import store from "./store/store";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import LoginTemplate from "./components/templates/login";
 import history from './utils/history';

@@ -4,6 +4,12 @@ import {useState} from "react";
 import PrimaryButton from "../../../atoms/button/primary";
 import "./style/style.css"
 
+/**
+ * Prop Values:
+ * - checkCredentials(username, password): Function -- A callback function passed back up with values from form.
+ * @param props
+ * @constructor
+ */
 const LoginForm = (props: any) => {
 
     const [username, setUsername] = useState(null);

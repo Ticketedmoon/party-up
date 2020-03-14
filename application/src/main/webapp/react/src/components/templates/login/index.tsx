@@ -5,7 +5,7 @@ import PrimaryButton from "../../atoms/button/primary";
 import {redirectToRouteWithCurrent, redirectToRouteWithRoot} from "../../../utils/history";
 import {useToasts} from "react-toast-notifications";
 import {useDispatch} from "react-redux";
-import {setUser} from "../../../store/login/types/action.function.types";
+import {setUser} from "../../../store/Reducers/login/types/action.function.types";
 
 const LoginTemplate = (props: any) => {
 

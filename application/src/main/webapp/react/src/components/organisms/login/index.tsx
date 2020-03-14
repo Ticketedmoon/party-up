@@ -1,13 +1,13 @@
 import * as React from "react";
 import LoginForm from "../../molecules/form/LoginForm";
 import "./style/style.css";
-import PrimaryButton from "../../atoms/button/primary";
+import BootstrapButton from "../../atoms/button/primary";
 import {redirectToRouteWithCurrent, redirectToRouteWithRoot} from "../../../utils/history";
 import {useToasts} from "react-toast-notifications";
 import {useDispatch} from "react-redux";
-import {setUser} from "../../../store/login/types/action.function.types";
+import {setUser} from "../../../store/Reducers/login/types/action.function.types";
 
-const LoginTemplate = (props: any) => {
+const LoginContainer = (props: any) => {
 
     const { addToast } = useToasts();
     const dispatch = useDispatch();
@@ -46,12 +46,14 @@ const LoginTemplate = (props: any) => {
     };
 
     return (
-        <div className={"login-template"}>
-            <span className={"login-template-title"}> Code Wars </span>
-            <LoginForm text={"Login"} checkCredentials={(username: string, password: string) => tryLogin(username, password)}/>
-            <PrimaryButton text={"Create New Account"} click={() => redirectToRouteWithCurrent("/create", {})}/>
+        <div className={"login-template-wrapper"}>
+            <div className={"login-template"}>
+                <span className={"login-template-title"}> Code Wars </span>
+                <LoginForm text={"Login"} checkCredentials={(username: string, password: string) => tryLogin(username, password)}/>
+                <BootstrapButton text={"Create New Account"} click={() => redirectToRouteWithCurrent("/create", {})}/>
+            </div>
         </div>
     );
 };
 
-export default LoginTemplate;
+export default LoginContainer;

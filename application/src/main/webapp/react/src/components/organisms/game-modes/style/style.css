@@ -47,7 +47,11 @@
 
 .button-list-animation {
     position: relative;
-    -webkit-animation: slideIn 1s forwards;
-    -moz-animation: slideIn 1s forwards;
-    animation: slideIn 1s forwards;
+    -webkit-animation: slideIn 0.5s forwards;
+    -moz-animation: slideIn 0.5s forwards;
+    animation: slideIn 0.5s forwards;
+}
+
+.game-modes > .button-form-container > div > button {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }

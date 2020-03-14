@@ -21,8 +21,6 @@ const GameModesContainer = (props: any) => {
             // Set condition to true
             setHasPublicGamesOpened(true);
         }
-
-        // Change active button colour and current display
     };
 
     return (
@@ -47,7 +45,7 @@ const GameModesContainer = (props: any) => {
                 {text: "Time Attack", click: (event: Event) => handleGameModeClick(event), enabled: false},
                 {text: "War", click: (event: Event) => handleGameModeClick(event), enabled: false},
                 {text: "Tag Team", click: (event: Event) => handleGameModeClick(event), enabled: false},
-                {text: "Logout", click: () => redirectToRouteWithRoot("/", {}), className: "logout-button-style"}
+                {text: "Logout", click: () => redirectToRouteWithRoot("/", {}), bootstrapColor: 'light', className: 'logout-button'}
             ]} animation={animation}/>
         </div>
     );

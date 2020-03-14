@@ -1,19 +1,29 @@
 import * as React from "react";
 import "./style/style.css";
 
-export interface PrimaryButtonProps {
-    text: string,
+export interface PrimaryButtonType {
+    className?: string,
+    click: Function,
     enabled?: boolean,
-    click: Function
+    text: string,
 }
 
 const defaultProps: Object = {
     enabled: true
 };
 
-const PrimaryButton: React.FunctionComponent<PrimaryButtonProps> = (props:PrimaryButtonProps) => {
+/**
+ * Prop Values:
+ * - className: string -- Access to class for styling
+ * - click: Function -- callback method when button clicked
+ * - enabled: boolean -- Whether button enabled or disabled
+ * - text: string -- Text of the button
+ * @param props
+ * @constructor
+ */
+const PrimaryButton: React.FunctionComponent<PrimaryButtonType> = (props:PrimaryButtonType) => {
     return (
-      <div>
+      <div className={props.className}>
           <button type="button" className="btn btn-primary custom" onClick={(event: React.MouseEvent<HTMLElement>) => {
               props.click(event);
           }} disabled={!props.enabled}> {props.text} </button>

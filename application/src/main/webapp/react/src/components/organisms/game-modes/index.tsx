@@ -45,9 +45,16 @@ const GameModesContainer = (props: any) => {
                     ]} />
 
                     {/* Public games container to appear on state change */}
-                    <div className={'public-games-container'}>
+                    <div className={"public-games-container"}>
+                        <div className={'grid-item-A grid-item-container'}>
+                            <div className={"grid-item-a-image"}/>
+                            <div className={"grid-item-text"}> Matchmaking Mode </div>
+                        </div>
+                        <div className={'grid-item-B grid-item-container'}>
+                            <div className={"grid-item-b-image"}/>
+                            <div className={"grid-item-text"}> Tournament Mode </div>
+                        </div>
                     </div>
-
                 </div>
 
             </div>

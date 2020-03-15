@@ -10,7 +10,7 @@ import {setUser} from "../../../store/Reducers/login/types/action.function.types
 const LoginContainer = (props: any) => {
 
     const { addToast } = useToasts();
-    const dispatch = useDispatch();
+    const { dispatch } = useDispatch();
 
     const tryLogin = (username: string, password: string) => {
         console.log("User with name: " + username + " attempting login...");

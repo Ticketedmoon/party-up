@@ -23,9 +23,14 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.tsx?$/,
+        enforce: "pre",
+        loader: "eslint-loader",
         exclude: /node_modules/,
-        use: "babel-loader"
+        options: {
+          emitWarning: true,
+          configFile: "./.eslintrc.json"
+        }
       },
       {
         test: /\.tsx?$/,
@@ -36,6 +41,11 @@ module.exports = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: "babel-loader"
+      }
     ]
   }
 };

@@ -6,6 +6,7 @@ import {redirectToRouteWithCurrent, redirectToRouteWithRoot} from "../../../util
 import {useToasts} from "react-toast-notifications";
 import {useDispatch} from "react-redux";
 import {setUser} from "../../../store/Reducers/login/types/action.function.types";
+import axios from "axios";
 
 const LoginContainer = (props: any) => {
 
@@ -13,36 +14,24 @@ const LoginContainer = (props: any) => {
     const dispatch = useDispatch();
 
     const tryLogin = (username: string, password: string) => {
-        console.log("User with name: " + username + " attempting login...");
-        fetch(window.location.href, {
-            method: 'POST',
-            headers : {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({'username': username, 'password': password})
-        }).then(response => response.json()).then(data => {
-            if (data != null) {
-                addToast("User: {" + username + "}  Successfully logged in", {
-                    appearance: 'success',
-                    autoDismiss: true,
-                });
-
-                dispatch(setUser({username: data.username, role: data.role, level: data.level}));
-                redirectToRouteWithRoot("/game-modes", null);
-            }
-            else {
+        axios.post(window.location.href, {'username': username, 'password': password})
+            .then((response) => {
+                if (response.status >= 200 && response.status < 300) {
+                    let data = response.data;
+                    addToast("User: {" + username + "}  Successfully logged in", {
+                        appearance: 'success',
+                        autoDismiss: true,
+                    });
+                    dispatch(setUser({username: data.username, role: data.role, level: data.level}));
+                    redirectToRouteWithRoot("/game-modes", null);
+                }
+            })
+            .catch(() => {
                 addToast("User: {" + username + "}  failed to log in", {
                     appearance: 'error',
                     autoDismiss: true,
                 });
-            }
-        }).catch((err) => {
-            addToast("User: {" + username + "}  failed to log in", {
-                appearance: 'error',
-                autoDismiss: true,
-            });
-        })
+        });
     };
 
     return (

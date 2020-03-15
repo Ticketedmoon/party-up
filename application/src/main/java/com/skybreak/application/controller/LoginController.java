@@ -2,11 +2,13 @@ package com.skybreak.application.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.skybreak.application.domain.entity.User;
-import com.skybreak.application.exception.UsernameNotFoundException;
+import com.skybreak.application.exception.IncorrectPasswordException;
+import com.skybreak.application.exception.UsernameNotValidException;
 import com.skybreak.application.service.UserService;
 import java.io.IOException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,23 +29,26 @@ public class LoginController {
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public User login(@RequestBody String userDTO) throws IOException {
+    public ResponseEntity<?> login(@RequestBody String userDTO) throws IOException {
         final User user = objectMapper.readValue(userDTO, User.class);
-        User existingUser = userService.userAttemptLogin(user);
-        if (existingUser != null) {
+        try {
+            User existingUser = userService.userAttemptLogin(user);
             existingUser.setPassword(null);
+            return new ResponseEntity<>(existingUser, HttpStatus.OK);
+        } catch (UsernameNotValidException | IncorrectPasswordException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return existingUser;
     }
 
     @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public boolean createNewUser(@RequestBody String userDTO) throws IOException {
+    public ResponseEntity<?> createNewUser(@RequestBody String userDTO) throws IOException {
         try {
             final User user = objectMapper.readValue(userDTO, User.class);
-            return userService.registerNewUser(user) != null;
-        } catch (UsernameNotFoundException e) {
-            return false;
+            userService.registerNewUser(user);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (UsernameNotValidException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 

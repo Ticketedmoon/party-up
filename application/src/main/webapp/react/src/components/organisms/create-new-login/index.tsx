@@ -1,9 +1,10 @@
 import * as React from "react";
 import LoginForm from "../../molecules/form/LoginForm";
 import "./style/style.css";
-import history, {redirectToRouteWithCurrent, redirectToRouteWithRoot} from "../../../utils/history";
-import { useToasts } from 'react-toast-notifications';
+import history, {redirectToRouteWithRoot} from "../../../utils/history";
+import {useToasts} from 'react-toast-notifications';
 import BootstrapButton from "../../atoms/button/primary";
+import axios from "axios";
 
 const CreateNewLoginContainer = (props: any) => {
 
@@ -12,28 +13,16 @@ const CreateNewLoginContainer = (props: any) => {
     const verifyNewUser = (username: string, password: string) => {
         console.log("User with name: " + username + " validating...");
 
-        fetch(window.location.href, {
-            method: 'POST',
-            headers : {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({'username': username, 'password': password})
-        }).then(response => response.json().then(accountCreated => {
-            if (accountCreated) {
+        axios.post(window.location.href, {'username': username, 'password': password})
+            .then(response => {
+            if (response.status >= 200 && response.status < 300) {
                 addToast("User: {" + username + "}  Successfully Created", {
                     appearance: 'success',
                     autoDismiss: true,
                 });
                 history.goBack();
             }
-            else {
-                addToast("User: {" + username + "}  failed to create", {
-                    appearance: 'error',
-                    autoDismiss: true,
-                });
-            }
-        })).catch((e) => {
+        }).catch(() => {
             addToast("User: {" + username + "}  failed to create", {
                 appearance: 'error',
                 autoDismiss: true,

@@ -15,7 +15,7 @@
 
         <title> Code Wars - An adversarial learning tool </title>
         <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-
+        <link rel="icon" type="image/png"  href="/resources/assets/icon/favicon.ico">
     </head>
 
     <body>

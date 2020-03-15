@@ -1,12 +1,11 @@
 .button-form-container {
-    margin: auto;
     padding: 1em;
     border-radius: 5px;
-    width: 20%;
-    text-align: center;
-    border: 1px solid black;
+    width: 20em;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    background-color: #eee;
 }
 
 .button-form-container * {
-    margin: 1em;
+    padding: 1em;
 }

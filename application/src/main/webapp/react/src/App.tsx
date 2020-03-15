@@ -9,6 +9,7 @@ import {ToastProvider} from "react-toast-notifications";
 import {LoginTemplate} from "./components/templates/template.login";
 import {CreateNewLoginTemplate} from "./components/templates/template.create.new.login";
 import {GameModesTemplate} from "./components/templates/template.game.modes";
+import {MatchMakingMode} from "./components/templates/template.matchmaking.mode";
 
 const App = () => {
     return (
@@ -20,6 +21,7 @@ const App = () => {
                         <Route exact path={"/login"} component={LoginTemplate}/>
                         <Route exact path={"/login/create"} component={CreateNewLoginTemplate}/>
                         <Route exact path={"/game-modes"} component={GameModesTemplate}/>
+                        <Route exact path={"/game-modes/type/:mode"} component={MatchMakingMode}/>
                     </ToastProvider>
                 </Switch>
             </Router>

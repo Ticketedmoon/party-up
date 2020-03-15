@@ -3,13 +3,18 @@
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
-.top-row {
+.wrapper {
     display: grid;
     flex-wrap: wrap;
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
     padding: 1em;
     justify-items: center;
     align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
 }
 
 .top-row * {
@@ -60,23 +65,21 @@
     width: 100%;
 }
 
-.wrapper {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-}
-
-.game-mode-area-container-wrapper {
-    display: grid;
-    flex-wrap: wrap;
-    grid-template-columns: 1fr 2fr;
-    justify-items: center;
-    align-items: center;
-}
-
 .public-games-container {
     display: flex;
     flex-direction: row;
+}
+
+.user-details, .title, .profile {
+    padding: 2em;
+}
+
+.game-modes {
+    width: 100%;
+}
+
+.game-modes-item * {
+    display: inline;
 }
 
 .grid-item-container {

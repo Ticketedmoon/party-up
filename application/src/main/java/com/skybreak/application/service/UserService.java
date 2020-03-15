@@ -3,11 +3,11 @@ package com.skybreak.application.service;
 import com.skybreak.application.controller.LoginController;
 import com.skybreak.application.domain.entity.User;
 import com.skybreak.application.domain.enums.UserRole;
-import com.skybreak.application.exception.UsernameNotFoundException;
+import com.skybreak.application.exception.IncorrectPasswordException;
+import com.skybreak.application.exception.UsernameNotValidException;
 import com.skybreak.application.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,26 +24,25 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User userAttemptLogin(User user) {
+    public User userAttemptLogin(User user) throws UsernameNotValidException, IncorrectPasswordException {
         logger.info(String.format("Attempting to verify user with username: {%s}", user.getUsername()));
         User existingUser = userRepository.findUserByUsername(user.getUsername());
-        // User exists, now verify hashed password.
+        // User exists -> Verify password.
         try {
             if (passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
                 logger.info(String.format("User with username: {%s} successfully authenticated", user.getUsername()));
                 return existingUser;
             }
-            logger.info(String.format("User found for username: {%s} but incorrect password entered", user.getUsername()));
+            throw new IncorrectPasswordException(String.format("User found for username: {%s} but incorrect password entered", user.getUsername()));
         } catch (NullPointerException e) {
-            logger.info(String.format("User not found for username: {%s}", user.getUsername()));
+            throw new UsernameNotValidException(String.format("User not found for username: {%s}", user.getUsername()), e);
         }
-        return null;
     }
 
-    public User registerNewUser(User newUser) throws UsernameNotFoundException {
+    public void registerNewUser(User newUser) throws UsernameNotValidException {
         logger.info(String.format("User with username: {%s} attempting creation", newUser.getUsername()));
         if (!isUsernameValid(newUser.getUsername())) {
-            throw new UsernameNotFoundException("There is an account with that email address:" + newUser.getUsername());
+            throw new UsernameNotValidException("There is an account with that email address:" + newUser.getUsername());
         }
 
         // Use the PasswordEncoder to hash the password during the user registration process
@@ -53,7 +52,7 @@ public class UserService {
         user.setRole(UserRole.STANDARD);
         user.setLevel(1);
         logger.info(String.format("Creating user for Code Wars application with credentials: %s", user));
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     private boolean isUsernameValid(String username) {

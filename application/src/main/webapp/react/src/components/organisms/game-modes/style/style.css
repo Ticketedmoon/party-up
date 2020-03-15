@@ -3,13 +3,18 @@
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
-.top-row {
+.wrapper {
     display: grid;
     flex-wrap: wrap;
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
     padding: 1em;
     justify-items: center;
     align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
 }
 
 .top-row * {
@@ -47,7 +52,69 @@
 
 .button-list-animation {
     position: relative;
-    -webkit-animation: slideIn 1s forwards;
-    -moz-animation: slideIn 1s forwards;
-    animation: slideIn 1s forwards;
+    -webkit-animation: slideIn 0.5s forwards;
+    -moz-animation: slideIn 0.5s forwards;
+    animation: slideIn 0.5s forwards;
 }
+
+.game-modes > .game-mode-area-container-wrapper > .button-form-container > div > button {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.game-modes > .game-mode-area-container-wrapper > .button-form-container > div > button {
+    width: 100%;
+}
+
+.public-games-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.user-details, .title, .profile {
+    padding: 2em;
+}
+
+.game-modes {
+    width: 100%;
+}
+
+.game-modes-item * {
+    display: inline;
+}
+
+.grid-item-container {
+    height: 20em;
+    border-radius: 5px;
+    width: 20em;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    background-color: #eee;
+}
+
+.grid-item-container:hover {
+    cursor: pointer;
+    filter: grayscale(100%);
+}
+
+.grid-item-a-image {
+    background-image: url('/resources/assets/images/battle-swords.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 80%;
+}
+
+.grid-item-text {
+    height: 20%;
+    text-align: center;
+    color: black;
+    padding: 1.5em;
+}
+
+.grid-item-b-image {
+    background-image: url('/resources/assets/images/tournament-trophy.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 80%;
+}
+

@@ -9,16 +9,35 @@ import "./style/style.css";
  * @param props
  * @constructor
  */
-const ButtonForm = (props: {buttonListConfigurations: BootstrapButtonType[], animation: string}) => {
-  return (
-      <div className={`button-form-container ${props.animation}`}>
-          {
-              props.buttonListConfigurations.map((buttonConfig: BootstrapButtonType, index: number) => {
-                  return (<BootstrapButton className={buttonConfig.className} key={index} text={buttonConfig.text} click={(event: Event) => buttonConfig.click(event)} enabled={buttonConfig.enabled}/>)
-              })
-          }
-      </div>
-  )
+const ButtonForm = (props: ButtonFormType) => {
+    return (
+        <div className={`button-form-container ${props.animation}`}>
+            {
+                props.buttonListConfigurations.map((buttonConfig: BootstrapButtonType, index: number) => {
+                    return (
+                        <BootstrapButton className={buttonConfig.className}
+                                         key={index}
+                                         text={buttonConfig.text}
+                                         click={(event: Event) => buttonConfig.click(event)}
+                                         bootstrapColor={buttonConfig.bootstrapColor}
+                                         enabled={buttonConfig.enabled}
+                        />
+                    )
+                })
+            }
+        </div>
+    )
 };
+
+export interface ButtonFormType {
+    buttonListConfigurations: BootstrapButtonType[],
+    animation?: String
+}
+
+const defaultProps: Object = {
+    animation: null
+};
+
+ButtonForm.defaultProps = defaultProps;
 
 export default ButtonForm;

@@ -4,6 +4,7 @@ import com.skybreak.application.controller.LoginController;
 import com.skybreak.application.domain.entity.User;
 import com.skybreak.application.domain.enums.UserRole;
 import com.skybreak.application.exception.IncorrectPasswordException;
+import com.skybreak.application.exception.UserNotFoundException;
 import com.skybreak.application.exception.UsernameNotValidException;
 import com.skybreak.application.repository.UserRepository;
 import org.slf4j.Logger;
@@ -24,7 +25,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User userAttemptLogin(User user) throws UsernameNotValidException, IncorrectPasswordException {
+    public User userAttemptLogin(User user) throws UserNotFoundException, IncorrectPasswordException {
         logger.info(String.format("Attempting to verify user with username: {%s}", user.getUsername()));
         User existingUser = userRepository.findUserByUsername(user.getUsername());
         // User exists -> Verify password.
@@ -35,7 +36,7 @@ public class UserService {
             }
             throw new IncorrectPasswordException(String.format("User found for username: {%s} but incorrect password entered", user.getUsername()));
         } catch (NullPointerException e) {
-            throw new UsernameNotValidException(String.format("User not found for username: {%s}", user.getUsername()), e);
+            throw new UserNotFoundException(String.format("User not found for username: {%s}", user.getUsername()), e);
         }
     }
 

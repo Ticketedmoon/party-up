@@ -1,6 +1,6 @@
 package com.skybreak.application.exception;
 
-public class UsernameNotValidException extends Exception {
+public class UsernameNotValidException extends RuntimeException {
 
     public UsernameNotValidException(String errorMessage) {
         this(errorMessage, null);

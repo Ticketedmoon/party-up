@@ -1,6 +1,6 @@
 package com.skybreak.application.exception;
 
-public class IncorrectPasswordException extends Exception {
+public class IncorrectPasswordException extends RuntimeException {
 
     public IncorrectPasswordException(String errorMessage) {
         this(errorMessage, null);

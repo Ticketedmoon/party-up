@@ -1,33 +1,26 @@
 package com.skybreak.application.exception;
 
-import java.util.Collections;
-import java.util.List;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+public class GlobalExceptionHandler {
 
-    @ExceptionHandler(UserNotFoundException.class)
-    protected ResponseEntity<?> handleUserNotFound(final CodeWarsException exception, WebRequest request) {
-        List<String> errors = Collections.singletonList(exception.getMessage());
-        return handleExceptionInternal(exception, errors, null, HttpStatus.NOT_FOUND, request);
-    }
+    @ExceptionHandler(CodeWarsException.class)
+    protected ResponseEntity<?> handleCodeWarsException(final CodeWarsException exception) {
+        // Create payload
+        final HttpStatus badRequestStatus = HttpStatus.BAD_REQUEST;
+        ClientException clientException = new ClientException(
+                exception.getMessage(),
+                badRequestStatus,
+                ZonedDateTime.now(ZoneOffset.UTC));
 
-    @ExceptionHandler(UsernameNotValidException.class)
-    protected ResponseEntity<?> handleUsernameNotValid(final CodeWarsException exception, WebRequest request) {
-        List<String> errors = Collections.singletonList(exception.getMessage());
-        return handleExceptionInternal(exception, errors, null, HttpStatus.BAD_REQUEST, request);
-    }
-
-    @ExceptionHandler(IncorrectPasswordException.class)
-    protected ResponseEntity<?> handleIncorrectPassword(final CodeWarsException exception, WebRequest request) {
-        List<String> errors = Collections.singletonList(exception.getMessage());
-        return handleExceptionInternal(exception, errors, null, HttpStatus.BAD_REQUEST, request);
+        // Return ResponseEntity
+        return new ResponseEntity<>(clientException, badRequestStatus);
     }
 
 }

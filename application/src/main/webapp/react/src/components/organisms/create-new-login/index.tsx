@@ -22,8 +22,8 @@ const CreateNewLoginContainer = (props: any) => {
                 });
                 history.goBack();
             }
-        }).catch(() => {
-            addToast("User: {" + username + "}  failed to create", {
+        }).catch((error) => {
+            addToast(`User: ${username} failed to create - ${error.response.data.message}`, {
                 appearance: 'error',
                 autoDismiss: true,
             });

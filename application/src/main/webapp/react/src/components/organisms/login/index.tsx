@@ -16,6 +16,7 @@ const LoginContainer = (props: any) => {
     const tryLogin = (username: string, password: string) => {
         axios.post(window.location.href, {'username': username, 'password': password})
             .then((response) => {
+                console.log(response);
                 if (response.status >= 200 && response.status < 300) {
                     let data = response.data;
                     addToast("User: {" + username + "}  Successfully logged in", {
@@ -26,8 +27,9 @@ const LoginContainer = (props: any) => {
                     redirectToRouteWithRoot("/game-modes", null);
                 }
             })
-            .catch(() => {
-                addToast("User: {" + username + "}  failed to log in", {
+            .catch((error) => {
+                addToast(
+                    `User: ${username} failed to log in - ${error.response.data.message}`, {
                     appearance: 'error',
                     autoDismiss: true,
                 });

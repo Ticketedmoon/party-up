@@ -1,3 +1,3 @@
 export interface IStore {
-    activeUser: Object;
+    activeUser: Object | null;
 }

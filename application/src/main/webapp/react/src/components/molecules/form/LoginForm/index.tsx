@@ -1,8 +1,9 @@
 import * as React from "react";
 import TextInputField from "../../../atoms/input/TextInputField";
 import {useState} from "react";
-import BootstrapButton from "../../../atoms/button/primary";
-import "./style/style.css"
+import BootstrapButton from "../../../atoms/button/bootstrap";
+
+const style = require("./style/style.module.css");
 
 /**
  * Prop Values:
@@ -12,8 +13,8 @@ import "./style/style.css"
  */
 const LoginForm = (props: any) => {
 
-    const [username, setUsername] = useState(null);
-    const [password, setPassword] = useState(null);
+    const [username, setUsername] = useState<string>();
+    const [password, setPassword] = useState<string>();
 
     const keyPress = (event: React.KeyboardEvent) => {
         if (event.key == "Enter") {
@@ -22,7 +23,7 @@ const LoginForm = (props: any) => {
     };
 
     return (
-        <div className={"login-form"}>
+        <div className={style["login-form"]}>
             <TextInputField title={"Email: "} type={"email"} update={(value: string) => setUsername(value)}
                             keypress={(e: React.KeyboardEvent) => keyPress(e)}/>
             <TextInputField title={"Password: "} type={"password"} update={(value: string) => setPassword(value)}

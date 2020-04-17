@@ -1,23 +1,13 @@
-/** A reducer is just a JavaScript function.
- *  A reducer takes two parameters: the current state and an action.
- *  Reducers produce the state of the application.
- *  Redux says the only way to change the state is by sending a signal to the store. This signal is an action.
- *
- *  There are two key points for avoiding mutations in Redux:
- *  1. Using concat(), slice(), and …spread for arrays
- *  2. Using Object.assign() and …spread for objects */
-
-import * as React from "react";
 import {ILoginActionInterface} from "./types/ILoginActionInterface";
-import {Reducer} from "redux";
 import {Login} from "./types/action.constants";
 import {IStore} from "./types/store.interface.types";
+import {Reducer} from "redux";
 
 const initialState: IStore = {
     activeUser: null
 };
 
-const rootReducer : Reducer<IStore> = (state = initialState, action: ILoginActionInterface) => {
+const rootReducer: Reducer<IStore, ILoginActionInterface> = (state: IStore = initialState, action: ILoginActionInterface) => {
     switch (action.type) {
         case Login.SET_USER:
             return Object.assign({}, state, {activeUser: action.payload});

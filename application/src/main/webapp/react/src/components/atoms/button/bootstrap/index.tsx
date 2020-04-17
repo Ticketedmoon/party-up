@@ -1,5 +1,6 @@
 import * as React from "react";
-import "./style/style.css";
+
+const style = require("./style/style.module.css");
 
 export interface BootstrapButtonType {
     className?: string,
@@ -27,7 +28,7 @@ const defaultProps: Object = {
 const BootstrapButton: React.FunctionComponent<BootstrapButtonType> = (props:BootstrapButtonType) => {
     return (
       <div className={props.className}>
-          <button type="button" className={`btn btn-${props.bootstrapColor} custom`} onClick={(event: React.MouseEvent<HTMLElement>) => {
+          <button type="button" className={style[`btn btn-${props.bootstrapColor} custom`]} onClick={(event: React.MouseEvent<HTMLElement>) => {
               props.click(event);
           }} disabled={!props.enabled}> {props.text} </button>
       </div>

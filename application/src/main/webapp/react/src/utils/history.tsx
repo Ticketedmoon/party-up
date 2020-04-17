@@ -3,7 +3,7 @@ const history = createBrowserHistory (
     { basename: '/' }
     );
 
-export const redirectToRouteWithCurrent = (route: string, state: Object) => {
+export const redirectToRouteWithCurrent = (route: string, state: Object | null) => {
     const currentPath: string = window.location.pathname;
     history.push({
         pathname: currentPath + route,
@@ -11,7 +11,7 @@ export const redirectToRouteWithCurrent = (route: string, state: Object) => {
     });
 };
 
-export const redirectToRouteWithRoot = (route: string, state: Object) => {
+export const redirectToRouteWithRoot = (route: string, state: Object | null) => {
     history.push({
         pathname: route,
         state: state

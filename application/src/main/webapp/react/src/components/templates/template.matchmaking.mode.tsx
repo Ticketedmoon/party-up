@@ -1,11 +1,11 @@
 import * as React from "react";
-import {Fragment, useEffect, useState} from "react";
-import "./style/style.css"
-import Loader from 'react-loader-spinner';
+import {FunctionComponent, useEffect, useState} from "react";
 import {redirectToRouteWithRoot} from "../../utils/history";
 import {LoaderSpinner} from "../atoms/loaders/react-loader-spinner";
 
-export const MatchmakingMode = () => {
+const style = require("./style/style.module.css");
+
+export const MatchmakingMode: FunctionComponent<any> = () => {
 
     const [loading, setLoading] = useState(true);
 
@@ -23,9 +23,9 @@ export const MatchmakingMode = () => {
 
     return (
         (loading) ? (
-            <div className={"loading"}>
+            <div className={style["loading"]}>
                <LoaderSpinner type={"Oval"} color={"green"} height={70} width={70}/>
             </div>
-        ) : undefined
+        ) : null
     );
 };

@@ -1,6 +1,7 @@
 import Loader from "react-loader-spinner";
 import * as React from "react";
-import "./style/style.css";
+
+const style = require("./style/style.module.css");
 
 type Types =
     | 'Audio'
@@ -31,7 +32,7 @@ interface LoaderSpinnerType {
 
 export const LoaderSpinner = (props: LoaderSpinnerType) => {
     return (
-        <div className={"loader-spinner"}>
+        <div className={style["loader-spinner"]}>
             <Loader type={props.type} color={props.color} height={props.height} width={props.width}/>
         </div>
     );

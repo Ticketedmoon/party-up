@@ -1,12 +1,13 @@
 import * as React from "react";
 import LoginForm from "../../molecules/form/LoginForm";
-import "./style/style.css";
 import history, {redirectToRouteWithRoot} from "../../../utils/history";
 import {useToasts} from 'react-toast-notifications';
-import BootstrapButton from "../../atoms/button/primary";
+import BootstrapButton from "../../atoms/button/bootstrap";
 import axios from "axios";
 
-const CreateNewLoginContainer = (props: any) => {
+const style = require("./style/style.module.css");
+
+const CreateNewLoginContainer = () => {
 
     const { addToast } = useToasts();
 
@@ -15,14 +16,14 @@ const CreateNewLoginContainer = (props: any) => {
 
         axios.post(window.location.href, {'username': username, 'password': password})
             .then(response => {
-            if (response.status >= 200 && response.status < 300) {
-                addToast("User: {" + username + "}  Successfully Created", {
-                    appearance: 'success',
-                    autoDismiss: true,
-                });
-                history.goBack();
-            }
-        }).catch((error) => {
+                if (response.status >= 200 && response.status < 300) {
+                    addToast("User: {" + username + "}  Successfully Created", {
+                        appearance: 'success',
+                        autoDismiss: true,
+                    });
+                    history.goBack();
+                }
+            }).catch((error) => {
             addToast(`User: ${username} failed to create - ${error.response.data.message}`, {
                 appearance: 'error',
                 autoDismiss: true,
@@ -31,9 +32,9 @@ const CreateNewLoginContainer = (props: any) => {
     };
 
     return (
-        <div className={"login-template-wrapper"}>
-            <div className={"login-template"}>
-                <span className={"login-template-title"}> Create New Account </span>
+        <div className={style["login-template-wrapper"]}>
+            <div className={style["login-template"]}>
+                <span className={style["login-template-title"]}> Create New Account </span>
                 <LoginForm text={"Create New Account"}
                            checkCredentials={(username: string, password: string) => verifyNewUser(username, password)}/>
                 <BootstrapButton text={"Return to Login"} click={() => redirectToRouteWithRoot("/", {})}/>

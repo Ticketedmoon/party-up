@@ -1,6 +1,7 @@
-import BootstrapButton, {BootstrapButtonType} from "../../../atoms/button/primary";
+import BootstrapButton, {BootstrapButtonType} from "../../../atoms/button/bootstrap";
 import * as React from "react";
-import "./style/style.css";
+
+const style = require("./style/style.module.css");
 
 /**
  * Prop Values:
@@ -11,7 +12,7 @@ import "./style/style.css";
  */
 const ButtonForm = (props: ButtonFormType) => {
     return (
-        <div className={`button-form-container ${props.animation}`}>
+        <div className={style[`button-form-container ${props.animation}`]}>
             {
                 props.buttonListConfigurations.map((buttonConfig: BootstrapButtonType, index: number) => {
                     return (

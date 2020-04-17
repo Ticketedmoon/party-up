@@ -34,12 +34,28 @@ module.exports = {
       },
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-react']
+          }
+        },
         exclude: /node_modules/,
       },
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: [{
+          loader: 'style-loader',
+        },{
+          loader: "css-loader",
+          options: {
+            sourceMap: true,
+            importLoaders: 2,
+            modules: {
+              localIdentName: "[name]_[local]_[hash:base64:5]",
+            },
+          }
+        }],
       },
       {
         test: /\.(js|jsx)$/,

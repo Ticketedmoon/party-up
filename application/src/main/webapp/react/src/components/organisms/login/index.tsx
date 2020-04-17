@@ -1,14 +1,15 @@
 import * as React from "react";
 import LoginForm from "../../molecules/form/LoginForm";
-import "./style/style.css";
-import BootstrapButton from "../../atoms/button/primary";
+import BootstrapButton from "../../atoms/button/bootstrap";
 import {redirectToRouteWithCurrent, redirectToRouteWithRoot} from "../../../utils/history";
 import {useToasts} from "react-toast-notifications";
 import {useDispatch} from "react-redux";
 import {setUser} from "../../../store/Reducers/login/types/action.function.types";
 import axios from "axios";
 
-const LoginContainer = (props: any) => {
+const style = require("./style/style.module.css");
+
+const LoginContainer = () => {
 
     const { addToast } = useToasts();
     const dispatch = useDispatch();
@@ -37,9 +38,9 @@ const LoginContainer = (props: any) => {
     };
 
     return (
-        <div className={"login-template-wrapper"}>
-            <div className={"login-template"}>
-                <span className={"login-template-title"}> Code Wars </span>
+        <div className={style["login-template-wrapper"]}>
+            <div className={style["login-template"]}>
+                <span className={style["login-template-title"]}> Code Wars </span>
                 <LoginForm text={"Login"} checkCredentials={(username: string, password: string) => tryLogin(username, password)}/>
                 <BootstrapButton text={"Create New Account"} click={() => redirectToRouteWithCurrent("/create", {})}/>
             </div>

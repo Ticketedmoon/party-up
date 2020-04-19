@@ -2,7 +2,7 @@ import {Provider} from 'react-redux';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import {Router} from "react-router";
 import * as React from "react";
-import store from "./store/store";
+import { store } from "./store/store";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import history from './utils/history';
 import {ToastProvider} from "react-toast-notifications";
@@ -11,6 +11,8 @@ import {CreateNewLoginTemplate} from "./components/templates/template.create.new
 import {GameModesTemplate} from "./components/templates/template.game.modes";
 import {MatchmakingMode} from "./components/templates/template.matchmaking.mode";
 import {Game} from "./components/templates/template.game";
+
+import "./style.css";
 
 const App = () => {
     return (

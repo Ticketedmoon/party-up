@@ -21,10 +21,10 @@ const GameModesContainer = () => {
 
     return (
         <>
-            <div className={style["game-modes wrapper"]}>
+            <div className={style["game-modes"]}>
 
                 {/* Item 1*/}
-                <div className={style["game-modes-item user-details"]}>
+                <div className={`${style["game-modes-item"]} ${style["user-details"]}`}>
                     <FontAwesomeIcon icon={faChessKing} />
                     <b> <p> Level: { user.level } </p> </b>
                 </div>
@@ -53,13 +53,13 @@ const GameModesContainer = () => {
                 </div>
 
                 {/* Item 5 - Public games container to appear on state change */}
-                <div className={style['grid-item-A grid-item-container']} onClick={() => handleMatchMakingClick("matchmaking")}>
+                <div className={`${style['grid-item-A']} ${style['grid-item-container']}`} onClick={() => handleMatchMakingClick("matchmaking")}>
                     <div className={style["grid-item-a-image"]}/>
                     <div className={style["grid-item-text"]}> Matchmaking Mode </div>
                 </div>
 
                 {/* Item 6*/}
-                <div className={style['grid-item-B grid-item-container']}>
+                <div className={`${style['grid-item-B']} ${style['grid-item-container']}`}>
                     <div className={style["grid-item-b-image"]}/>
                     <div className={style["grid-item-text"]}> Tournament Mode </div>
                 </div>

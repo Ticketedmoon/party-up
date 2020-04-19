@@ -1,1 +1,13 @@
 /* Template styles */
+.game-view-container {
+    height: 100%;
+}
+
+.quest-text-left-column {
+    background-color: #1f2454;
+    height: 100%;
+    width: 25%;
+    font-size: 0.85em;
+    color: white;
+    padding: 1em;
+}

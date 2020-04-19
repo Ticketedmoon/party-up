@@ -12,7 +12,7 @@ const style = require("./style/style.module.css");
  */
 const ButtonForm = (props: ButtonFormType) => {
     return (
-        <div className={style[`button-form-container ${props.animation}`]}>
+        <div className={`${style[`button-form-container`]} ${style[`${props.animation}`]}`}>
             {
                 props.buttonListConfigurations.map((buttonConfig: BootstrapButtonType, index: number) => {
                     return (

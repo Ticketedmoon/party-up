@@ -1,7 +1,5 @@
 import * as React from "react";
 
-const style = require("./style/style.module.css");
-
 export interface BootstrapButtonType {
     className?: string,
     click: Function,
@@ -12,7 +10,8 @@ export interface BootstrapButtonType {
 
 const defaultProps: Object = {
     enabled: true,
-    bootstrapColor: "primary"
+    bootstrapColor: "primary",
+    className: "default"
 };
 
 /**
@@ -28,7 +27,7 @@ const defaultProps: Object = {
 const BootstrapButton: React.FunctionComponent<BootstrapButtonType> = (props:BootstrapButtonType) => {
     return (
       <div className={props.className}>
-          <button type="button" className={style[`btn btn-${props.bootstrapColor} custom`]} onClick={(event: React.MouseEvent<HTMLElement>) => {
+          <button type="button" className={`btn-${props.bootstrapColor}`} onClick={(event: React.MouseEvent<HTMLElement>) => {
               props.click(event);
           }} disabled={!props.enabled}> {props.text} </button>
       </div>

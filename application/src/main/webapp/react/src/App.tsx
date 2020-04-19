@@ -2,7 +2,7 @@ import {Provider} from 'react-redux';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import {Router} from "react-router";
 import * as React from "react";
-import store from "./store/store";
+import { store } from "./store/store";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import history from './utils/history';
 import {ToastProvider} from "react-toast-notifications";

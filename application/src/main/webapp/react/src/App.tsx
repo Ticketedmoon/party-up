@@ -12,6 +12,8 @@ import {GameModesTemplate} from "./components/templates/template.game.modes";
 import {MatchmakingMode} from "./components/templates/template.matchmaking.mode";
 import {Game} from "./components/templates/template.game";
 
+import "./style.css";
+
 const App = () => {
     return (
         <Provider store={store}>

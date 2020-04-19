@@ -15,12 +15,12 @@
 
         <title> Code Wars - An adversarial learning tool </title>
         <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-        <link rel="icon" type="image/png"  href="/resources/assets/icon/favicon.ico">
+        <link rel="icon" type="image/png"  href="${pageContext.request.contextPath}/resources/assets/icon/favicon.ico">
     </head>
 
     <body>
         <%-- React Hook-in for SPA --%>
-        <div id="root"></div>
+        <div id="root" style="width: 100%; height:100%"></div>
 
         <c:choose>
             <c:when test="${profile != 'dev'}">

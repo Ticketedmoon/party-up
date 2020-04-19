@@ -21,7 +21,7 @@ const GameModesContainer = () => {
 
     return (
         <>
-            <div className={style["game-modes wrapper"]}>
+            <div className={style["game-modes"]}>
 
                 {/* Item 1*/}
                 <div className={style["game-modes-item user-details"]}>

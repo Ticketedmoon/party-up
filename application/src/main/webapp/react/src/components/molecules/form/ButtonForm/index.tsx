@@ -1,5 +1,5 @@
-import BootstrapButton, {BootstrapButtonType} from "../../../atoms/button/bootstrap";
 import * as React from "react";
+import {Button} from "@material-ui/core";
 
 const style = require("./style/style.module.css");
 
@@ -14,15 +14,14 @@ const ButtonForm = (props: ButtonFormType) => {
     return (
         <div className={`${style[`button-form-container`]} ${style[`${props.animation}`]}`}>
             {
-                props.buttonListConfigurations.map((buttonConfig: BootstrapButtonType, index: number) => {
+                props.buttonListConfigurations.map((buttonConfig: ButtonConfigurationType, index: number) => {
                     return (
-                        <BootstrapButton className={buttonConfig.className}
-                                         key={index}
-                                         text={buttonConfig.text}
-                                         click={(event: Event) => buttonConfig.click(event)}
-                                         bootstrapColor={buttonConfig.bootstrapColor}
-                                         enabled={buttonConfig.enabled}
-                        />
+                        <Button key={index}
+                                variant={"contained"}
+                                onClick={(event) => buttonConfig.onClick(event)}
+                                color={buttonConfig.color}
+                                disabled={!buttonConfig.enabled}
+                        > {buttonConfig.text} </Button>
                     )
                 })
             }
@@ -30,8 +29,15 @@ const ButtonForm = (props: ButtonFormType) => {
     )
 };
 
+export interface ButtonConfigurationType {
+    text: string,
+    onClick: Function,
+    color: string,
+    enabled: boolean
+}
+
 export interface ButtonFormType {
-    buttonListConfigurations: BootstrapButtonType[],
+    buttonListConfigurations: ButtonConfigurationType[],
     animation?: String
 }
 

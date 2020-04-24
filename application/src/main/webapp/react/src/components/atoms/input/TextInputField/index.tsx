@@ -1,5 +1,7 @@
 import * as React from "react";
 
+const style = require("./style/style.module.css");
+
 /**
  * Prop Values:
  * - title: string -- A title describing the text input field above it.
@@ -13,7 +15,8 @@ const TextInputField = (props: {title: string, type: string, keypress: Function,
     return (
         <div>
             <p> {props.title} </p>
-            <input type={props.type} onKeyDown={(event: React.KeyboardEvent) => props.keypress(event)} onChange={(event) => {
+            <input className={style["customized"]} type={props.type}
+                   onKeyDown={(event: React.KeyboardEvent) => props.keypress(event)} onChange={(event) => {
                 props.update(event.currentTarget.value);
             }}/>
         </div>

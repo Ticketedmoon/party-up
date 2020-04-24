@@ -2,8 +2,8 @@ import * as React from "react";
 import LoginForm from "../../molecules/form/LoginForm";
 import history, {redirectToRouteWithRoot} from "../../../utils/history";
 import {useToasts} from 'react-toast-notifications';
-import BootstrapButton from "../../atoms/button/bootstrap";
 import axios from "axios";
+import {Button} from "@material-ui/core";
 
 const style = require("./style/style.module.css");
 
@@ -37,7 +37,8 @@ const CreateNewLoginContainer = () => {
                 <span className={style["login-template-title"]}> Create New Account </span>
                 <LoginForm text={"Create New Account"}
                            checkCredentials={(username: string, password: string) => verifyNewUser(username, password)}/>
-                <BootstrapButton text={"Return to Login"} click={() => redirectToRouteWithRoot("/", {})}/>
+                <Button color="primary" variant="contained" onClick={() => redirectToRouteWithRoot("/", {})}> Return to
+                    Login </Button>
             </div>
         </div>
     );

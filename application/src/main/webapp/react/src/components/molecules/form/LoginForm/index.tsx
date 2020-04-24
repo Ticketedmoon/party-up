@@ -1,7 +1,7 @@
 import * as React from "react";
-import TextInputField from "../../../atoms/input/TextInputField";
 import {useState} from "react";
-import BootstrapButton from "../../../atoms/button/bootstrap";
+import TextInputField from "../../../atoms/input/TextInputField";
+import {Button} from "@material-ui/core";
 
 const style = require("./style/style.module.css");
 
@@ -28,7 +28,8 @@ const LoginForm = (props: any) => {
                             keypress={(e: React.KeyboardEvent) => keyPress(e)}/>
             <TextInputField title={"Password: "} type={"password"} update={(value: string) => setPassword(value)}
                             keypress={(e: React.KeyboardEvent) => keyPress(e)}/>
-            <BootstrapButton text={props.text} click={() => props.checkCredentials(username, password)}/>
+            <Button className={style["customized"]} color={"primary"} variant={"outlined"} size={"small"}
+                    onClick={() => props.checkCredentials(username, password)}> {props.text} </Button>
         </div>
     );
 };

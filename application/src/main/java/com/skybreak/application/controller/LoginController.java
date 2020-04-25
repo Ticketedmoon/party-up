@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/login")
 public class LoginController {
 
-    private Logger logger = LoggerFactory.getLogger(LoginController.class);
+    private final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public LoginController(UserService userService) {

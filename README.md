@@ -1,4 +1,6 @@
-# Code Wars
+# Code Wars 
+![](https://github.com/ShaneCreedon/Code-Wars/workflows/Build%20with%20Maven/badge.svg)
+
 > To be Continued... 
 
 ### Design Process:

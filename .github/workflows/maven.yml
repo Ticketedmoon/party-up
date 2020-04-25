@@ -22,7 +22,7 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
       - name: Generate coverage report
-        working-directory: ./.github
+        working-directory: ./.github/workflows
         run: bash <(curl -s https://codecov.io/bash)
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1

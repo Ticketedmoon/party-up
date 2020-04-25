@@ -24,7 +24,7 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private DataSource dataSource;
+    private final DataSource dataSource;
 
     @Autowired
     public SecurityConfiguration(DataSource dataSource) {

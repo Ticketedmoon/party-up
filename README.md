@@ -1,5 +1,5 @@
 # Code Wars 
-![](https://github.com/ShaneCreedon/Code-Wars/workflows/Build%20with%20Maven/badge.svg)
+![](https://github.com/ShaneCreedon/Code-Wars/workflows/Build%20Project/badge.svg)
 
 > To be Continued... 
 

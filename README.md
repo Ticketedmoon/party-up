@@ -1,5 +1,5 @@
 # Code Wars 
-![](https://github.com/ShaneCreedon/Code-Wars/workflows/Code%20Wars%20Build/badge.svg)
+![Code Wars Build](https://github.com/ShaneCreedon/Code-Wars/workflows/Code%20Wars%20Build/badge.svg?branch=master)
 
 > To be Continued... 
 

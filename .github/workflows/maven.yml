@@ -20,5 +20,9 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: Code Wars Build
+    - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          flags: unittests
+          name: codecov-umbrella
       run: mvn -B package --file pom.xml

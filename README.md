@@ -1,6 +1,5 @@
 # Code Wars 
 ![Code Wars Build](https://github.com/ShaneCreedon/Code-Wars/workflows/Code%20Wars%20Build/badge.svg?branch=master)
- [![codecov](https://codecov.io/gh/ShaneCreedon/Code-Wars/branch/master/graph/badge.svg)](https://codecov.io/gh/ShaneCreedon/Code-Wars)
 > To be Continued... 
 
 ### Design Process:

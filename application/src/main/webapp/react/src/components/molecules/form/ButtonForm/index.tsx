@@ -6,6 +6,7 @@ const style = require("./style/style.module.css");
 /**
  * Prop Values:
  * - buttonListConfigurations: PrimaryButtonType[] -- An Array of PrimaryButtonType objects to be rendered in the form.
+ *   Color Types: 'inherit' | 'primary' | 'secondary' | 'default';
  * - animation: string -- CSS animation name passed into the Form Container
  * @param props
  * @constructor
@@ -17,10 +18,11 @@ const ButtonForm = (props: ButtonFormType) => {
                 props.buttonListConfigurations.map((buttonConfig: ButtonConfigurationType, index: number) => {
                     return (
                         <Button key={index}
+                                className={buttonConfig.className}
                                 variant={"contained"}
                                 onClick={(event) => buttonConfig.onClick(event)}
                                 color={buttonConfig.color}
-                                disabled={!buttonConfig.enabled}
+                                disabled={buttonConfig.enabled}
                         > {buttonConfig.text} </Button>
                     )
                 })
@@ -30,10 +32,11 @@ const ButtonForm = (props: ButtonFormType) => {
 };
 
 export interface ButtonConfigurationType {
+    className?: string,
     text: string,
     onClick: Function,
-    color: string,
-    enabled: boolean
+    color?: 'inherit' | 'primary' | 'secondary' | 'default',
+    enabled?: boolean
 }
 
 export interface ButtonFormType {

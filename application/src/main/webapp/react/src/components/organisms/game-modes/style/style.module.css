@@ -58,31 +58,45 @@
 
 .user-details, .title, .profile {
     padding: 2em;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
 }
 
 .game-modes {
     width: 100%;
-    display: grid;
+    display: block;
     flex-wrap: wrap;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto;
     padding: 1em;
-    justify-items: center;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+    text-align: center;
     margin: 0;
 }
 
-.game-modes-item * {
-    display: inline;
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.mode-body {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: space-evenly;
+    grid-gap: 3em;
+}
+
+.game-mode-area-container-wrapper * {
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+    font-size: 0.8em;
 }
 
 .grid-item-container {
-    height: 20em;
+    height: 10em;
     border-radius: 5px;
-    width: 20em;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    width: 10em;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     background-color: #eee;
 }
 
@@ -100,10 +114,10 @@
 }
 
 .grid-item-text {
-    height: 20%;
     text-align: center;
     color: black;
-    padding: 1.5em;
+    padding: 0.5em;
+    font-size: 0.75em;
 }
 
 .grid-item-b-image {
@@ -112,5 +126,11 @@
     background-repeat: no-repeat;
     background-position: center;
     height: 80%;
+}
+
+.main-body-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 

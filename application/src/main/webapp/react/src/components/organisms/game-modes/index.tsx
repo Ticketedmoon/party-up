@@ -22,48 +22,87 @@ const GameModesContainer = () => {
     return (
         <>
             <div className={style["game-modes"]}>
+                <div className={style["header"]}>
+                    {/* Nav Item A */}
+                    <div className={`${style["game-modes-item"]} ${style["user-details"]}`}>
+                        <FontAwesomeIcon icon={faChessKing}/>
+                        <b><p> Level: {user.level} </p></b>
+                    </div>
 
-                {/* Item 1*/}
-                <div className={`${style["game-modes-item"]} ${style["user-details"]}`}>
-                    <FontAwesomeIcon icon={faChessKing} />
-                    <b> <p> Level: { user.level } </p> </b>
+                    {/* Nav Item B */}
+                    <div className={`${style["game-modes-item"]} ${style["title"]}`}>
+                        <h4> Game Modes </h4>
+                    </div>
+
+                    {/* Nav Item C */}
+                    <div className={`${style["game-modes-item"]} ${style["profile"]}`}>
+                        <FontAwesomeIcon icon={faUser}/>
+                        <b><p> {user.username} </p></b>
+                    </div>
                 </div>
 
-                {/* Item 2 */}
-                <div className={style["game-modes-item title"]}>
-                    <h4> Game Modes </h4>
+                <div className={style["main-body-wrapper"]}>
+                    <div className={style["game-mode-area-container-wrapper"]}>
+                        <ButtonForm buttonListConfigurations={[
+                            {text: "Battle", onClick: (event: Event) => handleGameModeClick(event), color: 'primary'},
+                            {
+                                text: "Time Attack",
+                                onClick: (event: Event) => handleGameModeClick(event),
+                                enabled: false
+                            },
+                            {text: "War", onClick: (event: Event) => handleGameModeClick(event), enabled: false},
+                            {text: "Tag Team", onClick: (event: Event) => handleGameModeClick(event), enabled: false},
+                            {
+                                text: "Logout",
+                                onClick: () => redirectToRouteWithRoot("/", {}),
+                                color: "primary",
+                                className: 'logout-button'
+                            }
+                        ]}/>
+                    </div>
+
+                    <div className={style["mode-body"]}>
+                        {/* Item 1 - Public games container to appear on state change */}
+                        <div className={`${style['grid-item-A']} ${style['grid-item-container']}`}
+                             onClick={() => handleMatchMakingClick("matchmaking")}>
+                            <div className={style["grid-item-a-image"]}/>
+                            <div className={style["grid-item-text"]}> Matchmaking Mode</div>
+                        </div>
+
+                        {/* Item 2 */}
+                        <div className={`${style['grid-item-container']}`}>
+                            <div className={style["grid-item-b-image"]}/>
+                            <div className={style["grid-item-text"]}> Tournament Mode</div>
+                        </div>
+
+                        {/* Item 3 */}
+                        <div className={`${style['grid-item-C']} ${style['grid-item-container']}`}
+                             onClick={() => handleMatchMakingClick("matchmaking")}>
+                            <div className={style["grid-item-a-image"]}/>
+                            <div className={style["grid-item-text"]}> X Mode</div>
+                        </div>
+
+                        {/* Item 4 */}
+                        <div className={`${style['grid-item-D']} ${style['grid-item-container']}`}>
+                            <div className={style["grid-item-b-image"]}/>
+                            <div className={style["grid-item-text"]}> Y Mode</div>
+                        </div>
+
+                        {/* Item 5 */}
+                        <div className={`${style['grid-item-E']} ${style['grid-item-container']}`}
+                             onClick={() => handleMatchMakingClick("matchmaking")}>
+                            <div className={style["grid-item-a-image"]}/>
+                            <div className={style["grid-item-text"]}> Z Mode</div>
+                        </div>
+
+                        {/* Item 6 */}
+                        <div className={`${style['grid-item-F']} ${style['grid-item-container']}`}>
+                            <div className={style["grid-item-b-image"]}/>
+                            <div className={style["grid-item-text"]}> S Mode</div>
+                        </div>
+
+                    </div>
                 </div>
-
-                {/* Item 3 */}
-                <div className={style["game-modes-item profile"]}>
-                    <FontAwesomeIcon icon={faUser} />
-                    <b> <p> { user.username } </p> </b>
-                </div>
-
-                {/* Item 4 */}
-                <div className={style["game-mode-area-container-wrapper"]}>
-                    <ButtonForm buttonListConfigurations={[
-                        {text: "Battle", click: (event: Event) => handleGameModeClick(event), bootstrapColor: 'success'},
-                        {text: "Time Attack", click: (event: Event) => handleGameModeClick(event), enabled: false},
-                        {text: "War", click: (event: Event) => handleGameModeClick(event), enabled: false},
-                        {text: "Tag Team", click: (event: Event) => handleGameModeClick(event), enabled: false},
-                        {text: "Logout", click: () => redirectToRouteWithRoot("/", {}), bootstrapColor: 'light', className: 'logout-button'}
-                    ]} />
-
-                </div>
-
-                {/* Item 5 - Public games container to appear on state change */}
-                <div className={`${style['grid-item-A']} ${style['grid-item-container']}`} onClick={() => handleMatchMakingClick("matchmaking")}>
-                    <div className={style["grid-item-a-image"]}/>
-                    <div className={style["grid-item-text"]}> Matchmaking Mode </div>
-                </div>
-
-                {/* Item 6*/}
-                <div className={`${style['grid-item-B']} ${style['grid-item-container']}`}>
-                    <div className={style["grid-item-b-image"]}/>
-                    <div className={style["grid-item-text"]}> Tournament Mode </div>
-                </div>
-
             </div>
         </>
     );

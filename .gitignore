@@ -3,3 +3,4 @@ target/
 dist/
 .idea/
 *.iml
+application/src/main/resources/spring-config/spring.properties

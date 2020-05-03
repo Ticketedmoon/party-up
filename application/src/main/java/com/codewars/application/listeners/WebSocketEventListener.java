@@ -1,7 +1,7 @@
 package com.codewars.application.listeners;
 
 import com.codewars.application.domain.entity.ChatMessage;
-import java.util.Objects;
+import com.codewars.application.domain.enums.MessageType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,23 +25,20 @@ public class WebSocketEventListener {
     }
 
     @EventListener
-    public void handleWebSocketConnectListener(SessionConnectedEvent event) {
+    public void handleWebSocketConnectListener(final SessionConnectedEvent event) {
         logger.info("Received a new web socket connection");
     }
 
     @EventListener
-    public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
-        StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
+    public void handleWebSocketDisconnectListener(final SessionDisconnectEvent event) {
+        final StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
 
-        if (Objects.requireNonNull(headerAccessor.getSessionAttributes()).containsKey("username")) {
-            String username = (String) headerAccessor.getSessionAttributes().get("username");
-            logger.info("User Disconnected : " + username);
+        final String username = (String) headerAccessor.getSessionAttributes().get("username");
 
-            ChatMessage chatMessage = new ChatMessage();
-            chatMessage.setType(ChatMessage.MessageType.LEAVE);
-            chatMessage.setSender(username);
-
-            messagingTemplate.convertAndSend("/topic/public", chatMessage);
-        }
+        final ChatMessage chatMessage = ChatMessage.builder()
+                .type(MessageType.DISCONNECT)
+                .sender(username)
+                .build();
+        messagingTemplate.convertAndSend("/topic/public", chatMessage);
     }
 }

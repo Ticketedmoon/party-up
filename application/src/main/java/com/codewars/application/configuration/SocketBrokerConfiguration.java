@@ -12,7 +12,7 @@ public class SocketBrokerConfiguration implements WebSocketMessageBrokerConfigur
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/handler").withSockJS();
+        registry.addEndpoint("/chat-app").setAllowedOrigins("*");
     }
 
     @Override

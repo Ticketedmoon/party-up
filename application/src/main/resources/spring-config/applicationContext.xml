@@ -33,7 +33,7 @@
 
     <bean id="deployProperties"
           class="org.springframework.beans.factory.config.PropertiesFactoryBean"
-          p:location="classpath:spring-config/spring.properties" />
+          p:location="classpath:spring-config/application.properties"/>
 
     <import resource="classpath:spring-config/spring-webmvc.xml"/>
 

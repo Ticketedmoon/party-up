@@ -1,41 +1,31 @@
 package com.codewars.application.controller;
 
-import com.codewars.application.domain.entity.ChatHistoryDao;
-import java.util.List;
-import java.util.Map;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.codewars.application.domain.entity.ChatMessage;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MessageController {
-
-    private final ChatHistoryDao chatHistoryDao;
-
-    @Autowired
-    public MessageController(ChatHistoryDao chatHistoryDao) {
-        this.chatHistoryDao = chatHistoryDao;
-    }
 
     /*
      * This MessageMapping annotated method will be handled by
      * SimpAnnotationMethodMessageHandler and after that the Message will be
      * forwarded to Broker channel to be forwarded to the client via WebSocket
      */
-    @MessageMapping("/all")
-    @SendTo("/topic/all")
-    public Map<String, String> post(@Payload Map<String, String> message) {
-        message.put("timestamp", Long.toString(System.currentTimeMillis()));
-        chatHistoryDao.save(message);
-        return message;
+    @MessageMapping("/chat.send")
+    @SendTo("/topic/public")
+    public ChatMessage sendMessage(@Payload final ChatMessage chatMessage) {
+        return chatMessage;
     }
 
-    @RequestMapping("/history")
-    public List<Map<String, String>> getChatHistory() {
-        return chatHistoryDao.get();
+    @MessageMapping("/chat.newUser")
+    @SendTo("/topic/public")
+    public ChatMessage newUserJoined(@Payload final ChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
+        headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
+        return chatMessage;
     }
 
 }

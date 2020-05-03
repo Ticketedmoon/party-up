@@ -1,5 +1,7 @@
 /* Template styles */
 .game-view-container {
+    display: flex;
+    flex-direction: row;
     height: 100%;
 }
 

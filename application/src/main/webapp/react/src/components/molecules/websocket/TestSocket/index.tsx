@@ -27,6 +27,7 @@ export const TestSocket = () => {
 
     useEffect(() => {
         client.current.configure({
+            // TODO: Update this to be base path rather than hard-coded "localhost"
             brokerURL: 'ws://localhost:8080/chat-app',
             onConnect: () => {
                 console.log('connected!');

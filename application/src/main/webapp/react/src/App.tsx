@@ -9,11 +9,12 @@ import {ToastProvider} from "react-toast-notifications";
 import {LoginTemplate} from "./components/templates/template.login";
 import {CreateNewLoginTemplate} from "./components/templates/template.create.new.login";
 import {GameModesTemplate} from "./components/templates/template.game.modes";
-import {MatchmakingMode} from "./components/templates/template.matchmaking.mode";
+import {MatchmakingModeTemplate} from "./components/templates/template.matchmaking.mode";
 import {Game} from "./components/templates/template.game";
 
 import "./style.css";
 import {StylesProvider} from "@material-ui/core/styles";
+import {PublicChatTemplate} from "./components/templates/template.public.chat";
 
 const App = () => {
     return (
@@ -21,13 +22,14 @@ const App = () => {
             <Provider store={store}>
                 <Router history={history}>
                     <Switch>
-                        <Redirect exact from="/" to="/login"/>
+                        <Redirect exact from="/" to="/public/chat"/>
                         <ToastProvider>
                             <Route exact path={"/login"} component={LoginTemplate}/>
                             <Route exact path={"/login/create"} component={CreateNewLoginTemplate}/>
                             <Route exact path={"/game-modes"} component={GameModesTemplate}/>
-                            <Route exact path={"/game-modes/type/:mode"} component={MatchmakingMode}/>
+                            <Route exact path={"/game-modes/type/:mode"} component={MatchmakingModeTemplate}/>
                             <Route exact path={"/game/:id"} component={Game}/>
+                            <Route exact path={"/public/chat"} component={PublicChatTemplate}/>
                         </ToastProvider>
                     </Switch>
                 </Router>

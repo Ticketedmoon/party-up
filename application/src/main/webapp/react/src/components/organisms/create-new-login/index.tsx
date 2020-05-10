@@ -37,8 +37,8 @@ const CreateNewLoginContainer = () => {
                 <span className={style["login-template-title"]}> Create New Account </span>
                 <LoginForm text={"Create New Account"}
                            checkCredentials={(username: string, password: string) => verifyNewUser(username, password)}/>
-                <Button color="primary" variant="contained" onClick={() => redirectToRouteWithRoot("/", {})}> Return to
-                    Login </Button>
+                <Button color="primary" variant="contained"
+                        onClick={() => redirectToRouteWithRoot("/", {})}> Return to Login </Button>
             </div>
         </div>
     );

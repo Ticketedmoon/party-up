@@ -5,7 +5,7 @@ import {LoaderSpinner} from "../atoms/loaders/react-loader-spinner";
 
 const style = require("./style/style.module.css");
 
-export const MatchmakingMode: FunctionComponent<any> = () => {
+export const MatchmakingModeTemplate: FunctionComponent<any> = () => {
 
     const [loading, setLoading] = useState(true);
 

@@ -11,11 +11,6 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 public class SocketBrokerConfiguration implements WebSocketMessageBrokerConfigurer {
 
     @Override
-    public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/chat-app").setAllowedOrigins("*");
-    }
-
-    @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         /*
          * The application destination prefix is an arbitrary prefix to
@@ -37,7 +32,11 @@ public class SocketBrokerConfiguration implements WebSocketMessageBrokerConfigur
          * pub-sub model targeting many subscribers and the "/queue" destination
          * for point to point messaging.
          */
-        registry.enableSimpleBroker("/topic", "/queue");
+        registry.enableSimpleBroker("/chat/topic");
     }
 
+    @Override
+    public void registerStompEndpoints(StompEndpointRegistry registry) {
+        registry.addEndpoint("/chat-app").setAllowedOrigins("*");
+    }
 }

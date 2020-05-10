@@ -34,7 +34,6 @@ export const Game = () => {
                 </div>
             </div>
             <div className={style["code-text-area"]}>
-
             </div>
         </div>
     );

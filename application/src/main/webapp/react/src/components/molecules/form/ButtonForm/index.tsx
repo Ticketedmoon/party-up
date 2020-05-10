@@ -20,7 +20,7 @@ const ButtonForm = (props: ButtonFormType) => {
                         <Button key={index}
                                 className={buttonConfig.className}
                                 variant={"contained"}
-                                onClick={(event) => buttonConfig.onClick(event)}
+                                onClick={(event) => buttonConfig.onClick()}
                                 color={buttonConfig.color}
                                 disabled={buttonConfig.enabled}
                         > {buttonConfig.text} </Button>

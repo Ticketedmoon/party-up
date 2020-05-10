@@ -1,5 +1,4 @@
 import * as React from "react";
-import {TestSocket} from "../molecules/websocket/TestSocket";
 
 const style = require("./style/style.module.css");
 
@@ -35,7 +34,6 @@ export const Game = () => {
                 </div>
             </div>
             <div className={style["code-text-area"]}>
-                <TestSocket/>
             </div>
         </div>
     );

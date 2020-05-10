@@ -11,8 +11,24 @@ const GameModesContainer = () => {
 
     const user = useSelector((state: RootStateOrAny) => state.activeUser);
 
-    const handleGameModeClick = (event: Event) => {
-        console.log("clicked: " + event);
+    enum GameMode {
+        Battle,
+        TimeAttack,
+        War,
+        TagTeam
+    }
+
+    const handleGameModeClick = (type: GameMode) => {
+        switch (type) {
+            case GameMode.Battle:
+                break;
+            case GameMode.TimeAttack:
+                break;
+            case GameMode.War:
+                break;
+            case GameMode.TagTeam:
+                break;
+        }
     };
 
     const handleMatchMakingClick = (mode: string) => {
@@ -44,14 +60,18 @@ const GameModesContainer = () => {
                 <div className={style["main-body-wrapper"]}>
                     <div className={style["game-mode-area-container-wrapper"]}>
                         <ButtonForm buttonListConfigurations={[
-                            {text: "Battle", onClick: (event: Event) => handleGameModeClick(event), color: 'primary'},
+                            {text: "Battle", onClick: () => handleGameModeClick(GameMode.Battle), color: 'primary'},
                             {
                                 text: "Time Attack",
-                                onClick: (event: Event) => handleGameModeClick(event),
+                                onClick: () => handleGameModeClick(GameMode.TimeAttack),
                                 enabled: false
                             },
-                            {text: "War", onClick: (event: Event) => handleGameModeClick(event), enabled: false},
-                            {text: "Tag Team", onClick: (event: Event) => handleGameModeClick(event), enabled: false},
+                            {text: "War", onClick: () => handleGameModeClick(GameMode.War), enabled: false},
+                            {text: "Tag Team", onClick: () => handleGameModeClick(GameMode.TagTeam), enabled: false},
+                            {
+                                text: "Public Chat",
+                                onClick: () => redirectToRouteWithRoot("/public/chat", {}),
+                            },
                             {
                                 text: "Logout",
                                 onClick: () => redirectToRouteWithRoot("/", {}),

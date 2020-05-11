@@ -1,0 +1,19 @@
+.chat-message {
+    border-radius: 1em;
+    color: whitesmoke;
+    padding: 1vw;
+    max-width: 30vw;
+}
+
+.message-sender {
+    color: red;
+}
+
+.message-time {
+
+}
+
+.message-content {
+    display: flex;
+    flex-direction: row;
+}

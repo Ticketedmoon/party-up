@@ -6,6 +6,7 @@
     width: 100%;
     height: 100%;
     padding-top: 5vh;
+    font-size: 0.7vw;
 }
 
 .chat-box {
@@ -15,7 +16,8 @@
 }
 
 .chat-region {
-    background-color: whitesmoke;
+    overflow: auto;
+    background-color: #444;
     width: 100%;
     height: 90%;
 }

@@ -3,23 +3,15 @@ import {Button} from "@material-ui/core";
 import history from "../../../utils/history";
 import {RootStateOrAny, useSelector} from "react-redux";
 import {Client} from "@stomp/stompjs";
+import {ChatMessage} from "../../atoms/message";
+import {IChatMessageResponse} from "../../atoms/message/chat.message.interface"
+import {IMessageTypeResponse} from "../../atoms/message/chat.message.enum"
 
 const style = require("./style/style.module.css");
 
-enum IMessageTypeResponse {
-    CHAT = "CHAT",
-    CONNECT = "CONNECT",
-    DISCONNECT = "DISCONNECT"
-}
-
-interface IChatMessageResponse {
-    type: IMessageTypeResponse,
-    content: string,
-    sender: string,
-    time: string
-}
-
 export const ChatView = () => {
+
+    const MESSAGE_LOG_LIMIT = 50;
 
     const user = useSelector((state: RootStateOrAny) => state.activeUser);
     const [messageLog, setMessageLog] = useState<IChatMessageResponse[]>([]);
@@ -27,45 +19,34 @@ export const ChatView = () => {
 
     const client = useRef(new Client());
 
-    useEffect(() => {
-        client.current.configure({
-            // TODO: Update this to be base path rather than hard-coded "localhost"
-            brokerURL: 'ws://localhost:8080/chat-app',
-            onConnect: () => {
-                console.log('connected!');
-                client.current.subscribe('/topic/chat', (message) => {
-                    resetMessageBox();
-                    addMessage(message);
-                });
-            },
-            // Helps during debugging, remove in production
-            debug: (str) => {
-                console.log(new Date(), str);
-            }
-        })
-
-        client.current.activate();
-    }, [])
-
     const addMessage: Function = (message: IChatMessageResponse) => {
-        setMessageLog((state: IChatMessageResponse[]) => [...state, message])
+        setMessageLog((state: IChatMessageResponse[]) => state.concat(message));
     };
 
     const resetMessageBox: Function = () => {
         setCurrentMessage('');
     }
 
+    const moveScrollBarToShowNewMessage = () => {
+        let chatRegion = document.querySelector('#chat-region');
+        if (chatRegion) {
+            chatRegion.scrollTop = chatRegion.scrollHeight - chatRegion.clientHeight;
+        }
+    }
+
     const sendChatMessage = () => {
         try {
-            client.current.publish({
-                destination: '/app/chat.send', body:
-                    JSON.stringify({
-                        'type': IMessageTypeResponse.CHAT,
-                        'content': currentMessage,
-                        'sender': "test",//user.username,
-                        'time': new Date()
-                    })
-            });
+            if (currentMessage.length > 0) {
+                client.current.publish({
+                    destination: '/app/chat.send', body:
+                        JSON.stringify({
+                            'type': IMessageTypeResponse.CHAT,
+                            'content': currentMessage,
+                            'sender': "test",//user.username,
+                            'time': new Date()
+                        })
+                })
+            }
         } catch (err) {
             // TODO: Replace with snackbar notification or modal.
             console.log(err);
@@ -78,11 +59,48 @@ export const ChatView = () => {
         }
     };
 
+    useEffect(() => {
+        if (messageLog.length > MESSAGE_LOG_LIMIT) {
+            let messageLogWithoutFirst = [...messageLog];
+            messageLogWithoutFirst.splice(0, 1);
+            setMessageLog(messageLogWithoutFirst);
+        }
+    }, [messageLog])
+
+    useEffect(() => {
+        client.current.configure({
+            // TODO: Update this to be base path rather than hard-coded "localhost"
+            brokerURL: 'ws://localhost:8080/chat-app',
+            onConnect: () => {
+                console.log('connected!');
+                client.current.subscribe('/topic/chat', (message) => {
+                    resetMessageBox();
+                    addMessage(JSON.parse(message.body));
+                    moveScrollBarToShowNewMessage();
+                });
+            },
+            // Helps during debugging, remove in production
+            debug: (str) => {
+                console.log(new Date(), str);
+            }
+        })
+
+        client.current.activate();
+    }, [])
+
     return (
         <div className={style["chat-view-container"]}>
             <div className={style["chat-box"]}>
-                <div className={style["chat-region"]}>
-
+                <div id={"chat-region"} className={style["chat-region"]}>
+                    {
+                        messageLog.map((message) => {
+                            return <ChatMessage type={IMessageTypeResponse.CHAT}
+                                                content={message.content}
+                                                sender={message.sender}
+                                                time={message.time}
+                            />
+                        })
+                    }
                 </div>
                 <div className={style["message-box-container"]}>
                     <input className={style["message-box"]} type={"text"} placeholder={"Enter a message"}

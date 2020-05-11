@@ -38,6 +38,6 @@ public class WebSocketEventListener {
                 .type(MessageType.DISCONNECT)
                 .sender(username)
                 .build();
-        messagingTemplate.convertAndSend("/topic/chat/public", chatMessage);
+        messagingTemplate.convertAndSend("/topic/chat", chatMessage);
     }
 }

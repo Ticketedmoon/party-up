@@ -33,7 +33,7 @@ export const ChatView = () => {
             brokerURL: 'ws://localhost:8080/chat-app',
             onConnect: () => {
                 console.log('connected!');
-                client.current.subscribe('/topic/chat/public', (message) => {
+                client.current.subscribe('/topic/chat', (message) => {
                     resetMessageBox();
                     addMessage(message);
                 });

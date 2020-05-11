@@ -25,14 +25,14 @@ public class MessageController {
      * forwarded to Broker channel to be forwarded to the client via WebSocket
      */
     @MessageMapping("/chat.send")
-    @SendTo("/topic/chat/public")
+    @SendTo("/topic/chat")
     public ChatMessage sendMessage(@Payload final ChatMessage chatMessage) {
         messageService.addMessage(chatMessage);
         return chatMessage;
     }
 
     @MessageMapping("/chat.newUser")
-    @SendTo("/topic/chat/public")
+    @SendTo("/topic/chat")
     public ChatMessage newUserJoined(@Payload final ChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
         headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
         return chatMessage;

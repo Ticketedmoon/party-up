@@ -42,7 +42,7 @@ export const ChatView = () => {
                         JSON.stringify({
                             'type': IMessageTypeResponse.CHAT,
                             'content': currentMessage,
-                            'sender': "test",//user.username,
+                            'sender': user.username,
                             'time': new Date()
                         })
                 })
@@ -72,12 +72,20 @@ export const ChatView = () => {
             // TODO: Update this to be base path rather than hard-coded "localhost"
             brokerURL: 'ws://localhost:8080/chat-app',
             onConnect: () => {
-                console.log('connected!');
                 client.current.subscribe('/topic/chat', (message) => {
                     resetMessageBox();
                     addMessage(JSON.parse(message.body));
                     moveScrollBarToShowNewMessage();
                 });
+
+                client.current.publish({
+                    destination: '/app/chat.newUser', body:
+                        JSON.stringify({
+                            'type': IMessageTypeResponse.CHAT,
+                            'sender': user.username,
+                            'time': new Date()
+                        })
+                })
             },
             // Helps during debugging, remove in production
             debug: (str) => {
@@ -111,7 +119,10 @@ export const ChatView = () => {
             </div>
             <div className={style["footer"]}>
                 <Button color="primary" variant="contained" className={style["button-return"]}
-                        onClick={() => history.goBack()}> Return to Game Modes </Button>
+                        onClick={() => {
+                            client.current.deactivate();
+                            history.goBack();
+                        }}> Return to Game Modes </Button>
             </div>
         </div>
     )

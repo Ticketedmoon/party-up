@@ -10,9 +10,9 @@ import lombok.Data;
 @AllArgsConstructor
 public class ChatMessage {
 
-    private final MessageType type;
-    private final String content;
-    private final String sender;
-    private final String time;
+    private MessageType type;
+    private String content;
+    private String sender;
+    private String time;
 
 }

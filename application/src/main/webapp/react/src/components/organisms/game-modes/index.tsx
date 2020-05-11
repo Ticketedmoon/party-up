@@ -71,6 +71,7 @@ const GameModesContainer = () => {
                             {
                                 text: "Public Chat",
                                 onClick: () => redirectToRouteWithRoot("/public/chat", {}),
+                                color: "primary"
                             },
                             {
                                 text: "Logout",

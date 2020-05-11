@@ -36,6 +36,7 @@ public class WebSocketEventListener {
         final String username = (String) headerAccessor.getSessionAttributes().get("username");
         final ChatMessage chatMessage = ChatMessage.builder()
                 .type(MessageType.DISCONNECT)
+                .content(String.format("User %s has disconnected from the session.", username))
                 .sender(username)
                 .build();
         messagingTemplate.convertAndSend("/topic/chat", chatMessage);

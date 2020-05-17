@@ -1,50 +1,40 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {FunctionComponent, RefObject, useState} from "react";
 import {Button} from "@material-ui/core";
 import history from "../../../utils/history";
-import {RootStateOrAny, useSelector} from "react-redux";
-import {Client} from "@stomp/stompjs";
 import {ChatMessage} from "../../atoms/message";
-import {IChatMessageResponse} from "../../atoms/message/chat.message.interface"
 import {IMessageTypeResponse} from "../../atoms/message/chat.message.enum"
+import {IChatMessageResponse} from "../../atoms/message/chat.message.interface";
+import {RootStateOrAny, useSelector} from "react-redux";
 
 const style = require("./style/style.module.css");
 
-export const ChatView = () => {
+interface Props {
+    messageLog: IChatMessageResponse[],
+    client: RefObject<any>
+    disconnectClient: Function
+}
 
-    const MESSAGE_LOG_LIMIT = 50;
+export const ChatView: FunctionComponent<Props> = ({client, messageLog, disconnectClient}: Props) => {
 
-    const user = useSelector((state: RootStateOrAny) => state.activeUser);
-    const [messageLog, setMessageLog] = useState<IChatMessageResponse[]>([]);
     const [currentMessage, setCurrentMessage] = useState('');
-
-    const client = useRef(new Client());
-
-    const addMessage: Function = (message: IChatMessageResponse) => {
-        setMessageLog((state: IChatMessageResponse[]) => state.concat(message));
-    };
+    const user = useSelector((state: RootStateOrAny) => state.activeUser);
 
     const resetMessageBox: Function = () => {
         setCurrentMessage('');
     }
 
-    const moveScrollBarToShowNewMessage = () => {
-        let chatRegion = document.querySelector('#chat-region');
-        if (chatRegion) {
-            chatRegion.scrollTop = chatRegion.scrollHeight - chatRegion.clientHeight;
-        }
-    }
-
     const sendChatMessage = () => {
         try {
             if (currentMessage.length > 0) {
+                resetMessageBox();
                 client.current.publish({
-                    destination: '/app/chat.send', body:
-                        JSON.stringify({
-                            'type': IMessageTypeResponse.CHAT,
-                            'content': currentMessage,
-                            'sender': user.username,
-                            'time': new Date()
-                        })
+                    destination: '/app/chat.send',
+                    body: JSON.stringify({
+                        'type': IMessageTypeResponse.CHAT,
+                        'content': currentMessage,
+                        'sender': {"username": user.username},
+                        'time': new Date()
+                    })
                 })
             }
         } catch (err) {
@@ -58,43 +48,6 @@ export const ChatView = () => {
             sendChatMessage();
         }
     };
-
-    useEffect(() => {
-        if (messageLog.length > MESSAGE_LOG_LIMIT) {
-            let messageLogWithoutFirst = [...messageLog];
-            messageLogWithoutFirst.splice(0, 1);
-            setMessageLog(messageLogWithoutFirst);
-        }
-    }, [messageLog])
-
-    useEffect(() => {
-        client.current.configure({
-            // TODO: Update this to be base path rather than hard-coded "localhost"
-            brokerURL: 'ws://localhost:8080/chat-app',
-            onConnect: () => {
-                client.current.subscribe('/topic/chat', (message) => {
-                    resetMessageBox();
-                    addMessage(JSON.parse(message.body));
-                    moveScrollBarToShowNewMessage();
-                });
-
-                client.current.publish({
-                    destination: '/app/chat.newUser', body:
-                        JSON.stringify({
-                            'type': IMessageTypeResponse.CHAT,
-                            'sender': user.username,
-                            'time': new Date()
-                        })
-                })
-            },
-            // Helps during debugging, remove in production
-            debug: (str) => {
-                console.log(new Date(), str);
-            }
-        })
-
-        client.current.activate();
-    }, [])
 
     return (
         <div className={style["chat-view-container"]}>
@@ -120,7 +73,7 @@ export const ChatView = () => {
             <div className={style["footer"]}>
                 <Button color="primary" variant="contained" className={style["button-return"]}
                         onClick={() => {
-                            client.current.deactivate();
+                            disconnectClient();
                             history.goBack();
                         }}> Return to Game Modes </Button>
             </div>

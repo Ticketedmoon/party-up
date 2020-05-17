@@ -1,8 +1,9 @@
 .chat-message {
     border-radius: 1em;
-    color: whitesmoke;
-    padding: 1vw;
+    color: black;
+    padding: 0.25vw;
     max-width: 30vw;
+    font-size: 0.75vw;
 }
 
 .message-sender {

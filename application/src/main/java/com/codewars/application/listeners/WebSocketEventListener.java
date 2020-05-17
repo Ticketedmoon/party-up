@@ -1,5 +1,6 @@
 package com.codewars.application.listeners;
 
+import com.codewars.application.domain.dto.UserDTO;
 import com.codewars.application.domain.entity.ChatMessage;
 import com.codewars.application.domain.enums.MessageType;
 import org.slf4j.Logger;
@@ -37,7 +38,7 @@ public class WebSocketEventListener {
         final ChatMessage chatMessage = ChatMessage.builder()
                 .type(MessageType.DISCONNECT)
                 .content(String.format("User %s has disconnected from the session.", username))
-                .sender(username)
+                .sender(new UserDTO(username))
                 .build();
         messagingTemplate.convertAndSend("/topic/chat", chatMessage);
     }

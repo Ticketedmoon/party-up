@@ -4,7 +4,7 @@ import {Router} from "react-router";
 import * as React from "react";
 import {store} from "./store/store";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import history from './utils/history';
+import history from './utils/history/history';
 import {ToastProvider} from "react-toast-notifications";
 import {LoginTemplate} from "./components/templates/template.login";
 import {CreateNewLoginTemplate} from "./components/templates/template.create.new.login";

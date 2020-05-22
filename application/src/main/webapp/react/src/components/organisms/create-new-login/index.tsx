@@ -1,6 +1,6 @@
 import * as React from "react";
 import LoginForm from "../../molecules/form/LoginForm";
-import history, {redirectToRouteWithRoot} from "../../../utils/history";
+import history, {redirectToRouteWithRoot} from "../../../utils/history/history";
 import {useToasts} from 'react-toast-notifications';
 import axios from "axios";
 import {Button} from "@material-ui/core";

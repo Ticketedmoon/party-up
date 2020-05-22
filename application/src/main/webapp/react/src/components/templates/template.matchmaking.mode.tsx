@@ -1,6 +1,6 @@
 import * as React from "react";
 import {FunctionComponent, useEffect, useState} from "react";
-import {redirectToRouteWithRoot} from "../../utils/history";
+import {redirectToRouteWithRoot} from "../../utils/history/history";
 import {LoaderSpinner} from "../atoms/loaders/react-loader-spinner";
 
 const style = require("./style/style.module.css");

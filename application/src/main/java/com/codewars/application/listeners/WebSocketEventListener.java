@@ -34,12 +34,12 @@ public class WebSocketEventListener {
     public void handleWebSocketDisconnectListener(final SessionDisconnectEvent event) {
         logger.info("Disconnection Event: Received a new web socket disconnection with event {}", event);
         final StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
-        final String username = (String) headerAccessor.getSessionAttributes().get("username");
+        final UserDTO user = (UserDTO) headerAccessor.getSessionAttributes().get("username");
         final ChatMessage chatMessage = ChatMessage.builder()
                 .type(MessageType.DISCONNECT)
-                .content(String.format("User %s has disconnected from the session.", username))
-                .sender(new UserDTO(username))
+                .content(String.format("User %s has disconnected from the session.", user.getUsername()))
+                .sender(user)
                 .build();
-        messagingTemplate.convertAndSend("/topic/chat", chatMessage);
+        messagingTemplate.convertAndSend("/topic/chat/userDisconnected", chatMessage);
     }
 }

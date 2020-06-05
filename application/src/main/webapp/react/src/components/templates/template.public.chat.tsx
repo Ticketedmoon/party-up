@@ -2,7 +2,7 @@ import React, {FunctionComponent, useEffect, useRef, useState} from "react";
 import {ChatView} from "../organisms/chat-view";
 import {OnlineUserView} from "../organisms/online-user-view";
 import {IMessageTypeResponse} from "../atoms/message/chat.message.enum";
-import {Client} from "@stomp/stompjs";
+import {Client, IMessage} from "@stomp/stompjs";
 import {IChatMessageResponse} from "../atoms/message/chat.message.interface";
 import {RootStateOrAny, useSelector} from "react-redux";
 
@@ -14,38 +14,47 @@ export const PublicChatTemplate: FunctionComponent<any> = () => {
 
     const user = useSelector((state: RootStateOrAny) => state.activeUser);
     const client = useRef(new Client());
-    const [connectedUsers, setConnectedUsers] = useState({});
+    const [connectedUsers, setConnectedUsers] = useState<Map<string, string>>(new Map<string, string>());
     const [messageLog, setMessageLog] = useState<IChatMessageResponse[]>([]);
 
     const addMessage: Function = (message: IChatMessageResponse) => {
         setMessageLog((state: IChatMessageResponse[]) => state.concat(message));
-    };
+    }
 
     const disconnectClient = () => {
         client.current.deactivate();
-    }
+    };
 
     const moveScrollBarToShowNewMessage = () => {
         let chatRegion = document.querySelector('#chat-region');
         if (chatRegion) {
             chatRegion.scrollTop = chatRegion.scrollHeight - chatRegion.clientHeight;
         }
-    }
+    };
 
     useEffect(() => {
         client.current.configure({
             // TODO: Update this to be base path rather than hard-coded "localhost"
             brokerURL: 'ws://localhost:8080/chat-app',
             onConnect: () => {
-                client.current.subscribe('/topic/chat', (message) => {
-                    addMessage(JSON.parse(message.body));
+                client.current.subscribe('/topic/chat', (message: IMessage) => {
+                    let chatMessage: IChatMessageResponse = JSON.parse(message.body);
+                    addMessage(chatMessage);
                     moveScrollBarToShowNewMessage();
                 });
 
-                client.current.subscribe('/topic/chat/newUser', (message) => {
+                client.current.subscribe('/topic/chat/newUser', (message: IMessage) => {
                     let response = JSON.parse(message.body);
                     addMessage(response.chatMessage);
                     setConnectedUsers(response.connectedUsers);
+                    moveScrollBarToShowNewMessage();
+                });
+
+                client.current.subscribe('/topic/chat/userDisconnected', (message: IMessage) => {
+                    let response: IChatMessageResponse = JSON.parse(message.body);
+                    addMessage(response);
+                    setConnectedUsers(((state: Map<string, string>) => state.delete(response.sender.userId) ? state : new Map()));
+                    console.log("user disconnected: " + response.sender.username);
                     moveScrollBarToShowNewMessage();
                 });
 

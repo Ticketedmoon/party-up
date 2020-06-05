@@ -1,7 +1,7 @@
 import * as React from "react";
 import {faChessKing, faUser} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {redirectToRouteWithCurrent, redirectToRouteWithRoot} from "../../../utils/history";
+import {redirectToRouteWithCurrent, redirectToRouteWithRoot} from "../../../utils/history/history";
 import ButtonForm from "../../molecules/form/ButtonForm";
 import {RootStateOrAny, useSelector} from "react-redux";
 

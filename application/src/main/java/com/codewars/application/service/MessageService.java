@@ -24,8 +24,13 @@ public class MessageService {
         logger.info("Message Service: Added new message. Message Log: {}", messageLog);
     }
 
-    public void addNewConnectedUsers(UserDTO userDTO) {
+    public void addNewConnectedUser(UserDTO userDTO) {
         connectedUsers.put(userDTO.getUserId(), userDTO.getUsername());
+    }
+
+    public void removeConnectedUser(UserDTO userDTO) {
+        connectedUsers.remove(userDTO.getUserId());
+        logger.info("User with ID {} has been removed", userDTO.getUserId());
     }
 
     public Map<String, String> getConnectedUsers() {

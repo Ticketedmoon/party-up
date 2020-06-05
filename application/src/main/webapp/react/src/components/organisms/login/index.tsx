@@ -1,6 +1,6 @@
 import * as React from "react";
 import LoginForm from "../../molecules/form/LoginForm";
-import {redirectToRouteWithCurrent, redirectToRouteWithRoot} from "../../../utils/history";
+import {redirectToRouteWithCurrent, redirectToRouteWithRoot} from "../../../utils/history/history";
 import {useToasts} from "react-toast-notifications";
 import {useDispatch} from "react-redux";
 import {setUser} from "../../../store/Reducers/login/types/action.function.types";

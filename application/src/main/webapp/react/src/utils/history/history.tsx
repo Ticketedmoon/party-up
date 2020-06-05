@@ -1,7 +1,8 @@
-import { createBrowserHistory } from 'history';
-const history = createBrowserHistory (
-    { basename: '/' }
-    );
+import {createBrowserHistory} from "history";
+
+const history = createBrowserHistory(
+    {basename: '/'}
+);
 
 export const redirectToRouteWithCurrent = (route: string, state: Object | null) => {
     const currentPath: string = window.location.pathname;

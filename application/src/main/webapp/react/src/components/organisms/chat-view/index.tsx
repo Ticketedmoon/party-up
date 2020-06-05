@@ -1,6 +1,6 @@
 import React, {FunctionComponent, RefObject, useState} from "react";
 import {Button} from "@material-ui/core";
-import history from "../../../utils/history";
+import history from "../../../utils/history/history";
 import {ChatMessage} from "../../atoms/message";
 import {IMessageTypeResponse} from "../../atoms/message/chat.message.enum"
 import {IChatMessageResponse} from "../../atoms/message/chat.message.interface";

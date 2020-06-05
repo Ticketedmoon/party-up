@@ -41,7 +41,7 @@ public class MessageController {
         chatMessage.getSender().setUserId(UUID.randomUUID().toString());
 
         // TOOD: Maybe consider moving this logic to some utility service, OR find a way to automatically parse it on request.
-        messageService.addNewConnectedUsers(chatMessage.getSender());
+        messageService.addNewConnectedUser(chatMessage.getSender());
 
         UserConnectedDTO userConnectedDTO = new UserConnectedDTO();
         userConnectedDTO.setConnectedUsers(messageService.getConnectedUsers());

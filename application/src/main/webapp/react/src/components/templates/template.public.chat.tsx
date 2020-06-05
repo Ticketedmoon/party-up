@@ -14,7 +14,7 @@ export const PublicChatTemplate: FunctionComponent<any> = () => {
 
     const user = useSelector((state: RootStateOrAny) => state.activeUser);
     const client = useRef(new Client());
-    const [connectedUsers, setConnectedUsers] = useState<Map<string, string>>(new Map());
+    const [connectedUsers, setConnectedUsers] = useState<Map<string, string>>(new Map<string, string>());
     const [messageLog, setMessageLog] = useState<IChatMessageResponse[]>([]);
 
     const addMessage: Function = (message: IChatMessageResponse) => {
@@ -24,6 +24,7 @@ export const PublicChatTemplate: FunctionComponent<any> = () => {
     const disconnectClient = () => {
         client.current.deactivate();
     };
+
     const moveScrollBarToShowNewMessage = () => {
         let chatRegion = document.querySelector('#chat-region');
         if (chatRegion) {
@@ -31,21 +32,14 @@ export const PublicChatTemplate: FunctionComponent<any> = () => {
         }
     };
 
-    const removeUserFromConnectedUsers = (userId: string): void => {
-        if (connectedUsers.has(userId)) {
-            connectedUsers.delete(userId);
-            setConnectedUsers(new Map(connectedUsers));
-        }
-    }
-
     useEffect(() => {
         client.current.configure({
             // TODO: Update this to be base path rather than hard-coded "localhost"
             brokerURL: 'ws://localhost:8080/chat-app',
             onConnect: () => {
                 client.current.subscribe('/topic/chat', (message: IMessage) => {
-                    let response = JSON.parse(message.body);
-                    addMessage(response.chatMessage);
+                    let chatMessage: IChatMessageResponse = JSON.parse(message.body);
+                    addMessage(chatMessage);
                     moveScrollBarToShowNewMessage();
                 });
 
@@ -59,7 +53,7 @@ export const PublicChatTemplate: FunctionComponent<any> = () => {
                 client.current.subscribe('/topic/chat/userDisconnected', (message: IMessage) => {
                     let response: IChatMessageResponse = JSON.parse(message.body);
                     addMessage(response);
-                    removeUserFromConnectedUsers(response.sender.userId);
+                    setConnectedUsers(((state: Map<string, string>) => state.delete(response.sender.userId) ? state : new Map()));
                     console.log("user disconnected: " + response.sender.username);
                     moveScrollBarToShowNewMessage();
                 });

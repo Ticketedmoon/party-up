@@ -18,9 +18,9 @@
     <beans profile="unit-testing">
         <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
             <property name="driverClassName" value="org.testcontainers.jdbc.ContainerDatabaseDriver"/>
-            <property name="url" value="jdbc:tc:mysql:5.6.40://hostname/codewarsdb"/>
+            <property name="url" value="jdbc:tc:mysql:5.6.40://hostname/partyupDB"/>
             <property name="username" value="root" />
-            <property name="password" value="test" />
+            <property name="password" value="###"/>
         </bean>
     </beans>
 

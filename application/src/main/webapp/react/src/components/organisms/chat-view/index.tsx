@@ -54,11 +54,12 @@ export const ChatView: FunctionComponent<Props> = ({client, messageLog, disconne
             <div className={style["chat-box"]}>
                 <div id={"chat-region"} className={style["chat-region"]}>
                     {
-                        messageLog.map((message) => {
+                        messageLog.map((message: IChatMessageResponse, index: number) => {
                             return <ChatMessage type={IMessageTypeResponse.CHAT}
                                                 content={message.content}
                                                 sender={message.sender}
                                                 time={message.time}
+                                                key={"message-" + index}
                             />
                         })
                     }

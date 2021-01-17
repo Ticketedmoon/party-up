@@ -40,7 +40,7 @@ const LoginContainer = () => {
     return (
         <div className={style["login-template-wrapper"]}>
             <div className={style["login-template"]}>
-                <span className={style["login-template-title"]}> Code Wars </span>
+                <span className={style["login-template-title"]}> Party Up! </span>
                 <LoginForm text={"Login"}
                            checkCredentials={(username: string, password: string) => tryLogin(username, password)}/>
                 <Button className={style["customized"]} color={"primary"} variant={"contained"}

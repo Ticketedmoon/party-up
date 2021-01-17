@@ -3,14 +3,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
-        <groupId>com.codewars.parent</groupId>
-        <artifactId>code-wars-parent</artifactId>
+        <groupId>com.partyup.parent</groupId>
+        <artifactId>party-up-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.codewars.application</groupId>
-    <artifactId>code-wars-application</artifactId>
+    <groupId>com.partyup.application</groupId>
+    <artifactId>party-up-application</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <url>http://maven.apache.org</url>

@@ -14,8 +14,8 @@ export const OnlineUserView: FunctionComponent<Props> = ({userList}: Props) => {
                 <h4> Online Users </h4>
             </div>
             {
-                userList.map((username: string) => {
-                    return (<p> {username} </p>)
+                userList.map((username: string, index: number) => {
+                    return (<p key={"username-" + index}> {username} </p>)
                 })
             }
         </div>

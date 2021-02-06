@@ -17,15 +17,10 @@ const LoginContainer = () => {
     const tryLogin = (username: string, password: string) => {
         axios.post(window.location.href, {'username': username, 'password': password})
             .then((response: AxiosResponse) => {
-                console.log(response);
                 if (response.status >= 200 && response.status < 300) {
                     let data = response.data;
-                    addToast("User: {" + username + "}  Successfully logged in", {
-                        appearance: 'success',
-                        autoDismiss: true,
-                    });
                     dispatch(setUser({username: data.username, role: data.role, level: data.level}));
-                    redirectToRouteWithRoot("/game-modes", null);
+                    redirectToRouteWithRoot("/dashboard", null);
                 }
             })
             .catch((error: any) => {

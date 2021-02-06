@@ -1,0 +1,136 @@
+* {
+    font-family: 'Roboto', Calibri, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.top-row * {
+    display: inline-block;
+}
+
+.user-details > b, .profile > b {
+    padding: 0.5em;
+}
+
+@-webkit-keyframes slideIn {
+    0% {
+        transform: translateX(0px);
+    }
+    100% {
+        transform: translateX(-32.5vw);
+    }
+}
+@-moz-keyframes slideIn {
+    0% {
+        transform: translateX(0px);
+    }
+    100% {
+        transform: translateX(-32.5vw);
+    }
+}
+@keyframes slideIn {
+    0% {
+        transform: translateX(0px);
+    }
+    100% {
+        transform: translateX(-32.5vw);
+    }
+}
+
+.button-list-animation {
+    position: relative;
+    -webkit-animation: slideIn 0.5s forwards;
+    -moz-animation: slideIn 0.5s forwards;
+    animation: slideIn 0.5s forwards;
+}
+
+.game-modes > .game-mode-area-container-wrapper > .button-form-container > div > button {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.game-modes > .game-mode-area-container-wrapper > .button-form-container > div > button {
+    width: 100%;
+}
+
+.public-games-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.user-details, .title, .profile {
+    padding: 2em;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+.game-modes {
+    width: 100%;
+    display: block;
+    flex-wrap: wrap;
+    padding: 1em;
+    text-align: center;
+    margin: 0;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.mode-body {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: space-evenly;
+    grid-gap: 3em;
+}
+
+.game-mode-area-container-wrapper * {
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+    font-size: 0.8em;
+}
+
+.grid-item-container {
+    height: 10em;
+    border-radius: 5px;
+    width: 10em;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    background-color: #eee;
+}
+
+.grid-item-container:hover {
+    cursor: pointer;
+    filter: grayscale(100%);
+}
+
+.grid-item-a-image {
+    background-image: url('/resources/assets/images/battle-swords.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 80%;
+}
+
+.grid-item-text {
+    text-align: center;
+    color: black;
+    padding: 0.5em;
+    font-size: 0.75em;
+}
+
+.grid-item-b-image {
+    background-image: url('/resources/assets/images/tournament-trophy.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 80%;
+}
+
+.main-body-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+

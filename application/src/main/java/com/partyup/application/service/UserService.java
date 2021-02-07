@@ -8,6 +8,7 @@ import com.partyup.application.exception.UsernameNotValidException;
 import com.partyup.application.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
+    private final OauthClientService oauthClientService;
 
     public User userAttemptLogin(User user) throws UserNotFoundException, IncorrectPasswordException {
         log.info("Attempting to verify user with username: {}", user.getUsername());
@@ -25,6 +27,10 @@ public class UserService {
         try {
             if (passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
                 log.info("User with username: {} successfully authenticated", user.getUsername());
+                if (!SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
+                    // Put token in context and when expire re-store.
+                    oauthClientService.generateAccessTokenForContext();
+                }
                 existingUser.setPassword(null);
                 return existingUser;
             }

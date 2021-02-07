@@ -3,16 +3,14 @@ package com.partyup.application.servlet;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class ApplicationContextListener implements ServletContextListener {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationContextListener.class);
 
     @Override
     public void contextDestroyed(ServletContextEvent arg0) {
-        LOGGER.info("Servlet Context Destroyed");
+        log.info("Servlet Context Destroyed");
     }
 
     @Override
@@ -20,7 +18,7 @@ public class ApplicationContextListener implements ServletContextListener {
         ServletContext context = event.getServletContext();
         System.setProperty("initializeURL", context.getInitParameter("initializeURL"));
         System.setProperty("rootPath", context.getRealPath("/"));
-        LOGGER.info("Servlet Context Initialized");
+        log.info("Servlet Context Initialized");
     }
 
 }

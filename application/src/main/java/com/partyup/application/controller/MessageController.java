@@ -4,7 +4,7 @@ import com.partyup.application.domain.dto.UserConnectedDTO;
 import com.partyup.application.domain.entity.ChatMessage;
 import com.partyup.application.service.MessageService;
 import java.util.UUID;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -12,14 +12,10 @@ import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequiredArgsConstructor
 public class MessageController {
 
     private final MessageService messageService;
-
-    @Autowired
-    public MessageController(MessageService messageService) {
-        this.messageService = messageService;
-    }
 
     /*
      * This MessageMapping annotated method will be handled by

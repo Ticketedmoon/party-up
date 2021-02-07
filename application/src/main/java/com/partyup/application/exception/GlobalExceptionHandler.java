@@ -10,16 +10,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(CodeWarsException.class)
-    protected ResponseEntity<?> handleCodeWarsException(final CodeWarsException exception) {
-        // Create payload
+    @ExceptionHandler(PartyUpAccessException.class)
+    protected ResponseEntity<?> handlePartyUpAccessException(final PartyUpAccessException exception) {
         final HttpStatus badRequestStatus = HttpStatus.BAD_REQUEST;
         ClientException clientException = new ClientException(
                 exception.getMessage(),
                 badRequestStatus,
                 ZonedDateTime.now(ZoneOffset.UTC));
-
-        // Return ResponseEntity
         return new ResponseEntity<>(clientException, badRequestStatus);
     }
 

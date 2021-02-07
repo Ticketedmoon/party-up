@@ -1,14 +1,13 @@
 package com.partyup.application.controller;
 
 import com.partyup.application.domain.entity.User;
-import com.partyup.application.exception.CodeWarsException;
 import com.partyup.application.exception.IncorrectPasswordException;
+import com.partyup.application.exception.PartyUpAccessException;
 import com.partyup.application.exception.UserNotFoundException;
 import com.partyup.application.exception.UsernameNotValidException;
 import com.partyup.application.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,26 +18,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/login")
+@Slf4j
+@RequiredArgsConstructor
 public class LoginController {
 
-    private final Logger logger = LoggerFactory.getLogger(LoginController.class);
-
     private final UserService userService;
-
-    @Autowired
-    public LoginController(UserService userService) {
-        this.userService = userService;
-    }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> login(@RequestBody User user) {
         try {
             User existingUser = userService.userAttemptLogin(user);
-            existingUser.setPassword(null);
             return new ResponseEntity<>(existingUser, HttpStatus.OK);
         } catch (UserNotFoundException | IncorrectPasswordException e) {
-            logger.info("Error: {}", e.getMessage());
-            throw new CodeWarsException("Invalid Credentials Entered", e);
+            log.info("Error: {}", e.getMessage());
+            throw new PartyUpAccessException("Invalid Credentials Entered", e);
         }
     }
 
@@ -48,8 +41,8 @@ public class LoginController {
             userService.registerNewUser(user);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (UsernameNotValidException e) {
-            logger.info("Error: {}", e.getMessage());
-            throw new CodeWarsException("Invalid Username - User already exists with name", e);
+            log.info("Error: {}", e.getMessage());
+            throw new PartyUpAccessException("Invalid Username - User already exists with name", e);
         }
     }
 

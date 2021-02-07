@@ -1,37 +1,31 @@
 package com.partyup.application.service;
 
-import com.partyup.application.controller.LoginController;
 import com.partyup.application.domain.entity.User;
 import com.partyup.application.domain.enums.UserRole;
 import com.partyup.application.exception.IncorrectPasswordException;
 import com.partyup.application.exception.UserNotFoundException;
 import com.partyup.application.exception.UsernameNotValidException;
 import com.partyup.application.repository.UserRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
+@Slf4j
 public class UserService {
-
-    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
 
-    public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository) {
-        this.passwordEncoder = passwordEncoder;
-        this.userRepository = userRepository;
-    }
-
     public User userAttemptLogin(User user) throws UserNotFoundException, IncorrectPasswordException {
-        logger.info(String.format("Attempting to verify user with username: {%s}", user.getUsername()));
+        log.info("Attempting to verify user with username: {}", user.getUsername());
         User existingUser = userRepository.findUserByUsername(user.getUsername());
-        // User exists -> Verify password.
         try {
             if (passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
-                logger.info(String.format("User with username: {%s} successfully authenticated", user.getUsername()));
+                log.info("User with username: {} successfully authenticated", user.getUsername());
+                existingUser.setPassword(null);
                 return existingUser;
             }
             throw new IncorrectPasswordException(String.format("User found for username: {%s} but incorrect password entered", user.getUsername()));
@@ -41,7 +35,7 @@ public class UserService {
     }
 
     public void registerNewUser(User newUser) throws UsernameNotValidException {
-        logger.info(String.format("User with username: {%s} attempting creation", newUser.getUsername()));
+        log.info("User with username: {} attempting creation", newUser.getUsername());
         if (!isUsernameValid(newUser.getUsername())) {
             throw new UsernameNotValidException("There is an account with that email address:" + newUser.getUsername());
         }
@@ -52,14 +46,14 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(newUser.getPassword()));
         user.setRole(UserRole.STANDARD);
         user.setLevel(1);
-        logger.info(String.format("Creating user for Code Wars application with credentials: %s", user));
+        log.info("Created new user for Party Up application");
         userRepository.save(user);
     }
 
     private boolean isUsernameValid(String username) {
         User user = userRepository.findUserByUsername(username);
         if (user != null) {
-            logger.info(String.format("User with username: {%s} found in DB", username));
+            log.info("User with username: {} found in DB", username);
         }
         return user == null;
     }

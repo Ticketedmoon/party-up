@@ -12,7 +12,7 @@ const Dashboard = () => {
     const user = useSelector((state: RootStateOrAny) => state.activeUser);
 
     const handleMatchMakingClick = (gameID: string) => {
-        redirectToRouteWithRoot("/party/game/" + gameID, null);
+        redirectToRouteWithRoot("/app/party/game/" + gameID, null);
     };
 
     return (

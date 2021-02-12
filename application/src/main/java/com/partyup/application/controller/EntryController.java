@@ -11,7 +11,7 @@ public class EntryController {
     @Value("${react-profile:Unknown}")
     private String activeProfile;
 
-    @GetMapping(value = "/")
+    @GetMapping(value = "/**")
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView("react/index");
         modelAndView.addObject("profile", activeProfile);

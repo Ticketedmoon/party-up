@@ -1,6 +1,6 @@
 import * as React from "react";
 import {FunctionComponent, useEffect, useState} from "react";
-import {redirectToRouteWithRoot} from "../../utils/history/history";
+import {redirectToRouteWithCurrent} from "../../utils/history/history";
 import {LoaderSpinner} from "../atoms/loaders/react-loader-spinner";
 
 const style = require("./style/style.module.css");
@@ -10,7 +10,7 @@ export const MatchmakingModeTemplate: FunctionComponent<any> = () => {
     const [loading, setLoading] = useState(true);
 
     const startMatch = () => {
-        redirectToRouteWithRoot("/game/1", null);
+        redirectToRouteWithCurrent("/room/1", null);
     };
 
     // Temporary - delete after

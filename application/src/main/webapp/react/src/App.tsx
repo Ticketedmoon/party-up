@@ -1,5 +1,5 @@
 import {Provider} from 'react-redux';
-import {Redirect, Route, Switch} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import {Router} from "react-router";
 import * as React from "react";
 import {store} from "./store/store";
@@ -23,16 +23,15 @@ const App = () => {
                 <Router history={history}>
                     <Switch>
                         <ToastProvider>
-                            <Redirect exact from="/" to="/login"/>
-                            <Route path={"/"}>
-                                <Route path={"/login"} component={LoginTemplate}/>
+                            <Route path={"/app"}>
                                 <ApplicationNavigationWrapper>
-                                    <Route path={"/login/create"} component={CreateNewLoginTemplate}/>
-                                    <Route path={"/dashboard"} component={GameModesTemplate}/>
-                                    <Route path={"/party/game/:game"} component={MatchmakingModeTemplate}/>
-                                    <Route path={"/party/game/:game/room/:id"} component={PublicChatTemplate}/>
+                                    <Route path={"/app/dashboard"} component={GameModesTemplate}/>
+                                    <Route path={"/app/party/game/:game"} component={MatchmakingModeTemplate}/>
+                                    <Route path={"/app/party/game/:game/room/:id"} component={PublicChatTemplate}/>
                                 </ApplicationNavigationWrapper>
                             </Route>
+                            <Route exact path={"/new-login/create"} component={CreateNewLoginTemplate}/>
+                            <Route path={"/*"} component={LoginTemplate}/>
                         </ToastProvider>
                     </Switch>
                 </Router>

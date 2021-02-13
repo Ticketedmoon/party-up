@@ -1,0 +1,49 @@
+package com.partyup.application.configuration.context;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+@EnableWebMvc
+@Configuration
+public class ApplicationWebConfiguration implements WebMvcConfigurer {
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/**")
+                .addResourceLocations("/resources/")
+                .setCachePeriod(3600);
+        registry.addResourceHandler("/react/**")
+                .addResourceLocations("/react/")
+                .setCachePeriod(3600);
+    }
+
+    @Bean(name = "multipartResolver")
+    public CommonsMultipartResolver createMultipartResolver() {
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        resolver.setDefaultEncoding("utf-8");
+        return resolver;
+    }
+
+    @Bean(name = "viewResolver")
+    public InternalResourceViewResolver createMultipartResolver(@Value("${app.viewResolver.prefix}") String prefix,
+                                                                @Value("${app.viewResolver.suffix}") String suffix) {
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setPrefix(prefix);
+        resolver.setSuffix(suffix);
+        return resolver;
+    }
+
+    @Bean(name = "messageSource")
+    public ResourceBundleMessageSource createResourceBundleMessageSource() {
+        ResourceBundleMessageSource resourceBundleMessageSource = new ResourceBundleMessageSource();
+        resourceBundleMessageSource.setBasename("messages");
+        return resourceBundleMessageSource;
+    }
+}

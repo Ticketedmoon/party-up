@@ -20,7 +20,7 @@ const LoginContainer = () => {
     }, []);
 
     const tryLogin = (username: string, password: string) => {
-        axios.post(window.location.href, {'username': username, 'password': password})
+        axios.post(window.location.origin + "/login", {'username': username, 'password': password})
             .then((response: AxiosResponse) => {
                 if (response.status >= 200 && response.status < 300) {
                     let data = response.data;

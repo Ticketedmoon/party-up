@@ -1,18 +1,19 @@
 package com.partyup.application.unit.service;
 
 import com.partyup.application.domain.entity.User;
+import com.partyup.application.exception.UsernameNotValidException;
 import com.partyup.application.repository.UserRepository;
 import com.partyup.application.service.UserService;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -29,23 +30,27 @@ public class UserServiceTest {
     public UserService userService;
 
     @Test
-    public void testUserAttemptLogin_success_userCanLogin() {
-        // Given
+    public void testRegisterNewUser_successCase() {
         User userMock = Mockito.mock(User.class);
+        given(userMock.getUsername()).willReturn("userMock");
+        given(userMock.getPassword()).willReturn("testPassword");
 
-        // When
-        when(userMock.getUsername()).thenReturn("userMock");
-        when(userMock.getPassword()).thenReturn("testPassword");
-        when(userRepositoryMock.findUserByUsername(anyString())).thenReturn(userMock);
-        when(passwordEncoderMock.matches(anyString(), anyString())).thenReturn(true);
+        userService.registerNewUser(userMock);
 
-        // Then
-        User responseUserObj = userService.attemptLogin(userMock);
+        then(userRepositoryMock).should().findUserByUsername(anyString());
+        then(passwordEncoderMock).should().encode(anyString());
+        then(userRepositoryMock).should().save(any(User.class));
+        verifyNoMoreInteractions(passwordEncoderMock, userRepositoryMock);
+    }
 
-        // Verify
-        verify(userRepositoryMock, times(1)).findUserByUsername(anyString());
-        verify(passwordEncoderMock, times(1)).matches(anyString(), anyString());
-        Assert.assertEquals(userMock, responseUserObj);
+    @Test(expected = UsernameNotValidException.class)
+    public void testRegisterNewUser_failureCase_userAlreadyExists() {
+        User userMock = Mockito.mock(User.class);
+        given(userMock.getUsername()).willReturn("userMock");
+        given(userMock.getPassword()).willReturn("testPassword");
+        given(userRepositoryMock.findUserByUsername(anyString())).willReturn(userMock);
+        given(passwordEncoderMock.matches(anyString(), anyString())).willReturn(true);
+        userService.registerNewUser(userMock);
     }
 
 }

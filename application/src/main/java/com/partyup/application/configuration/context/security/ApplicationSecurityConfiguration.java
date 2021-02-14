@@ -1,5 +1,6 @@
 package com.partyup.application.configuration.context.security;
 
+import com.partyup.application.repository.UserRepository;
 import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.web.method.annotation.AuthenticationPrincipalArgumentResolver;
 
 /**
  * We are BCrypt as a primary form of encryption and security for our passwords.
@@ -28,18 +30,16 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final DataSource dataSource;
-    private final ApplicationUserDetailsService userDetailsService;
+    private final UserRepository userRepository;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    @Autowired
-    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication()
-                .dataSource(dataSource)
-                .passwordEncoder(passwordEncoder());
+    @Bean
+    public AuthenticationPrincipalArgumentResolver authenticationPrincipalArgumentResolver() {
+        return new AuthenticationPrincipalArgumentResolver();
     }
 
     @Bean
@@ -49,26 +49,30 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
         return jdbcUserDetailsManager;
     }
 
+    @Autowired
+    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+        auth.jdbcAuthentication()
+                .dataSource(dataSource)
+                .passwordEncoder(passwordEncoder());
+    }
+
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        ApplicationAuthenticationProvider authenticationProvider = new ApplicationAuthenticationProvider();
+        ApplicationAuthenticationProvider authenticationProvider = new ApplicationAuthenticationProvider(passwordEncoder(), userRepository);
         auth.authenticationProvider(authenticationProvider);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .headers()
-                .xssProtection()
-                .and()
-                .frameOptions()
-                .and().and()
+        http.headers().and()
+                .httpBasic().and()
                 .csrf().disable()
 
                 .authorizeRequests()
                 .antMatchers("/login/").permitAll()
                 .antMatchers("/api/**").hasAnyRole("BASIC", "STANDARD", "ADMIN")
-                .antMatchers("/**").authenticated()
+                .anyRequest().authenticated()
                 .and()
 
                 .formLogin()

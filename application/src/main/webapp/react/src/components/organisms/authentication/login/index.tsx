@@ -15,7 +15,12 @@ const LoginContainer = () => {
     const dispatch = useDispatch();
 
     const tryLogin = (username: string, password: string) => {
-        axios.post(window.location.origin + "/perform_login", {'username': username, 'password': password})
+        axios.post(window.location.origin + "/perform_login", {}, {
+            auth: {
+                username: username,
+                password: password
+            }
+        })
             .then((response: AxiosResponse) => {
                 if (response.status >= 200 && response.status < 300) {
                     let data = response.data;
@@ -23,10 +28,10 @@ const LoginContainer = () => {
                     redirectToRouteWithRoot("/app/dashboard", null);
                 }
             })
-            .catch((error: any) => {
+            .catch(() => {
                 addToast(
-                    `User: ${username} failed to log in - ${error.response.data.message}`, {
-                        appearance: 'error',
+                    `Login failure - Please verify your credentials.`, {
+                        appearance: 'warning',
                         autoDismiss: true,
                     });
             });

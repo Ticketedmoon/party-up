@@ -1,4 +1,4 @@
-package com.partyup.application.configuration.context;
+package com.partyup.application.configuration.context.security;
 
 import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
@@ -51,8 +51,8 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(this.userDetailsService)
-                .passwordEncoder(new BCryptPasswordEncoder());
+        ApplicationAuthenticationProvider authenticationProvider = new ApplicationAuthenticationProvider();
+        auth.authenticationProvider(authenticationProvider);
     }
 
     @Override
@@ -63,6 +63,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .and()
                 .frameOptions()
                 .and().and()
+                .csrf().disable()
 
                 .authorizeRequests()
                 .antMatchers("/login/").permitAll()

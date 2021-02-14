@@ -1,4 +1,4 @@
-package com.partyup.application.configuration.context;
+package com.partyup.application.configuration.context.security;
 
 import com.partyup.application.domain.entity.User;
 import com.partyup.application.repository.UserRepository;

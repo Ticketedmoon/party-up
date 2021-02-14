@@ -21,7 +21,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final OauthClientService oauthClientService;
 
-    public User userAttemptLogin(User user) throws UserNotFoundException, IncorrectPasswordException {
+    public User attemptLogin(User user) throws UserNotFoundException, IncorrectPasswordException {
         log.info("Attempting to verify user with username: {}", user.getUsername());
         User existingUser = userRepository.findUserByUsername(user.getUsername());
         try {

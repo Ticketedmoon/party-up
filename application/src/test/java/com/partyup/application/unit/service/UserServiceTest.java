@@ -40,7 +40,7 @@ public class UserServiceTest {
         when(passwordEncoderMock.matches(anyString(), anyString())).thenReturn(true);
 
         // Then
-        User responseUserObj = userService.userAttemptLogin(userMock);
+        User responseUserObj = userService.attemptLogin(userMock);
 
         // Verify
         verify(userRepositoryMock, times(1)).findUserByUsername(anyString());

@@ -2,9 +2,9 @@ package com.partyup.application.configuration.context;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -12,6 +12,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @EnableWebMvc
 @Configuration
+@ComponentScan(basePackages = "com.partyup")
 public class ApplicationWebConfiguration implements WebMvcConfigurer {
 
     @Override
@@ -22,13 +23,6 @@ public class ApplicationWebConfiguration implements WebMvcConfigurer {
         registry.addResourceHandler("/react/**")
                 .addResourceLocations("/react/")
                 .setCachePeriod(3600);
-    }
-
-    @Bean(name = "multipartResolver")
-    public CommonsMultipartResolver createMultipartResolver() {
-        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
-        resolver.setDefaultEncoding("utf-8");
-        return resolver;
     }
 
     @Bean(name = "viewResolver")

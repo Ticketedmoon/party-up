@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class EntryController {
 
-    @Value("${react-profile:Unknown}")
+    @Value("${spring.profiles.active}")
     private String activeProfile;
 
     @GetMapping(value = "/**")

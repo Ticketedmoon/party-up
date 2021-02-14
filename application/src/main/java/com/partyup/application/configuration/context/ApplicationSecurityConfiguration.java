@@ -1,6 +1,7 @@
 package com.partyup.application.configuration.context;
 
 import javax.sql.DataSource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,21 +26,16 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
  */
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final DataSource dataSource;
-
-    @Autowired
-    public ApplicationSecurityConfiguration(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // Enable jdbc authentication
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(passwordEncoder());

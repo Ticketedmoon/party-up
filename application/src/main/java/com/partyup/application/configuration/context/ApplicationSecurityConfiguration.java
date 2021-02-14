@@ -6,15 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
 /**
@@ -26,10 +23,12 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
  */
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
 public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final DataSource dataSource;
+    private final ApplicationUserDetailsService userDetailsService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -38,7 +37,9 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
 
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(passwordEncoder());
+        auth.jdbcAuthentication()
+                .dataSource(dataSource)
+                .passwordEncoder(passwordEncoder());
     }
 
     @Bean
@@ -46,6 +47,12 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();
         jdbcUserDetailsManager.setDataSource(dataSource);
         return jdbcUserDetailsManager;
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(this.userDetailsService)
+                .passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Override
@@ -65,6 +72,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
 
                 .formLogin()
                 .loginPage("/login")
+                .loginProcessingUrl("/perform_login")
                 .failureUrl("/login-failed")
                 .defaultSuccessUrl("/")
                 .permitAll()
@@ -83,17 +91,6 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
 
                 .exceptionHandling()
                 .accessDeniedPage("/access-denied");
-    }
-
-    @Bean
-    @Override
-    public UserDetailsService userDetailsService() {
-        UserDetails user = User.withUsername("user")
-                .password("####")
-                .roles("STANDARD")
-                .build();
-
-        return new InMemoryUserDetailsManager(user);
     }
 
 }

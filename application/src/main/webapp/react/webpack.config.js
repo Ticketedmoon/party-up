@@ -1,3 +1,5 @@
+const URL_LOADER_LIMIT = 8192
+
 module.exports = {
   entry: "./src/index.tsx",
   output: {
@@ -61,6 +63,10 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: "babel-loader"
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|svg)$/,
+        loader: 'url-loader?limit=100000'
       }
     ]
   }

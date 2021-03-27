@@ -31,7 +31,7 @@ const App = () => {
                                 </ApplicationNavigationWrapper>
                             </Route>
                             <Route exact path={"/new-login/create"} component={CreateNewLoginTemplate}/>
-                            <Route path={"/login"} component={LoginTemplate}/>
+                            <Route exact path={["/login", "/"]} component={LoginTemplate}/>
                         </ToastProvider>
                     </Switch>
                 </Router>

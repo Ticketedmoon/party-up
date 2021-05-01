@@ -1,5 +1,5 @@
 # Party Up
-![Party Up Build](https://github.com/ShaneCreedon/Code-Wars/workflows/Code%20Wars%20Build/badge.svg?branch=master)
+![Party Up Build](https://github.com/ShaneCreedon/Party-Up/workflows/Party%20Up%20Build/badge.svg?branch=master)
 > To be Continued... 
 
 ### Design Process:

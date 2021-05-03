@@ -37,18 +37,20 @@ const Dashboard = () => {
     }, []);
 
     const findGamesByQuery = () => {
-        axios.get(window.location.origin + "/api/games/find/" + gameSearchQuery)
-            .then((res) => {
-                let games: Game[] = res.data;
-                setGames(games);
-            })
-            .catch(() => {
-                addToast(
-                    `Failure to find game listing data! Please check the application status`, {
-                        appearance: 'error',
-                        autoDismiss: true,
-                    });
-            });
+        axios.get(window.location.origin + "/api/games/find/", {
+            params: {
+                query: gameSearchQuery
+            }
+        }).then((res) => {
+            let games: Game[] = res.data;
+            setGames(games);
+        }).catch(() => {
+            addToast(
+                `Failure to find game listing data! Please check the application status`, {
+                    appearance: 'error',
+                    autoDismiss: true,
+                });
+        });
     }
 
     const handleClick = (gameID: any) => {

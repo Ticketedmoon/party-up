@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -30,8 +31,8 @@ public class GameLookupController {
         }
     }
 
-    @GetMapping("/find/{query}")
-    public List<GameInfoDTO> findGamesByQuery(@PathVariable String query) {
+    @GetMapping("/find/")
+    public List<GameInfoDTO> findGamesByQuery(@RequestParam String query) {
         try {
             return gameApiClientService.findGamesByQuery(query);
         } catch (PartyUpException e) {

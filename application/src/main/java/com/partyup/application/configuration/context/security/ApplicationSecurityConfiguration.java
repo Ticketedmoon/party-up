@@ -63,7 +63,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) {
         ApplicationAuthenticationProvider authenticationProvider = new ApplicationAuthenticationProvider(userService());
         auth.authenticationProvider(authenticationProvider);
     }
@@ -76,7 +76,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
 
                 .authorizeRequests()
                 .antMatchers("/login/").permitAll()
-                .antMatchers("/api/**").hasAnyRole("BASIC", "STANDARD", "ADMIN")
+                .antMatchers("/api/**").authenticated()
                 .anyRequest().authenticated()
                 .and()
 

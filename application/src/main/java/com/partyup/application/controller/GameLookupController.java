@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/games")
+@RequestMapping("/api/games")
 public class GameLookupController {
 
     private static final String DEFAULT_GAME_LOOKUP_ERROR_MESSAGE = "Something went wrong when looking for game list information";
 
     private final GameApiClientService gameApiClientService;
 
-    @GetMapping("/find/{limit}")
+    @GetMapping("/find/all/{limit}")
     public List<GameInfoDTO> findGamesWithLimit(@PathVariable int limit) {
         try {
             return gameApiClientService.getGameList(limit);

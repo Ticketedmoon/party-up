@@ -22,7 +22,7 @@ const Dashboard = () => {
     }
 
     useEffect(() => {
-        axios.get(window.location.origin + "/games/find/10")
+        axios.get(window.location.origin + "/api/games/find/all/10")
             .then((res) => {
                 let games: Game[] = res.data;
                 setGames(games);
@@ -37,7 +37,7 @@ const Dashboard = () => {
     }, []);
 
     const findGamesByQuery = () => {
-        axios.get(window.location.origin + "/games/find/" + gameSearchQuery)
+        axios.get(window.location.origin + "/api/games/find/" + gameSearchQuery)
             .then((res) => {
                 let games: Game[] = res.data;
                 setGames(games);

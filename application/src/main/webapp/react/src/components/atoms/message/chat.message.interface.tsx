@@ -1,9 +1,9 @@
 import {IMessageTypeResponse} from "./chat.message.enum";
-import {UserDtoType} from "../../../utils/types/user.dto.interface";
+import {User} from "../../../utils/types/user.dto.type";
 
 export interface IChatMessageResponse {
     type: IMessageTypeResponse,
     content: string,
-    sender: UserDtoType,
+    sender: User,
     time: string
 }

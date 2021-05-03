@@ -1,6 +1,6 @@
 package com.partyup.application.controller;
 
-import com.partyup.application.domain.dto.UserConnectedDTO;
+import com.partyup.application.domain.dto.user.UserConnectedDTO;
 import com.partyup.application.domain.entity.ChatMessage;
 import com.partyup.application.service.MessageService;
 import java.util.UUID;

@@ -6,6 +6,7 @@ import {useDispatch} from "react-redux";
 import {setUser} from "../../../../store/Reducers/login/types/action.function.types";
 import axios, {AxiosResponse} from "axios";
 import {Button} from "@material-ui/core";
+import {User} from "../../../../utils/types/user.dto.type";
 
 const style = require("./style/style.module.css");
 
@@ -13,6 +14,23 @@ const LoginContainer = () => {
 
     const {addToast} = useToasts();
     const dispatch = useDispatch();
+
+    const setUserAndLogin = (username: string): User | null => {
+        axios.get(window.location.origin + "/users", {
+            params: {
+                username: username
+            }
+        }).then((res) => {
+            let authenticatedUser: User = res.data;
+            if (authenticatedUser != null) {
+                dispatch(setUser(authenticatedUser));
+                redirectToRouteWithRoot("/app/dashboard", null);
+            }
+        }).catch((error) => {
+            throw error;
+        })
+        return null;
+    }
 
     const tryLogin = (username: string, password: string) => {
         axios.post(window.location.origin + "/perform_login", {}, {
@@ -22,10 +40,9 @@ const LoginContainer = () => {
             }
         })
             .then((response: AxiosResponse) => {
-                if (response.status >= 200 && response.status < 300) {
-                    let data = response.data;
-                    dispatch(setUser({username: data.username, role: data.role, level: data.level}));
-                    redirectToRouteWithRoot("/app/dashboard", null);
+                let authenticatedSuccessful = response.status >= 200 && response.status < 300;
+                if (authenticatedSuccessful) {
+                   setUserAndLogin(username);
                 }
             })
             .catch(() => {

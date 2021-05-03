@@ -1,6 +1,7 @@
 package com.partyup.application.configuration.context.security;
 
 import com.partyup.application.repository.UserRepository;
+import com.partyup.application.service.UserService;
 import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,11 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
         return jdbcUserDetailsManager;
     }
 
+    @Bean
+    public UserService userService() {
+        return new UserService(passwordEncoder(), userRepository);
+    }
+
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
@@ -56,10 +62,9 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .passwordEncoder(passwordEncoder());
     }
 
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        ApplicationAuthenticationProvider authenticationProvider = new ApplicationAuthenticationProvider(passwordEncoder(), userRepository);
+        ApplicationAuthenticationProvider authenticationProvider = new ApplicationAuthenticationProvider(userService());
         auth.authenticationProvider(authenticationProvider);
     }
 

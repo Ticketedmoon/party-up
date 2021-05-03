@@ -1,6 +1,6 @@
 package com.partyup.application.service;
 
-import com.partyup.application.domain.dto.UserDTO;
+import com.partyup.application.domain.dto.user.UserDTO;
 import com.partyup.application.domain.entity.ChatMessage;
 import java.util.ArrayList;
 import java.util.List;

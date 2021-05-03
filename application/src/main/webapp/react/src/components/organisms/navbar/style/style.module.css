@@ -9,27 +9,41 @@
     text-decoration: none;
     color: white;
     font-weight: bold;
-    font-family: 'Press Start 2P', "impact", "serif";
+    font-family: "Roboto", "calibri", serif;
 }
 
-.app-title:hover {
+.app-logout-container {
+    text-align: right;
+}
+
+.app-title:hover, .app-logout:hover {
     text-decoration: none;
     color: #000000;
+    cursor: pointer;
 }
 
-.navigation-logout-container {
+.profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1em;
+}
+
+.profile > span {
+    font-family: Calibri, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.navigation-right-container {
     display: grid;
+    grid-template-columns: 1fr 1fr;
     justify-content: end;
     padding-right: 1vw;
     margin-left: auto;
 }
 
-.navigation-logout-container > a {
+.navigation-right-container > a {
     font-family: Calibri, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
     'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-}
-
-.navigation-logout-container > a:hover {
-    color: #0066ff;
-    cursor: pointer;
+    color: white;
 }

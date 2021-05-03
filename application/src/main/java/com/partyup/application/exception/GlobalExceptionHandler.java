@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(PartyUpAccessException.class)
-    protected ResponseEntity<?> handlePartyUpAccessException(final PartyUpAccessException exception) {
+    @ExceptionHandler(PartyUpException.class)
+    protected ResponseEntity<?> handlePartyUpAccessException(final PartyUpException exception) {
         final HttpStatus badRequestStatus = HttpStatus.BAD_REQUEST;
         ClientException clientException = new ClientException(
                 exception.getMessage(),

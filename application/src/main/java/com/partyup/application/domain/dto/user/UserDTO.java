@@ -1,4 +1,4 @@
-package com.partyup.application.domain.dto;
+package com.partyup.application.domain.dto.user;
 
 import java.util.UUID;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
 package com.partyup.application.listeners;
 
-import com.partyup.application.domain.dto.UserDTO;
+import com.partyup.application.domain.dto.user.UserDTO;
 import com.partyup.application.domain.entity.ChatMessage;
 import com.partyup.application.domain.enums.MessageType;
 import com.partyup.application.service.MessageService;

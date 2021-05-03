@@ -1,6 +1,6 @@
 package com.partyup.application.domain.entity;
 
-import com.partyup.application.domain.dto.UserDTO;
+import com.partyup.application.domain.dto.user.UserDTO;
 import com.partyup.application.domain.enums.MessageType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

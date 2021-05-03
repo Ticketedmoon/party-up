@@ -9,6 +9,17 @@ import lombok.Setter;
 public class GameInfoDTO {
     private Integer id;
     private String name;
-    private List<Integer> screenshots;
+    private List<GameScreenshotInfoDTO> screenshots;
     private String summary;
+
+    @Setter
+    @Getter
+    private static class GameScreenshotInfoDTO {
+        private Integer id;
+        private Integer game;
+        private String url;
+        private Integer height;
+        private Integer width;
+    }
+
 }

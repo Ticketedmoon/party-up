@@ -12,7 +12,7 @@ const CreateNewLoginContainer = () => {
     const {addToast} = useToasts();
 
     const createNewUser = (username: string, password: string) => {
-        axios.post(window.location.origin + "/user/create", {'username': username, 'password': password})
+        axios.post(window.location.origin + "/users/create", {'username': username, 'password': password})
             .then(response => {
                 if (response.status >= 200 && response.status < 300) {
                     addToast("User: {" + username + "}  Successfully Created", {

@@ -1,0 +1,20 @@
+.chat-message {
+    border-radius: 1em;
+    color: black;
+    padding: 0.25vw;
+    max-width: 30vw;
+    font-size: 0.75vw;
+}
+
+.message-sender {
+    color: red;
+}
+
+.message-time {
+
+}
+
+.message-content {
+    display: flex;
+    flex-direction: row;
+}

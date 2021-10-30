@@ -18,12 +18,15 @@
     </properties>
 
     <modules>
-        <module>application</module>
+        <module>web-application</module>
+        <module>pu-game-search</module>
+        <module>pu-public-chat</module>
+        <module>pu-shared</module>
+        <module>pu-user-management</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
-            <!-- Spring -->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-jdbc</artifactId>
@@ -48,14 +51,12 @@
                 <version>${spring.version}</version>
             </dependency>
 
-            <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
             <dependency>
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-config</artifactId>
                 <version>${spring.version}</version>
             </dependency>
 
-            <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
             <dependency>
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-web</artifactId>
@@ -95,7 +96,6 @@
                 <scope>provided</scope>
             </dependency>
 
-            <!-- https://mvnrepository.com/artifact/org.springframework/spring-messaging -->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-messaging</artifactId>
@@ -121,7 +121,6 @@
                 <scope>test</scope>
             </dependency>
 
-            <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
@@ -129,7 +128,6 @@
                 <scope>test</scope>
             </dependency>
 
-            <!-- junit 5, unit test -->
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
@@ -137,7 +135,6 @@
                 <scope>test</scope>
             </dependency>
 
-            <!-- unit test -->
             <dependency>
                 <groupId>org.hamcrest</groupId>
                 <artifactId>hamcrest-library</artifactId>
@@ -163,7 +160,6 @@
                 <version>4.3.6.Final</version>
             </dependency>
 
-            <!-- JDP Standard Libraries -->
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
@@ -171,7 +167,6 @@
                 <scope>provided</scope>
             </dependency>
 
-            <!-- Add the jstl-api dependency explicitly - otherwise jstl-api 1.2 is added -->
             <dependency>
                 <groupId>javax.servlet.jsp.jstl</groupId>
                 <artifactId>javax.servlet.jsp.jstl-api</artifactId>
@@ -183,7 +178,6 @@
                 <artifactId>javax.servlet.jsp.jstl</artifactId>
                 <version>1.2.1</version>
                 <exclusions>
-                    <!-- jstl-api was adding selvlet-api 2.5 and jsp-api-->
                     <exclusion>
                         <artifactId>jstl-api</artifactId>
                         <groupId>javax.servlet.jsp.jstl</groupId>
@@ -191,7 +185,6 @@
                 </exclusions>
             </dependency>
 
-            <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
@@ -199,7 +192,6 @@
                 <scope>provided</scope>
             </dependency>
 
-            <!-- https://mvnrepository.com/artifact/org.json/json -->
             <dependency>
                 <groupId>org.json</groupId>
                 <artifactId>json</artifactId>
@@ -208,5 +200,4 @@
 
         </dependencies>
     </dependencyManagement>
-
 </project>

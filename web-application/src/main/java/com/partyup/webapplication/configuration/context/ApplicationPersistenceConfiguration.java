@@ -16,8 +16,8 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 @Configuration
 @Slf4j
 @PropertySource("classpath:application.properties")
-@EnableJpaRepositories("com.partyup.application.repository")
-@ComponentScan(basePackages = "com.partyup.application.configuration.context")
+@EnableJpaRepositories("com.partyup")
+@ComponentScan(basePackages = "com.partyup.webapplication.configuration.context")
 public class ApplicationPersistenceConfiguration {
 
     @Bean(name = "entityManagerFactory")

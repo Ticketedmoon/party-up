@@ -1,6 +1,6 @@
 package com.partyup.publicchat.message.application.domain.model;
 
-import com.partyup.application.domain.dto.user.UserDTO;
+import com.partyup.publicchat.message.application.dto.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,10 +9,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ChatMessage {
-
     private MessageType type;
     private String content;
-    private UserDTO sender;
+    private UserDto sender;
     private String time;
-
 }

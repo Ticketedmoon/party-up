@@ -1,5 +1,6 @@
 package com.partyup.usermanagement.user.application.controller;
 
+import com.partyup.shared.exception.PartyUpException;
 import com.partyup.usermanagement.user.application.domain.model.User;
 import com.partyup.usermanagement.user.application.exception.UsernameNotValidException;
 import com.partyup.usermanagement.user.application.service.UserService;

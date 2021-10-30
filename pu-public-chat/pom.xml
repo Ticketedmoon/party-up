@@ -12,8 +12,7 @@
     <groupId>com.partyup.publicchat</groupId>
     <artifactId>party-up-public-chat</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
-    <url>http://maven.apache.org</url>
+    <packaging>jar</packaging>
 
     <dependencies>
         <!-- Spring -->

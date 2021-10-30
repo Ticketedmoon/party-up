@@ -36,7 +36,7 @@ public class ApplicationAuthenticationProvider implements AuthenticationProvider
             }
             return token;
         } else {
-            throw new PartyUpException("One or more principal details were not found in authentication request.");
+            throw new IllegalStateException("One or more principal details were not found in authentication request.");
         }
     }
 

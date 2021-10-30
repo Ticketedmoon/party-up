@@ -1,9 +1,8 @@
-package com.partyup.application.unit.service;
+package com.partyup.usermanagement.user.application.service;
 
-import com.partyup.application.domain.entity.User;
-import com.partyup.application.exception.UsernameNotValidException;
-import com.partyup.application.repository.UserRepository;
-import com.partyup.application.service.UserService;
+import com.partyup.usermanagement.user.application.domain.model.User;
+import com.partyup.usermanagement.user.application.exception.UsernameNotValidException;
+import com.partyup.usermanagement.user.infrastructure.persistence.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.mockito.ArgumentMatchers.any;

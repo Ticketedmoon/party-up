@@ -12,10 +12,13 @@
     <groupId>com.partyup.gamesearch</groupId>
     <artifactId>party-up-game-search</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
-    <url>http://maven.apache.org</url>
+    <packaging>jar</packaging>
 
     <dependencies>
+        <dependency>
+            <groupId>com.partyup.shared</groupId>
+            <artifactId>party-up-shared</artifactId>
+        </dependency>
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -206,61 +209,4 @@
         </dependency>
 
     </dependencies>
-
-    <build>
-        <finalName>Party Up</finalName>
-        <plugins>
-            <!-- http://www.eclipse.org/jetty/documentation/current/jetty-maven-plugin.html -->
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.4.12.v20180830</version>
-            </plugin>
-
-            <!-- Default is too old, update to latest to run the latest Spring 5 + jUnit 5 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.1</version>
-                <configuration>
-                    <useSystemClassLoader>false</useSystemClassLoader>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.3</version>
-                <configuration>
-                    <warSourceDirectory>${project.basedir}/src/main/webapp</warSourceDirectory>
-                    <nonFilteredFileExtensions>
-                        <nonFilteredFileExtension>gif</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>ico</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>jpg</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>png</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>pdf</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>otf</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>eot</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>svg</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>woff</nonFilteredFileExtension>
-                    </nonFilteredFileExtensions>
-                </configuration>
-            </plugin>
-
-            <!-- Flyway -->
-            <plugin>
-                <groupId>org.flywaydb</groupId>
-                <artifactId>flyway-maven-plugin</artifactId>
-                <version>6.2.4</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.h2database</groupId>
-                        <artifactId>h2</artifactId>
-                        <version>1.4.197</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-        </plugins>
-    </build>
 </project>

@@ -1,12 +1,11 @@
 package com.partyup.publicchat.message.infrastructure.listener;
 
-import com.partyup.application.domain.dto.user.UserDTO;
-import com.partyup.application.domain.entity.ChatMessage;
-import com.partyup.application.domain.enums.MessageType;
-import com.partyup.application.service.MessageService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.partyup.publicchat.message.application.domain.model.ChatMessage;
+import com.partyup.publicchat.message.application.domain.model.MessageType;
+import com.partyup.publicchat.message.application.dto.UserDto;
+import com.partyup.publicchat.message.application.service.MessageService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
@@ -15,30 +14,23 @@ import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
 @Component
+@RequiredArgsConstructor
+@Slf4j
 public class WebSocketEventListener {
-
-    private static final Logger logger = LoggerFactory.getLogger(WebSocketEventListener.class);
 
     private final SimpMessageSendingOperations messagingTemplate;
     private final MessageService messageService;
 
-    @Autowired
-    public WebSocketEventListener(SimpMessageSendingOperations messagingTemplate, MessageService messageService) {
-        this.messagingTemplate = messagingTemplate;
-        this.messageService = messageService;
-
-    }
-
     @EventListener
     public void handleWebSocketConnectListener(final SessionConnectedEvent event) {
-        logger.info("Connection Event: Received a new web socket connection with event {}", event);
+        log.info("Connection Event: Received a new web socket connection with event {}", event);
     }
 
     @EventListener
     public void handleWebSocketDisconnectListener(final SessionDisconnectEvent event) {
-        logger.info("Disconnection Event: Received a new web socket disconnection with event {}", event);
+        log.info("Disconnection Event: Received a new web socket disconnection with event {}", event);
         final StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
-        final UserDTO user = (UserDTO) headerAccessor.getSessionAttributes().get("username");
+        final UserDto user = (UserDto) headerAccessor.getSessionAttributes().get("username");
         messageService.removeConnectedUser(user);
 
         final ChatMessage chatMessage = ChatMessage.builder()

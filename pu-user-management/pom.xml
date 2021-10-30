@@ -13,9 +13,15 @@
     <artifactId>party-up-user-management</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <url>http://maven.apache.org</url>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.partyup.shared</groupId>
+            <artifactId>party-up-shared</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>

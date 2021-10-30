@@ -1,8 +1,8 @@
-package com.partyup.application.controller;
+package com.partyup.gamesearch.game.application.controller;
 
-import com.partyup.application.dto.GameInfoDto;
-import com.partyup.application.exception.PartyUpException;
-import com.partyup.application.service.GameApiService;
+import com.partyup.gamesearch.game.application.dto.GameInfoDto;
+import com.partyup.gamesearch.game.application.service.GameApiService;
+import com.partyup.shared.exception.PartyUpException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

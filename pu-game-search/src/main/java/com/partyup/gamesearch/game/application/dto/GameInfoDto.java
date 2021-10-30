@@ -1,4 +1,4 @@
-package com.partyup.application.dto;
+package com.partyup.gamesearch.game.application.dto;
 
 import java.util.List;
 import lombok.Getter;

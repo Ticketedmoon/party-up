@@ -13,20 +13,20 @@
     <artifactId>party-up-web-application</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <url>http://maven.apache.org</url>
 
     <dependencies>
-
         <dependency>
             <groupId>com.partyup.usermanagement</groupId>
             <artifactId>party-up-user-management</artifactId>
             <scope>compile</scope>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.partyup.shared</groupId>
             <artifactId>party-up-shared</artifactId>
             <scope>compile</scope>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>

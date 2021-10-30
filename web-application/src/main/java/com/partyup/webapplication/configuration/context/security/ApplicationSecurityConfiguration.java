@@ -1,7 +1,7 @@
 package com.partyup.webapplication.configuration.context.security;
 
-import com.partyup.application.repository.UserRepository;
-import com.partyup.application.service.UserService;
+import com.partyup.usermanagement.user.application.service.UserService;
+import com.partyup.usermanagement.user.infrastructure.persistence.UserRepository;
 import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

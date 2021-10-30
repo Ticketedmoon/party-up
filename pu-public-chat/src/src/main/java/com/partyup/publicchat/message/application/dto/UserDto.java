@@ -1,4 +1,4 @@
-package com.partyup.application.dto;
+package com.partyup.publicchat.message.application.dto;
 
 import java.util.UUID;
 import lombok.AllArgsConstructor;

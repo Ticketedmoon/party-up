@@ -1,7 +1,7 @@
 package com.partyup.publicchat.message.application.service;
 
-import com.partyup.application.domain.dto.user.UserDTO;
-import com.partyup.application.domain.entity.ChatMessage;
+import com.partyup.publicchat.message.application.domain.model.ChatMessage;
+import com.partyup.publicchat.message.application.dto.UserDto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -22,13 +22,13 @@ public class MessageService {
         log.info("Message Service: Added new message. Message Log: {}", messageLog);
     }
 
-    public void addNewConnectedUser(UserDTO userDTO) {
-        connectedUsers.put(userDTO.getUserId(), userDTO.getUsername());
+    public void addNewConnectedUser(UserDto userDto) {
+        connectedUsers.put(userDto.getUserId(), userDto.getUsername());
     }
 
-    public void removeConnectedUser(UserDTO userDTO) {
-        connectedUsers.remove(userDTO.getUserId());
-        log.info("User with ID {} has been removed", userDTO.getUserId());
+    public void removeConnectedUser(UserDto userDto) {
+        connectedUsers.remove(userDto.getUserId());
+        log.info("User with ID {} has been removed", userDto.getUserId());
     }
 
     public Map<String, String> getConnectedUsers() {

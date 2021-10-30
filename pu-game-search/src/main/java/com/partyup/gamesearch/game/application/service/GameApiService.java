@@ -1,7 +1,7 @@
-package com.partyup.application.service;
+package com.partyup.gamesearch.game.application.service;
 
-import com.partyup.application.dto.GameInfoDto;
-import com.partyup.application.exception.PartyUpException;
+import com.partyup.gamesearch.game.application.dto.GameInfoDto;
+import com.partyup.shared.exception.PartyUpException;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;

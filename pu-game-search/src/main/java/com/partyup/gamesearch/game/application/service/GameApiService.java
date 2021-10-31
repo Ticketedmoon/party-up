@@ -24,7 +24,7 @@ public class GameApiService {
     // TODO: This will be unused until data migrated to DB.
     private static final String BASE_DATASTORE_SINGLE_GAME_LOOKUP_URL = "https://www.giantbomb.com/api/game/%s/?api_key=%s&format=json&field_list=name,description,image";
 
-    @Value("${game.lookup.key}")
+    @Value("${GAME_LOOKUP_KEY}")
     private String gameLookupKey;
 
     private final RestTemplate restTemplate;

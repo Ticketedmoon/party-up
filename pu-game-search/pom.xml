@@ -18,6 +18,7 @@
         <dependency>
             <groupId>com.partyup.shared</groupId>
             <artifactId>party-up-shared</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <!-- Spring -->
         <dependency>

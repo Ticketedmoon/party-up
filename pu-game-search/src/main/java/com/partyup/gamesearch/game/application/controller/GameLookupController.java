@@ -1,6 +1,6 @@
 package com.partyup.gamesearch.game.application.controller;
 
-import com.partyup.gamesearch.game.application.dto.GameInfoDto;
+import com.partyup.gamesearch.game.application.dto.GameResponse;
 import com.partyup.gamesearch.game.application.service.GameApiService;
 import com.partyup.shared.exception.PartyUpException;
 import java.util.List;
@@ -21,7 +21,7 @@ public class GameLookupController {
     private final GameApiService gameApiService;
 
     @GetMapping("/find/all/{limit}")
-    public List<GameInfoDto> findGamesWithLimit(@PathVariable int limit) {
+    public List<GameResponse.GameResult> findGamesWithLimit(@PathVariable int limit) {
         try {
             return gameApiService.getGameList(limit);
         } catch (PartyUpException e) {
@@ -32,7 +32,7 @@ public class GameLookupController {
     }
 
     @GetMapping("/find/")
-    public List<GameInfoDto> findGamesByQuery(@RequestParam String query) {
+    public List<GameResponse.GameResult> findGamesByQuery(@RequestParam String query) {
         try {
             return gameApiService.findGamesByQuery(query);
         } catch (PartyUpException e) {

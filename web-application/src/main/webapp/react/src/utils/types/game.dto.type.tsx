@@ -1,14 +1,10 @@
 export type Game = {
-	id: number;
+	guid: number;
 	name: string;
-	summary: string;
-	screenshots: GameScreenshot[]
+	description: string;
+	image: GameScreenshot;
 }
 
 type GameScreenshot = {
-	id: number,
-	game: number,
-	url: string,
-	height: number,
-	width: number
+	original_url: string;
 }

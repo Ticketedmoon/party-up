@@ -1,15 +1,16 @@
 package com.partyup.gamesearch.game.application.service;
 
-import com.partyup.gamesearch.game.application.dto.GameInfoDto;
+import com.partyup.gamesearch.game.application.dto.GameResponse;
 import com.partyup.shared.exception.PartyUpException;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
+import java.util.Collections;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,55 +18,35 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 public class GameApiService {
 
-    private static final int STANDARD_QUERY_RESULT_SIZE_LIMIT = 10;
+    private static final String BASE_DATASTORE_URL = "https://www.giantbomb.com/api";
+    private static final String BASE_DATASTORE_ALL_GAMES_LOOKUP_URL = BASE_DATASTORE_URL + "/games/?api_key=%s&format=json&field_list=name,image,guid&limit=%d";
+    private static final String BASE_DATASTORE_GAME_SEARCH_LOOKUP_URL = BASE_DATASTORE_URL + "/search/?api_key=%s&format=json&field_list=name,image&query=%s&resources=game";
+    // TODO: This will be unused until data migrated to DB.
+    private static final String BASE_DATASTORE_SINGLE_GAME_LOOKUP_URL = "https://www.giantbomb.com/api/game/%s/?api_key=%s&format=json&field_list=name,description,image";
 
-    private static final String BASE_TWITCH_API_URL = "https://id.twitch.tv/oauth2/token";
-    private static final String BASE_DATASTORE_URL = "https://api.igdb.com/v4/";
-    private static final String BASE_GAME_DATASTORE_URL = BASE_DATASTORE_URL + "games";
-    private static final String GAME_DATASTORE_CLIENT_ID = "Client-ID";
-    private static final String ALL_GAMES_DATASTORE_LOOKUP_QUERY = "fields name, summary, screenshots.*; where screenshots != null; limit %d;";
-    private static final String SEARCHABLE_GAME_DATASTORE_LOOKUP_QUERY = ALL_GAMES_DATASTORE_LOOKUP_QUERY + " search \"%s\";";
-    private static final String FULL_TWITCH_API_URL = BASE_TWITCH_API_URL + "?client_id=%s&client_secret=%s&grant_type=%s";
-    private static final String DEFAULT_GRANT_TYPE = "client_credentials";
-    private static final String ACCESS_TOKEN = "access_token";
-
-    @Value("${oauth.client.id}")
-    private String oAuthClientId;
-
-    @Value("${oauth.client.secret}")
-    private String oAuthClientSecret;
+    @Value("${game.lookup.key}")
+    private String gameLookupKey;
 
     private final RestTemplate restTemplate;
 
-    public List<GameInfoDto> getGameList(int searchLimit) {
-        HttpHeaders headers = new HttpHeaders();
-        String accessToken = retrieveAccessToken();
-        headers.setBearerAuth(accessToken);
-        headers.set(GAME_DATASTORE_CLIENT_ID, oAuthClientId);
-        return getGameInformationFromDataStore(headers, String.format(ALL_GAMES_DATASTORE_LOOKUP_QUERY, searchLimit));
+    public List<GameResponse.GameResult> getGameList(int searchLimit) {
+        return getGameInformationFromDataStore(String.format(BASE_DATASTORE_ALL_GAMES_LOOKUP_URL, gameLookupKey, searchLimit));
     }
 
-    public List<GameInfoDto> findGamesByQuery(String query) {
-        HttpHeaders headers = new HttpHeaders();
-        String accessToken = retrieveAccessToken();
-        headers.setBearerAuth(accessToken);
-        headers.set(GAME_DATASTORE_CLIENT_ID, oAuthClientId);
-        return getGameInformationFromDataStore(headers, String.format(SEARCHABLE_GAME_DATASTORE_LOOKUP_QUERY, STANDARD_QUERY_RESULT_SIZE_LIMIT, query));
+    public List<GameResponse.GameResult> findGamesByQuery(String gameName) {
+        return getGameInformationFromDataStore(String.format(BASE_DATASTORE_GAME_SEARCH_LOOKUP_URL, gameLookupKey, gameName));
     }
 
-    private List<GameInfoDto> getGameInformationFromDataStore(HttpHeaders headers, String lookupQueryBody) {
-        HttpEntity<String> request = new HttpEntity<>(lookupQueryBody, headers);
-        GameInfoDto[] gameInfoList = restTemplate.postForEntity(BASE_GAME_DATASTORE_URL, request, GameInfoDto[].class).getBody();
-        if (gameInfoList == null || gameInfoList.length == 0) {
+    private List<GameResponse.GameResult> getGameInformationFromDataStore(String requestUrl) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
+        HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
+        GameResponse responseBody = restTemplate.exchange(requestUrl, HttpMethod.GET, entity, GameResponse.class).getBody();
+        if (responseBody == null || responseBody.getResults().length == 0) {
             throw new PartyUpException("Error finding game information in remote data store");
         }
-       return Arrays.asList(gameInfoList);
-    }
-
-    private String retrieveAccessToken() {
-        String url = String.format(FULL_TWITCH_API_URL, oAuthClientId, oAuthClientSecret, DEFAULT_GRANT_TYPE);
-        ResponseEntity<Object> response = restTemplate.postForEntity(url, null, Object.class);
-        return ((LinkedHashMap<String, String>) response.getBody()).get(ACCESS_TOKEN);
+        return Arrays.asList(responseBody.getResults());
     }
 
 }

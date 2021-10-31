@@ -52,7 +52,7 @@ export const Dashboard = () => {
                                     return (
                                         <div className={style['grid-item']}
                                              onClick={() => handleClick(1)}
-                                             style={getGameBoxStyle("https://" + game.screenshots[0].url.substring(2))}>
+                                             style={getGameBoxStyle(game.image.original_url)}>
                                             <div className={style["grid-item-text"]}> {game.name} </div>
                                         </div>
                                     )

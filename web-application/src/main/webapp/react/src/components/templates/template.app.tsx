@@ -1,12 +1,12 @@
 import React, {Fragment, PropsWithChildren} from "react";
-import {SideBar} from "../organisms/sidebar";
+import {NavigationMenu} from "../organisms/sidebar";
 import {Toolbar} from "@material-ui/core";
 
 export const ApplicationNavigationWrapper = (props: PropsWithChildren<any>) => {
 	return (
 		<Fragment>
 			<div>
-				<SideBar/>
+				<NavigationMenu/>
 			</div>
 			<Toolbar/>
 			{props.children}

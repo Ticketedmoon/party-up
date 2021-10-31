@@ -62,5 +62,7 @@
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@material-ui/icons": "^4.11.2"
+  }
 }

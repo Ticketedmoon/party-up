@@ -5,11 +5,13 @@
 
 .dashboard-container {
     display: flex;
-    width: 100%;
     flex-wrap: wrap;
-    padding: 1em;
     text-align: center;
-    margin: 0;
+    width: 85%;
+    right: 0;
+    margin-left: auto;
+    padding-right: 10rem;
+    padding-top: 2rem;
 }
 
 .left-body-wrapper, .right-body-wrapper {

@@ -1,10 +1,14 @@
 import React, {Fragment, PropsWithChildren} from "react";
-import {NavigationBar} from "../organisms/navbar";
+import {SideBar} from "../organisms/sidebar";
+import {Toolbar} from "@material-ui/core";
 
 export const ApplicationNavigationWrapper = (props: PropsWithChildren<any>) => {
 	return (
 		<Fragment>
-			<NavigationBar/>
+			<div>
+				<SideBar/>
+			</div>
+			<Toolbar/>
 			{props.children}
 		</Fragment>
 	)

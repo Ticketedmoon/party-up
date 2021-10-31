@@ -63,28 +63,15 @@ export const GameSearch = (): JSX.Element => {
 
                 <div className={style["left-body-wrapper"]}>
                     <div>
-                        <div>
-                            <div className={style["search-box"]}>
-                                <input placeholder={"Search for a game..."} onChange={(e) => setGameSearchQuery(e.target.value)}/>
-                                <Button className={style["customized"]} color={"secondary"} variant={"contained"} size={"small"}
-                                        onClick={() => findGamesByQuery()}> Search </Button>
-                            </div>
-                            <div className={style["search-info-text"]}>
-                                <p> Search for a video game to party up with other players! </p>
-                            </div>
+                        <div className={style["search-box"]}>
+                            <input placeholder={"Search for a game..."}
+                                   onChange={(e) => setGameSearchQuery(e.target.value)}/>
+                            <Button className={style["customized"]} color={"secondary"} variant={"contained"}
+                                    size={"small"}
+                                    onClick={() => findGamesByQuery()}> Search </Button>
                         </div>
-                        <div className={style["recent-games-selected"]}>
-                            {
-                                games.slice(0, 3).map((game: Game) => {
-                                    return (
-                                        <div className={style['grid-item']}
-                                             onClick={() => handleClick(1)}
-                                             style={getGameBoxStyle("https://" + game.screenshots[0].url.substring(2))}>
-                                            <div className={style["grid-item-text"]}> {game.name} </div>
-                                        </div>
-                                    )
-                                })
-                            }
+                        <div className={style["search-info-text"]}>
+                            <p> Search for a video game to party up with other players! </p>
                         </div>
                     </div>
                 </div>

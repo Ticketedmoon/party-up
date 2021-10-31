@@ -3,6 +3,7 @@ import {RootStateOrAny, useSelector} from "react-redux";
 import {redirectToRouteWithRoot} from "../../../utils/history/history";
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 import ChatIcon from '@material-ui/icons/Chat';
+import SubjectIcon from '@material-ui/icons/Subject';
 import {
 	AppBar,
 	CssBaseline,
@@ -33,12 +34,17 @@ const SELECTED_ITEM_STYLE: CSSProperties = {
 
 const sideBarItems: SidebarItem[] = [
 	{
-		text: 'Game Search',
-		icon: <SportsEsportsIcon htmlColor={SIDEBAR_ITEM_COLOUR}/>,
+		text: 'Dashboard',
+		icon: <SubjectIcon htmlColor={SIDEBAR_ITEM_COLOUR}/>,
 		path: `/app/dashboard`
 	},
 	{
-		text: 'Chat Room',
+		text: 'Game Search',
+		icon: <SportsEsportsIcon htmlColor={SIDEBAR_ITEM_COLOUR}/>,
+		path: `/app/game-search`
+	},
+	{
+		text: 'General Chat',
 		icon: <ChatIcon htmlColor={SIDEBAR_ITEM_COLOUR}/>,
 		path: `/app/dashboard`
 	}

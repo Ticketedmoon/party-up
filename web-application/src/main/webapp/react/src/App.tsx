@@ -7,7 +7,6 @@ import history from './utils/history/history';
 import {ToastProvider} from "react-toast-notifications";
 import {LoginTemplate} from "./components/templates/template.login";
 import {CreateNewLoginTemplate} from "./components/templates/template.create.new.login";
-import {GameModesTemplate} from "./components/templates/template.dashboard";
 import {MatchmakingModeTemplate} from "./components/templates/template.game.room";
 
 import "./style.css";
@@ -16,6 +15,8 @@ import {PublicChatTemplate} from "./components/templates/template.public.chat";
 import {ApplicationNavigationWrapper} from "./components/templates/template.app";
 import {persistedStore} from "./store/store";
 import {PersistGate} from 'redux-persist/integration/react'
+import {Dashboard} from "./components/organisms/dashboard";
+import {GameSearch} from "./components/organisms/game-search";
 
 const App = () => {
     return (
@@ -27,7 +28,8 @@ const App = () => {
                             <ToastProvider>
                                 <Route path={"/app"}>
                                     <ApplicationNavigationWrapper>
-                                        <Route path={"/app/dashboard"} component={GameModesTemplate}/>
+                                        <Route path={"/app/dashboard"} component={Dashboard}/>
+                                        <Route path={"/app/game-search"} component={GameSearch}/>
                                         <Route path={"/app/party/game/:game"} component={MatchmakingModeTemplate}/>
                                         <Route path={"/app/party/game/:game/room/:id"} component={PublicChatTemplate}/>
                                     </ApplicationNavigationWrapper>
